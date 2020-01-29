@@ -1,18 +1,22 @@
 package com.example.willamette_thesis
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.*
-
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.Spinner
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
+
 class MainActivity : AppCompatActivity() {
 
-    var waterCount = 0
+    private var waterCount = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         println("CREATED")
@@ -77,9 +81,9 @@ class MainActivity : AppCompatActivity() {
 * Currently uses to many variables
 * -Figure out whats going on while directly refrencing
 * textview on WaterText line (81 currently)*/
-    fun addWater(){
-        val WaterText = findViewById<TextView>(R.id.waterCountDisp)
-        val waterStr: String = WaterText.text.toString()
+    private fun addWater(){
+        val waterText = findViewById<TextView>(R.id.waterCountDisp)
+        val waterStr: String = waterText.text.toString()
 
         var count = waterStr.toInt()
         var ourWater = count + 1
@@ -94,21 +98,28 @@ class MainActivity : AppCompatActivity() {
 
         waterCountDisp.text = "$waterCount"
         var waterTotal = waterCount * waterSpinner.selectedItem.toString().toInt()
-        WaterText.text = "Total: $waterTotal"
+        waterTotalTV.text = "Total: $waterTotal"
+    }
+
+    private fun getWaterQuant(): Int {
+        var spinnerValue = waterSpinner.getSelectedItem().toString()
+        var waterQuant = 0
+
+        return waterQuant
     }
 
 
-    fun addGas(){
+    private fun addGas(){
         val gasText = findViewById<TextView>(R.id.gasCountDisplay)
         val gasStr: String = gasText.toString()
 
-        //val milageText = findViewById<EditText>(R.id.mileageInput)
-        val milageStr: String = mileageInput.getText().toString()
-        val milageInput = milageStr.toInt()
+        //val mileageText = findViewById<EditText>(R.id.mileageInput)
+        val mileageStr: String = mileageInput.getText().toString()
+        val mileageInput = mileageStr.toInt()
 
 
         var count = gasStr.toInt()
-        var gasCount = count + milageInput
+        var gasCount = count + mileageInput
 
 
         gasCountDisplay.text = "$gasCount"
