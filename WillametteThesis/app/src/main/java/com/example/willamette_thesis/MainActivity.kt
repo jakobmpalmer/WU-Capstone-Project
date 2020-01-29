@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlin.math.roundToLong
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val waterBtn = findViewById<Button>(R.id.waterButton)
 
         waterBtn.setOnClickListener {
-            addWater()
+            waterTotalTV.text = addWater().toString()
         }
 
 //Spinner
@@ -53,7 +54,8 @@ class MainActivity : AppCompatActivity() {
 
         val gasBtn = findViewById<Button>(R.id.gasButton)
         gasBtn.setOnClickListener {
-            addGas()
+            gasCountDisplay.text = addGas()
+            gasTotalTV.text = addGas()
         }
 
     }
@@ -81,48 +83,53 @@ class MainActivity : AppCompatActivity() {
 * Currently uses to many variables
 * -Figure out whats going on while directly refrencing
 * textview on WaterText line (81 currently)*/
-    private fun addWater(){
+    private fun addWater(): String {
         val waterText = findViewById<TextView>(R.id.waterCountDisp)
         val waterStr: String = waterText.text.toString()
+        var currentTotal: Int = waterTotalTV.text.toString().split(" ").first().toInt()
 
         var count = waterStr.toInt()
-        var ourWater = count + 1
-
-        println("the count is $count")
-        println("the water is $waterCount")
-        println("the ourWater is $ourWater")
-        waterCount = ourWater
-
-        println("the watercount is $waterCount")
-        println("the ourWater is $ourWater")
-
+        var ourCount = count + 1
+        waterCount = ourCount
         waterCountDisp.text = "$waterCount"
-        var waterTotal = waterCount * waterSpinner.selectedItem.toString().toInt()
-        waterTotalTV.text = "Total: $waterTotal"
+
+        var ourSpinner = waterSpinner.selectedItem.toString()
+        println("ourSpinnerr: $ourSpinner")
+        var ourSpinnerValue = ourSpinner.split(" ").first().toInt()
+        println("ourSpinnerValue: $ourSpinnerValue")
+        var waterTotal = currentTotal + ourSpinnerValue
+
+        mlTotalTV.text = calcML(waterTotal.toDouble()).toString() + " ml"
+
+        return waterTotal.toString() + " oz"
     }
 
-    private fun getWaterQuant(): Int {
-        var spinnerValue = waterSpinner.getSelectedItem().toString()
-        var waterQuant = 0
 
-        return waterQuant
-    }
+    private fun addGas(): String {
+        //val gasText = findViewById<TextView>(R.id.gasCountDisplay)
+        val gasStr: String = this.gasCountDisplay.toString()
+        var currentTotal = gasTotalTV.text.toString().toInt()
 
-
-    private fun addGas(){
-        val gasText = findViewById<TextView>(R.id.gasCountDisplay)
-        val gasStr: String = gasText.toString()
+        if(mileageInput.getText().toString() == ("")) {
+            println("\n\tMileageStr == \"\"!\n")
+            return "0"
+        }
 
         //val mileageText = findViewById<EditText>(R.id.mileageInput)
         val mileageStr: String = mileageInput.getText().toString()
         val mileageInput = mileageStr.toInt()
+        var gasCount = currentTotal + mileageInput
 
+        return gasCount.toString()
+    }
 
-        var count = gasStr.toInt()
-        var gasCount = count + mileageInput
+    private fun calcML(ounces: Double): Double {
+        var mlVolValue: Double = 29.574
+        var ourML = mlVolValue * ounces
 
+        var finalML:Double = String.format("%.3f", ourML).toDouble()
 
-        gasCountDisplay.text = "$gasCount"
+        return finalML
     }
 
 
