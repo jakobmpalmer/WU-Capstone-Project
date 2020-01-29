@@ -12,4 +12,10 @@
         <item>33.8</item>
         <item>36</item>
     </string-array>
+
+
+    <string name="water_button">Water Button</string>
+    <string name="gas_button">Gas Button</string>
+    <string name="default_int_value">0</string>
+
 </resources>
