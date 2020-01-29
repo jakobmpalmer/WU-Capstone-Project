@@ -1,8 +1,10 @@
 package com.example.willamette_thesis
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
@@ -10,7 +12,6 @@ import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlin.math.roundToLong
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,14 +25,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        dataDisplayTable.visibility = View.INVISIBLE
+
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Table Still There?", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-
-
-
-
-
+            fabAction()
         }
 
 // Water Display
@@ -62,6 +61,16 @@ class MainActivity : AppCompatActivity() {
             gasTotalTV.text = addGas()
         }
 
+//Change Activity
+        val gotoDDBtn = findViewById<Button>(R.id.changeActivityBtn)
+
+        gotoDDBtn.setOnClickListener {
+            println("Going To Data Display!!!")
+            //val ddIntent = Intent(this@MainActivity, DataDisplay::class.java)
+            //startActivity(ddIntent)
+        }
+
+
     } //Oncreate
 
 
@@ -69,10 +78,10 @@ class MainActivity : AppCompatActivity() {
         val ddt = findViewById<TableLayout>(R.id.dataDisplayTable)
             if(ddt.isInvisible){
                 println("- - ddt is invisible - -")
-                ddt.isVisible
+                ddt.visibility = View.VISIBLE
             } else{
                 println("- - ddt is visible - -")
-                ddt.isShrinkAllColumns
+                ddt.visibility = View.INVISIBLE
             }
     }
 

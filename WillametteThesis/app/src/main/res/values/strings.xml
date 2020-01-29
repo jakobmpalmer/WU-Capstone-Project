@@ -18,4 +18,6 @@
     <string name="gas_button">Gas Button</string>
     <string name="default_int_value">0</string>
 
+    <string name="title_data_display">data_display</string>
+
 </resources>
