@@ -3,11 +3,10 @@ package com.example.willamette_thesis
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -26,8 +25,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Table Still There?", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+
+
+
+
+
         }
 
 // Water Display
@@ -58,10 +62,19 @@ class MainActivity : AppCompatActivity() {
             gasTotalTV.text = addGas()
         }
 
+    } //Oncreate
+
+
+    private fun fabAction(){
+        val ddt = findViewById<TableLayout>(R.id.dataDisplayTable)
+            if(ddt.isInvisible){
+                println("- - ddt is invisible - -")
+                ddt.isVisible
+            } else{
+                println("- - ddt is visible - -")
+                ddt.isShrinkAllColumns
+            }
     }
-
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -100,6 +113,7 @@ class MainActivity : AppCompatActivity() {
         var waterTotal = currentTotal + ourSpinnerValue
 
         mlTotalTV.text = calcML(waterTotal.toDouble()).toString() + " ml"
+
 
         return waterTotal.toString() + " oz"
     }

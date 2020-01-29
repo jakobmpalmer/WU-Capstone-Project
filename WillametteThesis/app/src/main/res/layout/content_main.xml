@@ -19,7 +19,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/waterButton"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dataDisplayTable"
         app:layout_constraintVertical_bias="0.95" />
 
     <Button
@@ -67,7 +67,7 @@
         app:layout_constraintBottom_toTopOf="@+id/gasButton"
         app:layout_constraintEnd_toEndOf="@+id/gasButton"
         app:layout_constraintStart_toStartOf="@+id/gasButton"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dataDisplayTable"
         app:layout_constraintVertical_bias="0.95" />
 
     <EditText
@@ -84,7 +84,7 @@
         app:layout_constraintVertical_bias="0.19999999" />
 
     <TableLayout
-        android:id="@+id/tableLayout"
+        android:id="@+id/dataDisplayTable"
         android:layout_width="266dp"
         android:layout_height="206dp"
         app:layout_constraintBottom_toBottomOf="parent"
