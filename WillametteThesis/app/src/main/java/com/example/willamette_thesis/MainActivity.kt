@@ -18,6 +18,12 @@ class MainActivity : AppCompatActivity() {
 
     private var waterCount = 0
 
+    object OurVariables {
+        var waterTotal = 0
+        var gasTotal = 0
+        var ml: Double = 0.0
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         println("CREATED")
@@ -66,8 +72,8 @@ class MainActivity : AppCompatActivity() {
 
         gotoDDBtn.setOnClickListener {
             println("Going To Data Display!!!")
-            //val ddIntent = Intent(this@MainActivity, DataDisplay::class.java)
-            //startActivity(ddIntent)
+            val ddIntent = Intent(this@MainActivity, DataDisplay::class.java)
+            startActivity(ddIntent)
         }
 
 
@@ -123,7 +129,7 @@ class MainActivity : AppCompatActivity() {
 
         mlTotalTV.text = calcML(waterTotal.toDouble()).toString() + " ml"
 
-
+        OurVariables.waterTotal = waterTotal
         return waterTotal.toString() + " oz"
     }
 
@@ -143,6 +149,7 @@ class MainActivity : AppCompatActivity() {
         val mileageInput = mileageStr.toInt()
         var gasCount = currentTotal + mileageInput
 
+        OurVariables.gasTotal = gasCount
         return gasCount.toString()
     }
 
@@ -152,6 +159,7 @@ class MainActivity : AppCompatActivity() {
 
         var finalML:Double = String.format("%.3f", ourML).toDouble()
 
+        OurVariables.ml = finalML
         return finalML
     }
 
