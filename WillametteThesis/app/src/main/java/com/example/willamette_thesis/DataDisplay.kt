@@ -15,9 +15,9 @@ class DataDisplay : AppCompatActivity() {
     }
 
     fun updateVars(){
-        var mlVal = MainActivity.OurVariables.ml
-        var gasVal = MainActivity.OurVariables.gasTotal
-        var waterVal = MainActivity.OurVariables.waterTotal
+        var mlVal = ConsumableActivity.OurVariables.ml
+        var gasVal = ConsumableActivity.OurVariables.gasTotal
+        var waterVal = ConsumableActivity.OurVariables.waterTotal
 
         mlTotalTV.text = mlVal.toString() + " millileters"
         gasTotalTV.text = gasVal.toString() + " miles"
