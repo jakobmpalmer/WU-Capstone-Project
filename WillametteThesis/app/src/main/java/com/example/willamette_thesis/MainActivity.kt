@@ -30,6 +30,18 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        buttonWaste.setOnClickListener{
+            val wasteIntent = Intent(this, wasteActivity::class.java)
+            startActivity(wasteIntent)
+        }
+
+        val imageWaste = findViewById(R.id.imageTrash) as ImageView
+        imageWaste.setOnClickListener {
+            val wasteIntent = Intent(this, wasteActivity::class.java)
+            startActivity(wasteIntent)
+        }
+
+
         buttonConsumption.setOnClickListener {
             val consumableIntent = Intent(this, ConsumableActivity::class.java)
             startActivity(consumableIntent)
