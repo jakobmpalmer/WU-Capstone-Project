@@ -2,15 +2,20 @@ package com.example.willamette_thesis
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+
 
 //import com.example.willamette_thesis.R.id.transportationIV
 
 class MainActivity : AppCompatActivity() {
+
+
 
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,14 +24,14 @@ class MainActivity : AppCompatActivity() {
 
         val buttonTransportation = findViewById<Button>(R.id.buttonTransportation)
         buttonTransportation.setOnClickListener{
-            val intent = Intent(this, carActivity::class.java)
-            startActivity(intent)
+            val carImgIntent = Intent(this, CarActivity::class.java)
+            startActivity(carImgIntent)
         }
 
-        val imageTransportation = findViewById(R.id.transportationIV) as ImageView
+        val imageTransportation = findViewById <ImageView> (R.id.transportationIV)
         imageTransportation.setOnClickListener {
-            val intent = Intent(this, carActivity::class.java)
-            startActivity(intent)
+            val carIntent = Intent(this, CarActivity::class.java)
+            startActivity(carIntent)
         }
 
 
@@ -35,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(wasteIntent)
         }
 
-        val imageWaste = findViewById(R.id.imageTrash) as ImageView
+        val imageWaste = findViewById <ImageView>(R.id.imageTrash)
         imageWaste.setOnClickListener {
             val wasteIntent = Intent(this, wasteActivity::class.java)
             startActivity(wasteIntent)
@@ -50,10 +55,17 @@ class MainActivity : AppCompatActivity() {
         imageApple.setOnClickListener {
             val appleIntent = Intent(this, ConsumableActivity::class.java)
             startActivity(appleIntent)
-
         }
 
 
 
-    }
+        //Firebase
+        //val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+        //var ref: DatabaseReference = database.getReference("server/saving-data/fireblog")
+        //*-*-*
+
+
+    } //end main
+
+
 }

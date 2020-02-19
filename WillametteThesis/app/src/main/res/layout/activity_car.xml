@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFF"
-    tools:context=".carActivity">
+    tools:context=".CarActivity">
 
 
 
@@ -38,7 +38,7 @@
         android:text="@string/miles"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/car_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.702"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.925" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/car_text"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/bus_text"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
@@ -69,10 +69,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/car_text" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/plane_text"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginTop="52dp"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/bus_text" />
 
     <EditText
         android:id="@+id/editText5"
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/plane_text" />
 
     <ImageView
         android:id="@+id/imageView4"

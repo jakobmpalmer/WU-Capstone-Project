@@ -9,6 +9,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_consumable.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -161,6 +163,11 @@ class ConsumableActivity : AppCompatActivity() {
         OurVariables.ml = finalML
         return finalML
     }
+
+    //Firebase
+    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    var ref: DatabaseReference = database.getReference("server/saving-data/fireblog")
+    //*-*-*
 
 
 }
