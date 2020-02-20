@@ -25,4 +25,12 @@
     <string name="main_description">Pick a category to start recording your daily activities</string>
     <string name="title_activity_waste">activity_waste</string>
 
+
+
+        <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">com.example.willamette_thesis</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fbcom.example.willamette_thesis</string>
+        <!-- Twitter consumer key and secret -->
+
+
 </resources>

@@ -44,9 +44,16 @@ dependencies {
 
     // Add the SDKs for any other Firebase products you want to use in your app
     // For example, to use Firebase Authentication and Cloud Firestore
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    //implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.4.0'
     implementation 'com.google.firebase:firebase-database:19.2.1'
+
+    //** AUTH
+    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
+
+    // Required only if Facebook login support is required
+    // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94
+    implementation 'com.facebook.android:facebook-android-sdk:4.41.0'
 
     // Getting a "Could not find" error? Make sure that you've added
     // Google's Maven repository to your root-level build.gradle file
