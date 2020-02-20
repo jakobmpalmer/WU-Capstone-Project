@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
-        android:text="Pick a category to start recording your daily activities"
+        android:text="@string/main_description"
         android:textAlignment="center"
         android:textColor="#4A766E"
         android:textSize="22sp"

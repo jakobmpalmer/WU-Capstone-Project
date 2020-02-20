@@ -19,5 +19,10 @@
     <string name="default_int_value">0</string>
 
     <string name="title_data_display">data_display</string>
+    <string name="transportation">Transportation</string>
+    <string name="line_">------------------------</string>
+    <string name="miles">Miles</string>
+    <string name="main_description">Pick a category to start recording your daily activities</string>
+    <string name="title_activity_waste">activity_waste</string>
 
 </resources>
