@@ -2,6 +2,7 @@ package com.example.willamette_thesis
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -9,8 +10,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+
+//import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_consumable.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -165,9 +166,12 @@ class ConsumableActivity : AppCompatActivity() {
     }
 
     //Firebase
-    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    var ref: DatabaseReference = database.getReference("server/saving-data/fireblog")
+//    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+//    var ref: DatabaseReference = database.getReference("server/saving-data/fireblog")
     //*-*-*
+
+
+
 
 
 }

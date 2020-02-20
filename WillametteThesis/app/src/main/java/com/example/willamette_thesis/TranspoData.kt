@@ -1,9 +1,9 @@
 package com.example.willamette_thesis
 
-import com.google.firebase.database.IgnoreExtraProperties
+//import com.google.firebase.database.IgnoreExtraProperties
 
 // [START blog_user_class]
-@IgnoreExtraProperties
+//@IgnoreExtraProperties
 data class TranspoData (
     var id: String? = "",
     //var transpo_data: Array<Int>
