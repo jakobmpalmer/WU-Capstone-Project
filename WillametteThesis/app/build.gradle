@@ -49,6 +49,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.1'
 
     //** AUTH
+    implementation 'com.google.firebase:firebase-auth:17.2.1'
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
 
     // Required only if Facebook login support is required

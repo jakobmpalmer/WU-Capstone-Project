@@ -13,15 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_car.*
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 //import com.google.firebase.quickstart.auth.R
 
 
 class CarActivity : AppCompatActivity() {
 
-    private lateinit var database: DatabaseReference
+    //private lateinit var database: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,26 +43,6 @@ class CarActivity : AppCompatActivity() {
 
     }
 
-    private fun createSignInIntent() {
-        // [START auth_fui_create_intent]
-        // Choose authentication providers
-        val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.PhoneBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build(),
-            AuthUI.IdpConfig.FacebookBuilder().build(),
-            AuthUI.IdpConfig.TwitterBuilder().build())
-
-        // Create and launch sign-in intent
-        startActivityForResult(
-            AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .build(),
-            //RC_SIGN_IN)
-            1)
-        // [END auth_fui_create_intent]
-    }
 
 
     private fun storeData(someDate: String){ // Change someData to an intarray?
@@ -75,7 +53,7 @@ class CarActivity : AppCompatActivity() {
         val car_data = if (car_text.text != null) car_text.text.toString().toInt() else 0
         val bus_data = if (bus_text.text != null) bus_text.text.toString().toInt() else 0
         val plane_data = if (plane_text.text != null) plane_text.text.toString().toInt() else 0
-        val walk_data = if (walk_text.text != null) plane_text.text.toString().toInt() else 0
+        val walk_data = if (walk_text.text != null) walk_text.text.toString().toInt() else 0
         //database.child("users").child(userId).setValue(user)
 
         //database.child("server/saving-data/transpo-data").child()
