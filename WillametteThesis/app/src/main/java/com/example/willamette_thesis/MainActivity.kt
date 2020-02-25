@@ -64,6 +64,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(appleIntent)
         }
 
+        settings_image.setOnClickListener {
+            signOut()
+            createSignInIntent()
+        }
+
 
 
         //Firebase
@@ -124,7 +129,15 @@ class MainActivity : AppCompatActivity() {
     // [END auth_fui_result]
 
 
-
+    private fun signOut() {
+        // [START auth_fui_signout]
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener {
+                // ...
+            }
+        // [END auth_fui_signout]
+    }
 
 
 }
