@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFF"
-    tools:context=".wasteActivity">
+    tools:context=".WasteActivity">
 
     <TextView
         android:id="@+id/textView3"
@@ -115,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/plastic_text"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/recycle_text"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginTop="48dp"
@@ -138,10 +138,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/plastic_text" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/trash_text"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginTop="64dp"
@@ -151,7 +151,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        app:layout_constraintTop_toBottomOf="@+id/recycle_text" />
 
     <Button
         android:id="@+id/submitWaste_Button"
@@ -165,7 +165,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.881"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/trash_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
