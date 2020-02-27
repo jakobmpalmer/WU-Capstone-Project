@@ -43,13 +43,13 @@ class MainActivity : AppCompatActivity() {
 
 
         buttonWaste.setOnClickListener{
-            val wasteIntent = Intent(this, wasteActivity::class.java)
+            val wasteIntent = Intent(this, WasteActivity::class.java)
             startActivity(wasteIntent)
         }
 
         val imageWaste = findViewById <ImageView>(R.id.imageTrash)
         imageWaste.setOnClickListener {
-            val wasteIntent = Intent(this, wasteActivity::class.java)
+            val wasteIntent = Intent(this, WasteActivity::class.java)
             startActivity(wasteIntent)
         }
 

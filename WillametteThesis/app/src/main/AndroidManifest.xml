@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 <!--        <activity android:name=".wasteActivity"></activity>-->
         <activity
-            android:name=".wasteActivity"
+            android:name=".WasteActivity"
             android:label="waste_activity"
             android:theme="@style/AppTheme">
         </activity>

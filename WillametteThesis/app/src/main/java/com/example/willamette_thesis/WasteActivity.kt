@@ -7,7 +7,7 @@ import android.widget.Button
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_waste.*
 
-class wasteActivity : AppCompatActivity() {
+class WasteActivity : AppCompatActivity() {
 
 
 
