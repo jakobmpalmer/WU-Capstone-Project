@@ -19,7 +19,7 @@
 <!--            android:name=".activity_waste"-->
 <!--            android:label="@string/title_activity_waste"-->
 <!--            android:theme="@style/AppTheme.NoActionBar" />-->
-        <activity android:name=".MainActivity">
+        <activity android:name=".LogActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

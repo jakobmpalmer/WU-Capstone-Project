@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_logging.*
 
 
 //import com.google.firebase.database.DatabaseReference
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 //import com.example.willamette_thesis.R.id.transportationIV
 
-class MainActivity : AppCompatActivity() {
+class LogActivity : AppCompatActivity() {
 
     // Choose an arbitrary request code value
     private val RC_SIGN_IN = 123
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_logging)
 
         val buttonTransportation = findViewById<Button>(R.id.buttonTransportation)
         buttonTransportation.setOnClickListener{
