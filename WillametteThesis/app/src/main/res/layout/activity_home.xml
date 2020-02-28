@@ -22,11 +22,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logging"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="493dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:layout_constraintVertical_bias="0.457" />
 
     <Button
-        android:id="@+id/analitics_btn"
+        android:id="@+id/analytics_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -40,8 +44,10 @@
         android:id="@+id/settings_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
         android:text="@string/action_settings"
         app:layout_constraintEnd_toEndOf="@+id/logging_btn"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/logging_btn"
-        tools:layout_editor_absoluteY="618dp" />
+        app:layout_constraintTop_toBottomOf="@+id/logging_btn" />
 </androidx.constraintlayout.widget.ConstraintLayout>
