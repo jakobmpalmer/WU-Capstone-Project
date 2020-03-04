@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -37,10 +38,10 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-//        settings_image.setOnClickListener {
-            //            signOut()
-//            createSignInIntent()
-//        }
+        settings_image.setOnClickListener {
+            signOut()
+            createSignInIntent()
+        }
 
 
         if(FirebaseAuth.getInstance().currentUser != null){

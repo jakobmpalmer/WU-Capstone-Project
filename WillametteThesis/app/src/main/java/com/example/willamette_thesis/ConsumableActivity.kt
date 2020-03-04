@@ -1,15 +1,10 @@
 package com.example.willamette_thesis
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -44,13 +39,17 @@ class ConsumableActivity : AppCompatActivity() {
 //            fabAction()
 //        }
 
-
+        submitConsum_Button.setOnClickListener{ it: View? ->
+            //var input = car_input.toString().toDouble()
+            Toast.makeText(this@ConsumableActivity, "Consumable info for the day has been recorded", Toast.LENGTH_SHORT).show()
+            storeData()
+        }
 
     } //Oncreate
 
 
 
-    private fun storeData(someDate: String) {
+    private fun storeData() {
         // Create a new user with a first and last name
         val water_data = if (water_text.text != null) water_text.text.toString().toInt() else 0
         val food_data = if (food_text.text != null) food_text.text.toString().toInt() else 0

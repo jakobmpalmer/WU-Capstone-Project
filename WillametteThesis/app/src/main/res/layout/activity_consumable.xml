@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
     <Button
-        android:id="@+id/submitWaste_Button"
+        android:id="@+id/submitConsum_Button"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"

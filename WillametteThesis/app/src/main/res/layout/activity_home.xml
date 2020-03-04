@@ -7,6 +7,18 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/settings_image"
+        android:layout_width="39dp"
+        android:layout_height="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.00999999"
+        app:srcCompat="@drawable/settings_logo" />
+
+    <ImageView
         android:id="@+id/imageView10"
         android:layout_width="290dp"
         android:layout_height="205dp"

@@ -83,7 +83,7 @@ class LogActivity : AppCompatActivity() {
     } //end on create
 
 
-
+//
 //    private fun createSignInIntent() {
 //        // [START auth_fui_create_intent]
 //        // Choose authentication providers

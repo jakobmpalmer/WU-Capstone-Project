@@ -2,18 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_waste"
+        android:id="@+id/fragment_waste"
         android:icon="@drawable/recycle"
-        android:title="Waste"/>
+        android:orderInCategory="1"
+        android:title="Waste" />
 
     <item
-        android:id="@+id/navigation_transportation"
-        android:icon="@drawable/car"
-        android:title="Navigation"/>
+        android:id="@+id/fragment_all_data"
+        android:title="All"
+        android:orderInCategory="2"
+        android:icon="@drawable/apple" />
 
     <item
-        android:id="@+id/navigation_consumable"
-        android:icon="@drawable/apple"
-        android:title="Consumable"/>
+        android:id="@+id/fragment_transpo"
+        android:title="Transportation"
+        android:orderInCategory="3"
+        android:icon="@drawable/car" />
 
 </menu>
