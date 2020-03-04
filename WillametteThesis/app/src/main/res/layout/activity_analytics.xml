@@ -8,13 +8,14 @@
 
     <TableLayout
         android:id="@+id/dataDisplayTable"
-        android:layout_width="266dp"
-        android:layout_height="206dp"
+        android:layout_width="340dp"
+        android:layout_height="327dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24000001"
+        app:layout_constraintVertical_bias="0.326"
         tools:visibility="visible">
 
         <TableRow
@@ -39,6 +40,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Gas" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Waste" />
         </TableRow>
 
         <TableRow
@@ -64,6 +71,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/default_int_value" />
+
+            <TextView
+                android:id="@+id/wasteTotalTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0" />
         </TableRow>
 
         <TableRow
@@ -74,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Millileters" />
+                android:text="Total" />
 
             <TextView
                 android:id="@+id/mlTotalTV"
@@ -89,6 +103,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/default_int_value" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0" />
         </TableRow>
 
     </TableLayout>
@@ -105,14 +125,30 @@
         app:layout_constraintTop_toBottomOf="@+id/dataDisplayTable"
         app:layout_constraintVertical_bias="0.696" />
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:menu="@menu/data_navigation"/>-->
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/dataNavigationView"
-        android:layout_width="412dp"
-        android:layout_height="64dp"
+        android:layout_width="444dp"
+        android:layout_height="84dp"
         android:background="?android:attr/windowBackground"
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@color/oceanblue"
-        app:itemTextColor="@color/ecogreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

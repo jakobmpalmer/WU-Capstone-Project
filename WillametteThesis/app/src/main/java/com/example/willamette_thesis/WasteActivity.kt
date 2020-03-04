@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_waste.*
 
@@ -52,14 +53,16 @@ class WasteActivity : AppCompatActivity() {
 //        )
 
 // Add a new document with a generated ID
-        db.collection("/waste-data")
-            .add(data)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
+        val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+        //db.collection("/waste-data")
+//        db.collection(userPath)
+//            .add(data)
+//            .addOnSuccessListener { documentReference ->
+//                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+//            }
+//            .addOnFailureListener { e ->
+//                Log.w(TAG, "Error adding document", e)
+//            }
 
         // Add a new document with a generated ID
 //        db.collection("/impact-data")
@@ -70,6 +73,9 @@ class WasteActivity : AppCompatActivity() {
 //            .addOnFailureListener { e ->
 //                Log.w(TAG, "Error adding document", e)
 //            }
+
+        db.collection(userPath).document("/waste-data").set(data)
+
     }
 
 

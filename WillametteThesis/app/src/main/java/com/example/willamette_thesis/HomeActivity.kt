@@ -31,10 +31,10 @@ class HomeActivity : AppCompatActivity() {
             startActivity(analyticsIntent)
         }
 
-//        settingsBtn.setOnClickListener{
-//            val settingsIntent = Intent(this, settingsActivity::class.java)
-//            startActivity(settingsIntent)
-//        }
+        settingsBtn.setOnClickListener{
+            val settingsIntent = Intent(this, printDisplayName()::class.java)
+            startActivity(settingsIntent)
+        }
 
 
 //        settings_image.setOnClickListener {
@@ -106,6 +106,12 @@ class HomeActivity : AppCompatActivity() {
                 // ...
             }
         // [END auth_fui_signout]
+    }
+
+    fun printDisplayName(){
+
+        println("Your Displayname: " + FirebaseAuth.getInstance().currentUser)
+        println("Your Displayname: " + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE"))
     }
 
 

@@ -10,6 +10,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 //import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_consumable.*
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_consumable.*
 class ConsumableActivity : AppCompatActivity() {
 
     private var waterCount = 0
+    private val db = FirebaseFirestore.getInstance()
 
     object OurVariables {
         var waterTotal = 0
@@ -46,32 +49,51 @@ class ConsumableActivity : AppCompatActivity() {
     } //Oncreate
 
 
-    private fun fabAction(){
-        val ddt = findViewById<TableLayout>(R.id.dataDisplayTable)
-            if(ddt.isInvisible){
-                println("- - ddt is invisible - -")
-                ddt.visibility = View.VISIBLE
-            } else{
-                println("- - ddt is visible - -")
-                ddt.visibility = View.INVISIBLE
-            }
+
+    private fun storeData(someDate: String) {
+        // Create a new user with a first and last name
+        val water_data = if (water_text.text != null) water_text.text.toString().toInt() else 0
+        val food_data = if (food_text.text != null) food_text.text.toString().toInt() else 0
+        //val trash_data = if (trash_text.text != null) trash_text.text.toString().toInt() else 0
+
+
+        val data = hashMapOf(
+            "water_data" to water_data,
+            "food_data" to food_data
+        )
+
+// Add a new document with a generated ID
+        val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+        db.collection(userPath).document("/consumable-data").set(data)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+//
+//    private fun fabAction(){
+//        val ddt = findViewById<TableLayout>(R.id.dataDisplayTable)
+//            if(ddt.isInvisible){
+//                println("- - ddt is invisible - -")
+//                ddt.visibility = View.VISIBLE
+//            } else{
+//                println("- - ddt is visible - -")
+//                ddt.visibility = View.INVISIBLE
+//            }
+//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.menu_main, menu)
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        return when (item.itemId) {
+//            R.id.action_settings -> true
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
 /*Add Water Function
 * Currently uses to many variables
