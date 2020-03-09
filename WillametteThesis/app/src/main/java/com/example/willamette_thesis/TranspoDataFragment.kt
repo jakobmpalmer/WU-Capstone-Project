@@ -33,14 +33,20 @@ class TranspoDataFragment : Fragment() {
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                        var carTotal = (document.data?.get("car_data")?.toString()?.toFloat() ?: 0)
-                        var busTotal = (document.data?.get("bus_data")?.toString()?.toFloat() ?: 0)
-                        var airTotal = (document.data?.get("plane_data")?.toString()?.toFloat() ?: 0)
-                        var walkTotal = (document.data?.get("walk_data")?.toString()?.toFloat() ?: 0)
-                        var totalMiles = carTotal.toFloat() + busTotal.toFloat() + airTotal.toFloat() + walkTotal.toFloat()
+                        var carData = (document.data?.get("car_data")?.toString() ?: "NULL_VALUE")
+                        var busData = (document.data?.get("bus_data")?.toString() ?: "NULL_VALUE")
+                        var airData = (document.data?.get("plane_data")?.toString() ?: "NULL_VALUE")
+                        var walkData = (document.data?.get("walk_data")?.toString() ?: "NULL_VALUE")
 
-                        totalMilesText.text = (totalMiles.toString())
-                        //carbonFootrpintText.text = calculateCarbonFPCar(totalMiles)
+                        var carTotal = carData.toFloat()
+                        var busTotal = busData.toFloat()
+                        var airTotal = airData.toFloat()
+                        var walkTotal = walkData.toFloat()
+
+                        var totalMiles = carTotal + busTotal + airTotal + walkTotal
+
+                        totalMilesText.text = totalMiles.toString() + "miles"
+                        carbonFootrpintText.text = calculateCarbonFPCar(totalMiles).toString() + " C02e"
                     } else {
                         Log.d(TAG, "No such document")
                     }
@@ -62,7 +68,7 @@ class TranspoDataFragment : Fragment() {
     */*/
 
     private fun calculateCarbonFPCar(miles: Float) : Float{
-        return miles
+        return miles * 8.31f
     }
 
 
