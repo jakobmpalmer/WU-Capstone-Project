@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_waste.*
 
@@ -19,19 +21,16 @@ class WasteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_waste)
+        //val binding = R.layout.ActivityWasteBinding.inflate(layoutInflater)
+        //setContentView(binding.root)
 
         val submitWasteBtn = findViewById<Button>(R.id.submitWaste_Button)
         submitWasteBtn.setOnClickListener {
             //var data = getData()
+            Toast.makeText(this@WasteActivity, "Waste info for the day has been recorded", Toast.LENGTH_SHORT).show()
             storeData("Date")
         }
     }
-
-
-
-
-
-
 
     private fun storeData(someDate: String) {
         // Create a new user with a first and last name
@@ -45,31 +44,18 @@ class WasteActivity : AppCompatActivity() {
             "recycle_data" to recycle_data,
             "trash_data" to trash_data
         )
-//        val data2 = hashMapOf(
-//            "date" to someDate,
-//            "Data" to someData,
-//            "PlaneMiles" to "20"
-//        )
-
 // Add a new document with a generated ID
-        db.collection("/waste-data")
-            .add(data)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
-
-        // Add a new document with a generated ID
-//        db.collection("/impact-data")
-//            .add(data2)
+        val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+        //db.collection("/waste-data")
+//        db.collection(userPath)
+//            .add(data)
 //            .addOnSuccessListener { documentReference ->
 //                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
 //            }
 //            .addOnFailureListener { e ->
 //                Log.w(TAG, "Error adding document", e)
 //            }
+        db.collection(userPath).document("/waste-data").set(data)
     }
 
 

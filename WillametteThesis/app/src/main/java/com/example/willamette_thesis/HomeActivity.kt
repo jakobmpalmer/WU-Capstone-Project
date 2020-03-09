@@ -1,68 +1,42 @@
 package com.example.willamette_thesis
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_home.*
 
+class HomeActivity : AppCompatActivity() {
 
-//import com.google.firebase.database.DatabaseReference
-//import com.google.firebase.database.FirebaseDatabase
-
-
-//import com.example.willamette_thesis.R.id.transportationIV
-
-class MainActivity : AppCompatActivity() {
-
-    // Choose an arbitrary request code value
     private val RC_SIGN_IN = 123
 
-    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
 
-        val buttonTransportation = findViewById<Button>(R.id.buttonTransportation)
-        buttonTransportation.setOnClickListener{
-            val carImgIntent = Intent(this, CarActivity::class.java)
-            startActivity(carImgIntent)
+        val loggingBtn = findViewById<Button>(R.id.logging_btn)
+        val analyticsBtn = findViewById<Button>(R.id.analytics_btn)
+        val settingsBtn = findViewById<Button>(R.id.settings_btn)
+
+        loggingBtn.setOnClickListener{
+            val logIntent = Intent(this, LogActivity::class.java)
+            startActivity(logIntent)
         }
 
-        val imageTransportation = findViewById <ImageView> (R.id.transportationIV)
-        imageTransportation.setOnClickListener {
-            val carIntent = Intent(this, CarActivity::class.java)
-            startActivity(carIntent)
+        analyticsBtn.setOnClickListener{
+            val analyticsIntent = Intent(this, AnalyticsActivity::class.java)
+            startActivity(analyticsIntent)
         }
 
-
-        buttonWaste.setOnClickListener{
-            val wasteIntent = Intent(this, WasteActivity::class.java)
-            startActivity(wasteIntent)
+        settingsBtn.setOnClickListener{
+            val settingsIntent = Intent(this, printDisplayName()::class.java)
+            startActivity(settingsIntent)
         }
 
-        val imageWaste = findViewById <ImageView>(R.id.imageTrash)
-        imageWaste.setOnClickListener {
-            val wasteIntent = Intent(this, WasteActivity::class.java)
-            startActivity(wasteIntent)
-        }
-
-
-        buttonConsumption.setOnClickListener {
-            val consumableIntent = Intent(this, ConsumableActivity::class.java)
-            startActivity(consumableIntent)
-        }
-
-        imageApple.setOnClickListener {
-            val appleIntent = Intent(this, ConsumableActivity::class.java)
-            startActivity(appleIntent)
-        }
 
         settings_image.setOnClickListener {
             signOut()
@@ -70,21 +44,17 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-        //Firebase
-        //val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-        //var ref: DatabaseReference = database.getReference("server/saving-data/fireblog")
-        //*-*-*
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            println("Signed in as, " + FirebaseAuth.getInstance().getCurrentUser())
+        if(FirebaseAuth.getInstance().currentUser != null){
+            println("Signed in as, " + FirebaseAuth.getInstance().currentUser)
         } else {
             //not signed in
             println("You are not signed in!")
             createSignInIntent()
         }
 
-    } //end on create
 
+
+    } // Oncreate
 
 
     private fun createSignInIntent() {
@@ -137,6 +107,12 @@ class MainActivity : AppCompatActivity() {
                 // ...
             }
         // [END auth_fui_signout]
+    }
+
+    fun printDisplayName(){
+
+        println("Your Displayname: " + FirebaseAuth.getInstance().currentUser)
+        println("Your Displayname: " + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE"))
     }
 
 

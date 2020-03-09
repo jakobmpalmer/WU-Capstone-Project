@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ecofr3ndly_background"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
 
     <TableLayout
         android:id="@+id/dataDisplayTable"
-        android:layout_width="266dp"
-        android:layout_height="206dp"
+        android:layout_width="340dp"
+        android:layout_height="327dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24000001"
+        app:layout_constraintVertical_bias="0.326"
         tools:visibility="visible">
 
         <TableRow
@@ -41,6 +41,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Gas" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Waste" />
         </TableRow>
 
         <TableRow
@@ -51,7 +57,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Total" />
+                android:text="Waste" />
+
+            <TextView
+                android:id="@+id/waterWasteTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/default_int_value" />
+
+            <TextView
+                android:id="@+id/perHourTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/default_int_value" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total:" />
 
             <TextView
                 android:id="@+id/waterTotalTV"
@@ -66,46 +103,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/default_int_value" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/wasteTotalTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Millileters" />
-
-            <TextView
-                android:id="@+id/mlTotalTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/default_int_value" />
-
-            <TextView
-                android:id="@+id/perHourTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/default_int_value" />
+                android:text="0" />
         </TableRow>
 
     </TableLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20sp"
-        android:text="This is Data Display Activity"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataDisplayTable" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

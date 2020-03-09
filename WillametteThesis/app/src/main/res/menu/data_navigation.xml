@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragment_waste"
+        android:icon="@drawable/recycle"
+        android:orderInCategory="1"
+        android:title="Waste" />
+
+    <item
+        android:id="@+id/fragment_all_data"
+        android:title="All"
+        android:orderInCategory="2"
+        android:icon="@drawable/apple" />
+
+    <item
+        android:id="@+id/fragment_transpo"
+        android:title="Transportation"
+        android:orderInCategory="3"
+        android:icon="@drawable/car" />
+
+</menu>

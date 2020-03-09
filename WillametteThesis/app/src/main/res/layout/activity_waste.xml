@@ -7,6 +7,19 @@
     android:background="#FFFF"
     tools:context=".WasteActivity">
 
+    <EditText
+        android:id="@+id/recycle_text"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="144dp"
+        android:hint="0"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -128,19 +141,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/recycle_text"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        android:hint="0"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/plastic_text" />
-
-    <EditText
         android:id="@+id/trash_text"
         android:layout_width="80dp"
         android:layout_height="50dp"
@@ -149,7 +149,7 @@
         android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/recycle_text" />
 

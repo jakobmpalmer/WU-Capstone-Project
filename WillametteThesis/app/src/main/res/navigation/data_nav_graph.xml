@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/data_nav_graph"
+    app:startDestination="@id/home_fragment">
+
+    <!--First fragment-->
+    <fragment
+        android:id="@+id/fragment_waste"
+        android:name="com.example.willamette_thesis.WasteDataFragment"
+        android:label="waste_frag">
+        <action
+            android:id="@+id/action_fragment_waste_to_fragment_transpo"
+            app:destination="@id/fragment_transpo" />
+        <action
+            android:id="@+id/action_fragment_waste_to_fragment_consum"
+            app:destination="@id/fragment_all_data" />
+    </fragment>
+    <!--Second fragment-->
+    <fragment
+        android:id="@+id/fragment_transpo"
+        android:name="com.example.willamette_thesis.TranspoDataFragment"
+        android:label="transpo_frag">
+        <action
+            android:id="@+id/action_fragment_transpo_to_fragment_consum"
+            app:destination="@id/fragment_all_data" />
+        <action
+            android:id="@+id/action_fragment_transpo_to_fragment_waste"
+            app:destination="@id/fragment_waste" />
+    </fragment>
+    <!--Third fragment-->
+    <fragment
+        android:id="@+id/fragment_all_data"
+        android:name="com.example.willamette_thesis.AllDataFragment"
+        android:label="consum_frag">
+        <action
+            android:id="@+id/action_fragment_consum_to_fragment_waste"
+            app:destination="@id/fragment_waste" />
+        <action
+            android:id="@+id/action_fragment_consum_to_fragment_transpo4"
+            app:destination="@id/fragment_transpo" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.example.willamette_thesis.HomeDataFragment"
+        android:label="consum_frag">
+        <action
+            android:id="@+id/action_home_fragment_to_fragment_consum"
+            app:destination="@id/fragment_all_data" />
+        <action
+            android:id="@+id/action_home_fragment_to_fragment_transpo"
+            app:destination="@id/fragment_transpo" />
+        <action
+            android:id="@+id/action_home_fragment_to_fragment_waste"
+            app:destination="@id/fragment_waste" />
+    </fragment>
+
+</navigation>
