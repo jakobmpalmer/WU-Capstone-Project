@@ -10,6 +10,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 //import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_consumable.*
+import java.util.*
+
 //import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -23,6 +25,10 @@ class ConsumableActivity : AppCompatActivity() {
         var gasTotal = 0
         var ml: Double = 0.0
     }
+
+    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
+    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
+    private var calendar: Calendar = GregorianCalendar(pdt)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,17 +48,17 @@ class ConsumableActivity : AppCompatActivity() {
         submitConsum_Button.setOnClickListener{ it: View? ->
             //var input = car_input.toString().toDouble()
             Toast.makeText(this@ConsumableActivity, "Consumable info for the day has been recorded", Toast.LENGTH_SHORT).show()
-            storeData()
+            storeData(getOurDate(), getOurTime())
         }
 
     } //Oncreate
 
 
 
-    private fun storeData() {
+    private fun storeData(ourDate: String, ourTime: String) {
         // Create a new user with a first and last name
-        val water_data = if (water_text.text != null) water_text.text.toString().toInt() else 0
-        val food_data = if (food_text.text != null) food_text.text.toString().toInt() else 0
+        val water_data = if (water_text.text.isNotEmpty()) water_text.text.toString().toInt() else 0
+        val food_data = if (food_text.text.isNotEmpty()) food_text.text.toString().toInt() else 0
         //val trash_data = if (trash_text.text != null) trash_text.text.toString().toInt() else 0
 
 
@@ -63,7 +69,8 @@ class ConsumableActivity : AppCompatActivity() {
 
 // Add a new document with a generated ID
         val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
-        db.collection(userPath).document("/consumable-data").set(data)
+        //db.collection(userPath).document("/consumable-data").set(data)
+        db.collection(userPath).document(ourDate).collection("consumable-data").document(ourTime).set(data)
     }
 
 //
@@ -155,7 +162,22 @@ class ConsumableActivity : AppCompatActivity() {
 //    var ref: DatabaseReference = database.getReference("server/saving-data/fireblog")
     //*-*-*
 
+    fun getOurDate() : String{
+        var ourYear = calendar.get(Calendar.YEAR)
+        var ourMonth = calendar.get(Calendar.MONTH)
+        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
 
+        return ("$ourYear, $ourMonth, $ourDay")
+    }
+
+    private fun getOurTime() : String{
+        var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
+        var ourMin = calendar.get(Calendar.MINUTE)
+        var ourSec = calendar.get(Calendar.SECOND)
+        var ourMilisec = calendar.get(Calendar.MILLISECOND)
+
+        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
+    }
 
 
 
