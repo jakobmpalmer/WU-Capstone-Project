@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_car.*
+import java.util.*
 
 
 class CarActivity : AppCompatActivity() {
@@ -21,6 +22,10 @@ class CarActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     //add the tag
     val TAG: String = "ECO-FR3ndly"
+
+    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
+    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
+    private var calendar: Calendar = GregorianCalendar(this.pdt)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,13 +36,24 @@ class CarActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener{ it: View? ->
             //var input = car_input.toString().toDouble()
+            if(car_text.text.isEmpty()){
+                println("21Empty")
+            } else if(car_text.text.isBlank()){
+                println("21Blank")
+            } else if(car_text.text.isNullOrBlank()){
+            println("21Null of Blank")
+            } else {
+                println("None21")
+            }
+
+
             Toast.makeText(this@CarActivity, "Transportation info for the day has been recorded", LENGTH_SHORT).show()
 
             //var ourData = getTranspoData()
             //storeData("DATE", ourData)
             //storeData("DATE", "[0,0,125]")
             //storeData(LocalDateTime.now().toString(), getTranspoData()) //REQUIRES API MIN 26 --Current 24
-            storeData("TEMP-DATE")
+            storeData(getOurDate(), getOurTime())
         }
 
         //database = FirebaseDatabase.getInstance().reference
@@ -70,12 +86,13 @@ class CarActivity : AppCompatActivity() {
 *  2 / 24 / 2020
 *
 * */
-    private fun storeData(someDate: String) {
-        val carData = if (car_text.text != null) car_text.text.toString().toInt() else 0
-        val busData = if (bus_text.text != null) bus_text.text.toString().toInt() else 0
-        val planeData = if (plane_text.text != null) plane_text.text.toString().toInt() else 0
-        val walkData = if (walk_text.text != null) walk_text.text.toString().toInt() else 0
+    private fun storeData(ourDate: String, ourTime: String) {
+        val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toInt() else 0
+        val busData = if (bus_text.text.isNotEmpty()) bus_text.text.toString().toInt() else 0
+        val planeData = if (plane_text.text.isNotEmpty()) plane_text.text.toString().toInt() else 0
+        val walkData = if (walk_text.text.isNotEmpty()) walk_text.text.toString().toInt() else 0
 
+        println("ourdata= $carData, $busData, $planeData, $walkData")
 
         val data = hashMapOf(
             "car_data" to carData,
@@ -96,7 +113,25 @@ class CarActivity : AppCompatActivity() {
 //                Log.w(TAG, "Error adding document", e)
 //            }
 
-        db.collection(userPath).document("travel-data").set(data)
+        //db.collection(userPath).document("travel-data").set(data)
+        db.collection(userPath).document(ourDate).collection("travel-data").document(ourTime).set(data)
+    }
+
+    fun getOurDate() : String{
+        var ourYear = calendar.get(Calendar.YEAR)
+        var ourMonth = calendar.get(Calendar.MONTH)
+        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        return ("$ourYear, $ourMonth, $ourDay")
+    }
+
+    private fun getOurTime() : String{
+        var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
+        var ourMin = calendar.get(Calendar.MINUTE)
+        var ourSec = calendar.get(Calendar.SECOND)
+        var ourMilisec = calendar.get(Calendar.MILLISECOND)
+
+        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
     }
 
 
