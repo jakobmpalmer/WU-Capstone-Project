@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.toColor
 import com.example.willamette_thesis.R.color.*
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_car.*
@@ -27,9 +28,9 @@ class SettingsActivity : AppCompatActivity() {
             textView8.setTextColor(natureSettings_text)
             textView9.setTextColor(natureSettings_text)
 
-            transportation_text.setTextColor(natureCar_text)
+            //transportation_text.setTextColor(natureCar_text)
             textView.setTextColor(natureCar_text)
-            miles_text.setTextColor(natureCar_text)
+            //miles_text.setTextColor(natureCar_text)
             car_text.setTextColor(natureCar_text)
             bus_text.setTextColor(natureCar_text)
             plane_text.setTextColor(natureCar_text)
@@ -46,9 +47,9 @@ class SettingsActivity : AppCompatActivity() {
             textView8.setTextColor(originalSettings_text)
             textView9.setTextColor(originalSettings_text)
 
-            transportation_text.setTextColor(originalCar_text)
+            //transportation_text.setTextColor(originalCar_text)
             textView.setTextColor(originalCar_text)
-            miles_text.setTextColor(originalCar_text)
+            //miles_text.setTextColor(originalCar_text)
             car_text.setTextColor(originalCar_text)
             bus_text.setTextColor(originalCar_text)
             plane_text.setTextColor(originalCar_text)
@@ -61,6 +62,43 @@ class SettingsActivity : AppCompatActivity() {
             trash_text.setTextColor(colorPrimary)
         }
 
+        logout_btn.setOnClickListener {
+            signOut()
+            createSignInIntent()
+        }
+
+    }// On Create
+
+
+
+    private fun signOut() {
+        // [START auth_fui_signout]
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener {
+                // ...
+            }
+        // [END auth_fui_signout]
+    }
+
+    private fun createSignInIntent() {
+        // [START auth_fui_create_intent]
+        // Choose authentication providers
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build(),
+            AuthUI.IdpConfig.FacebookBuilder().build()
+        )
+
+        // Create and launch sign-in intent
+        startActivityForResult(
+            AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build(),
+            //RC_SIGN_IN)
+            1)
+        // [END auth_fui_create_intent]
     }
 }
 
