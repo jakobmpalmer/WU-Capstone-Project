@@ -27,6 +27,8 @@ class TranspoDataFragment : Fragment() {
             val db = FirebaseFirestore.getInstance()
             val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
             val travelRef = db.collection(userPath).document("travel-data")
+            //val dateRef = db.collection(userPath).document(requestedDate).collection(requestedTime).document("travel-data")
+            // ABOVE to be implemented with date select
 
 
             travelRef.get()
