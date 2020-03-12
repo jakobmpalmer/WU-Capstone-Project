@@ -2,9 +2,7 @@ package com.example.willamette_thesis
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.toColor
 import com.example.willamette_thesis.R.color.*
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,7 +27,7 @@ class SettingsActivity : AppCompatActivity() {
             textView9.setTextColor(natureSettings_text)
 
             //transportation_text.setTextColor(natureCar_text)
-            textView.setTextColor(natureCar_text)
+            transpoActivityTitle.setTextColor(natureCar_text)
             //miles_text.setTextColor(natureCar_text)
             car_text.setTextColor(natureCar_text)
             bus_text.setTextColor(natureCar_text)
@@ -48,7 +46,7 @@ class SettingsActivity : AppCompatActivity() {
             textView9.setTextColor(originalSettings_text)
 
             //transportation_text.setTextColor(originalCar_text)
-            textView.setTextColor(originalCar_text)
+            transpoActivityTitle.setTextColor(originalCar_text)
             //miles_text.setTextColor(originalCar_text)
             car_text.setTextColor(originalCar_text)
             bus_text.setTextColor(originalCar_text)
