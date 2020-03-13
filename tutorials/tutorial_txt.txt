@@ -1,2 +1,0 @@
-Actionbars && Bottom Navigation bar
-https://code.tutsplus.com/tutorials/how-to-code-a-bottom-navigation-bar-for-an-android-app--cms-30305
