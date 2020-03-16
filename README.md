@@ -1,6 +1,8 @@
 # WU-Capstone-Project -  EcoFr3ndly
 Created by Jakob M Paulson-Palmer & Daniela Camacho
+
 🌲🐻
+
 Background and Introduction
  
 The Intergovernmental Panel for Climate Change (IPCC) believes that by the end of the century our planet will warm by 2°C as 
