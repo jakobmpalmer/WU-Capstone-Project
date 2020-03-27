@@ -9,10 +9,15 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import java.util.*
 
-class HomeActivity : AppCompatActivity() {
+public class HomeActivity : AppCompatActivity() {
 
     private val RC_SIGN_IN = 123
+
+    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
+    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
+    private var calendar: Calendar = GregorianCalendar(this.pdt)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,6 +118,23 @@ class HomeActivity : AppCompatActivity() {
 
         println("Your Displayname: " + FirebaseAuth.getInstance().currentUser)
         println("Your Displayname: " + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE"))
+    }
+
+    public fun getOurDate() : String{
+        var ourYear = calendar.get(Calendar.YEAR)
+        var ourMonth = calendar.get(Calendar.MONTH)
+        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        return ("$ourYear, $ourMonth, $ourDay")
+    }
+
+    public fun getOurTime() : String{
+        var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
+        var ourMin = calendar.get(Calendar.MINUTE)
+        var ourSec = calendar.get(Calendar.SECOND)
+        var ourMilisec = calendar.get(Calendar.MILLISECOND)
+
+        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
     }
 
 
