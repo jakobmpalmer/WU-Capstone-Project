@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="ecogreen">#009921</color>
+    <color name="oceanblue">#0058e6</color>
+    
+    <color name="originalBackground">#FFFF</color>
+    <color name="natureSettings_background">#AFE6D4</color>
+    <color name="originalSettings_text">#146B73</color>
+    <color name="natureSettings_text">#2D9E17</color>
+    <color name="originalCar_text">#7C8280</color>
+    <color name="natureCar_text">#17926A</color>
+    <color name="natureWaste_text">#CDE06E</color>
+</resources>
