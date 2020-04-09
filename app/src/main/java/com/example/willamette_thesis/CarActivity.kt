@@ -88,11 +88,12 @@ class CarActivity : AppCompatActivity() {
 * */
     private fun storeData(ourDate: String, ourTime: String) {
 
-        val updates = HashMap<String, Any>()
+        //val updates = HashMap<String, Any>()
 
         val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+        val travelRef = db.collection(userPath).document(ourDate).collection("travel-data")
         val totalRef = db.collection(userPath).document(ourDate).collection("travel-data").document("day-total")
-        updates[totalRef + '/car_data'] =
+        //updates[totalRef + '/car_data'] =
 
         val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toFloat() else 0
         val busData = if (bus_text.text.isNotEmpty()) bus_text.text.toString().toFloat() else 0
@@ -108,15 +109,16 @@ class CarActivity : AppCompatActivity() {
             "walk_data" to walkData
         )
 
-        var newCarTotal = totalRef.get("car_total").result.toString().toFloat() + carData
+       // var newCarTotal = totalRef.get("car_total").result.toString().toFloat() + carData
 
-        val totalData = hashMapOf(
-            "car_total" to totalRef["car_total"] + carData,
-            "bus_total" to totalRef.get("bus_total") + busData,
-            "plane_total" to totalRef.get("plane_total") + planeData,
-            "walk_total" to totalRef.get("walk_total") + walkData
-        )
-
+//        val totalData = hashMapOf(
+//            "car_total" to if(travelRef["car_total"].result) + carData,
+//            "bus_total" to totalRef.get("bus_total") + busData,
+//            "plane_total" to totalRef.get("plane_total") + planeData,
+//            "walk_total" to totalRef.get("walk_total") + walkData
+//        )
+//
+//        updates["/car_data"] = carTotal
 // Add a new document with a generated ID
 
         //db.collection("/travel-data")
@@ -131,7 +133,7 @@ class CarActivity : AppCompatActivity() {
 
         //db.collection(userPath).document("travel-data").set(data)
         db.collection(userPath).document(ourDate).collection("travel-data").document(ourTime).set(data)
-        totalRef.set(updatedTotal)
+        //totalRef.set(updatedTotal)
     }
 
     fun getOurDate() : String{
