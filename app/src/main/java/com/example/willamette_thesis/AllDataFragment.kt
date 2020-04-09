@@ -17,15 +17,45 @@ class AllDataFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val db = FirebaseFirestore.getInstance()
         val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+        val dateTotal = db.collection(userPath).document("total-data")
         val travelRef = db.collection(userPath).document("travel-data")
         val wasteRef = db.collection(userPath).document("waste-data")
         val consumpRef = db.collection(userPath).document("consumable-data")
+
+        val appHome = HomeActivity()
+        val dateToday = appHome.getOurDate() //current date
+        val dateDoc = db.collection(userPath).document(dateToday) // Doc of dates
+        val travelCollection = dateDoc.collection("travel-data") //Travel data for the day
+
+        var totalMiles = 0f
+
+        travelCollection
+            .get()
+            .addOnSuccessListener { result ->
+                println("successful listener")
+                for (doc in result) {
+                    Log.d(TAG, "${doc.id} => ${doc.data}")
+                    println("Successfully got $doc from collection.. 48")
+                    var busData = doc.get("bus_data")
+                    var carData = doc.get("car_data")
+                    var planeData = doc.get("plane_data")
+                    var walkData = doc.get("walk_data")
+
+                    totalMiles = busData.toString().toFloat() + carData.toString().toFloat() + planeData.toString().toFloat() + walkData.toString().toFloat()
+                    println("its WORKING!!!!! $totalMiles")
+                }
+                totalMilesVal.text = ("$totalMiles miles")
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
 
         travelRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                     gasTotalTV.text = (document.data?.get("bus_data")?.toString() ?: "NULL_VALUE") + " miles"
+                    carbonFootprintVal.text = (document.data?.get("bus_data")?.toString() ?: "0") + " C02e"
                 } else {
                     Log.d(TAG, "No such document")
                 }
@@ -38,7 +68,7 @@ class AllDataFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document != null) {
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                    wasteTotalTV.text = ((document.data?.get("plastic_data")?.toString() ?: "NULL_VALUE") + " plastic")
+                    wasteTotalTV.text = ((document.data?.get("plastic_data")?.toString() ?: "0") + " plastic")
 
                 } else {
                     Log.d(TAG, "No such document")

@@ -9,14 +9,13 @@
 
     <TableLayout
         android:id="@+id/dataDisplayTable"
-        android:layout_width="340dp"
-        android:layout_height="327dp"
+        android:layout_width="386dp"
+        android:layout_height="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.326"
+        app:layout_constraintVertical_bias="0.046"
         tools:visibility="visible">
 
         <TableRow
@@ -113,6 +112,87 @@
         </TableRow>
 
     </TableLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="224dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataDisplayTable">
+
+        <LinearLayout
+            android:id="@+id/carbonDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#8BC34A"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/carbonFootprintTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Carbon Footprint:" />
+
+            <TextView
+                android:id="@+id/carbonFootprintVal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/milesDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#8BC34A"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/milesTraveledTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Miles Traveled:" />
+
+            <TextView
+                android:id="@+id/totalMilesVal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#4CAF50"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/totalPlasticTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Total Plastic:" />
+
+            <TextView
+                android:id="@+id/totalPlasticVal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

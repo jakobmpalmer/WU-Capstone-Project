@@ -87,10 +87,17 @@ class CarActivity : AppCompatActivity() {
 *
 * */
     private fun storeData(ourDate: String, ourTime: String) {
-        val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toInt() else 0
-        val busData = if (bus_text.text.isNotEmpty()) bus_text.text.toString().toInt() else 0
-        val planeData = if (plane_text.text.isNotEmpty()) plane_text.text.toString().toInt() else 0
-        val walkData = if (walk_text.text.isNotEmpty()) walk_text.text.toString().toInt() else 0
+
+        val updates = HashMap<String, Any>()
+
+        val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+        val totalRef = db.collection(userPath).document(ourDate).collection("travel-data").document("day-total")
+        updates[totalRef + '/car_data'] =
+
+        val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toFloat() else 0
+        val busData = if (bus_text.text.isNotEmpty()) bus_text.text.toString().toFloat() else 0
+        val planeData = if (plane_text.text.isNotEmpty()) plane_text.text.toString().toFloat() else 0
+        val walkData = if (walk_text.text.isNotEmpty()) walk_text.text.toString().toFloat() else 0
 
         println("ourdata= $carData, $busData, $planeData, $walkData")
 
@@ -101,8 +108,17 @@ class CarActivity : AppCompatActivity() {
             "walk_data" to walkData
         )
 
+        var newCarTotal = totalRef.get("car_total").result.toString().toFloat() + carData
+
+        val totalData = hashMapOf(
+            "car_total" to totalRef["car_total"] + carData,
+            "bus_total" to totalRef.get("bus_total") + busData,
+            "plane_total" to totalRef.get("plane_total") + planeData,
+            "walk_total" to totalRef.get("walk_total") + walkData
+        )
+
 // Add a new document with a generated ID
-        val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+
         //db.collection("/travel-data")
 //        db.collection(userPath)
 //            .add(data)
@@ -115,6 +131,7 @@ class CarActivity : AppCompatActivity() {
 
         //db.collection(userPath).document("travel-data").set(data)
         db.collection(userPath).document(ourDate).collection("travel-data").document(ourTime).set(data)
+        totalRef.set(updatedTotal)
     }
 
     fun getOurDate() : String{

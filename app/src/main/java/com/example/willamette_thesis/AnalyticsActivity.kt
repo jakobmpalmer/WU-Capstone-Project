@@ -10,10 +10,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class AnalyticsActivity : AppCompatActivity(){
+class AnalyticsActivity : AppCompatActivity() {
 
     //lateinit var toolbar: ActionBar
     private val db = FirebaseFirestore.getInstance()
+
     //var user = firebase.auth().currentUser;
     val TAG = "Analytics Problem"
 
@@ -23,11 +24,11 @@ class AnalyticsActivity : AppCompatActivity(){
         setContentView(R.layout.activity_analytics)
         //setSupportActionBar(toolbar)
         //supportActionBar?.setDisplayShowTitleEnabled(false)
-            //setUpNavigation()
+        //setUpNavigation()
         //toolbar = supportActionBar!!
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.dataNavigationView)
         val navController: NavController = Navigation.findNavController(this, R.id.home_fragment)
         NavigationUI.setupWithNavController(bottomNavigation, navController)
-
+    }
 }

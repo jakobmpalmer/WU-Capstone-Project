@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/data_nav_graph"
-    app:startDestination="@id/home_fragment">
+    app:startDestination="@id/fragment_all_data">
 
     <!--First fragment-->
     <fragment
@@ -20,7 +20,7 @@
     <!--Second fragment-->
     <fragment
         android:id="@+id/fragment_transpo"
-        android:name="com.example.willamette_thesis.TranspoDataFragment"
+        android:name="com.example.willamette_thesis.TodayDataFragment"
         android:label="transpo_frag">
         <action
             android:id="@+id/action_fragment_transpo_to_fragment_consum"
