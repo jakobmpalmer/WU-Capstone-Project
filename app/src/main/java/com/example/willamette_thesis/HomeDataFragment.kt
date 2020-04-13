@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_all_data.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeDataFragment : Fragment() {
 

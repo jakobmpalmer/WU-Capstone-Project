@@ -26,7 +26,7 @@ class TodayDataFragment : Fragment() {
 
             val db = FirebaseFirestore.getInstance()
             val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
-            val dateDoc = db.collection(userPath).document(dateToday) // Doc of dates
+            val dateDoc = db.collection(userPath).document(dateToday) // Doc of data for todays date
             val travelCollection = dateDoc.collection("travel-data") //Travel data for the day
             val travelTotal = dateDoc.collection("travel-data").document("total-data")
             // val travelRef = db.collection(userPath).document("travel-data")
@@ -68,7 +68,7 @@ class TodayDataFragment : Fragment() {
 
 //            val db = FirebaseFirestore.getInstance()
 //            val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
-            println("userPath: " + userPath)
+            println("userPath: $userPath")
             val dateRef = db.collection(userPath).document(dateToday)
             println("dateRed: " + dateRef)
             val travelRefDay = dateRef.collection("travel-data")

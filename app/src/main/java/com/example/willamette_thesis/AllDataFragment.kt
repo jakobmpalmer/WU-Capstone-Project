@@ -92,7 +92,8 @@ class AllDataFragment : Fragment() {
                 Log.d(TAG, "get failed with ", exception)
             }
 
-        return inflater.inflate(R.layout.fragment_all_data, container, false)
+//        return inflater.inflate(R.layout.fragment_all_data, container, false)
+        return inflater.inflate(R.layout.activity_settings, container, false)
 
     } // On Create
 

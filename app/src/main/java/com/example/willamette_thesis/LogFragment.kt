@@ -3,10 +3,13 @@ package com.example.willamette_thesis
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_logging.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+//import android.widget.ImageView
+import androidx.fragment.app.Fragment
+//import kotlinx.android.synthetic.main.activity_logging.*
+import kotlinx.android.synthetic.main.activity_logging.view.*
 
 
 //import com.google.firebase.database.DatabaseReference
@@ -15,52 +18,64 @@ import kotlinx.android.synthetic.main.activity_logging.*
 
 //import com.example.willamette_thesis.R.id.transportationIV
 
-class LogActivity : AppCompatActivity() {
+class LogFragment : Fragment() {
 
     // Choose an arbitrary request code value
     private val RC_SIGN_IN = 123
 
     @SuppressLint("WrongViewCast")
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_logging)
+        //setContentView(R.layout.activity_logging)
 
-        val buttonTransportation = findViewById<Button>(R.id.buttonTransportation)
-        buttonTransportation.setOnClickListener{
-            val carImgIntent = Intent(this, CarActivity::class.java)
+        val logView: View = inflater.inflate(
+            R.layout.activity_logging,
+            container,
+            false
+        )
+
+        logView.buttonTransportation.setOnClickListener {
+            val carImgIntent = Intent(activity, CarActivity::class.java)
             startActivity(carImgIntent)
         }
 
-        val imageTransportation = findViewById <ImageView> (R.id.transportationIV)
-        imageTransportation.setOnClickListener {
-            val carIntent = Intent(this, CarActivity::class.java)
+        //val buttonTransportation = findViewById<Button>(R.id.buttonTransportation)
+//        buttonTransportation.setOnClickListener{
+//            //val carImgIntent = Intent(this, CarActivity::class.java)
+//            val carImgIntent = Intent(activity, CarActivity::class.java)
+//            startActivity(carImgIntent)
+//        }
+
+        //al imageTransportation = findViewById <ImageView> (R.id.transportationIV)
+        logView.transportationIV.setOnClickListener {
+            val carIntent = Intent(activity, CarActivity::class.java)
             startActivity(carIntent)
         }
 
 
-        buttonWaste.setOnClickListener{
-            val wasteIntent = Intent(this, WasteActivity::class.java)
+        logView.buttonWaste.setOnClickListener{
+            val wasteIntent = Intent(activity, WasteActivity::class.java)
             startActivity(wasteIntent)
         }
 
-        val imageWaste = findViewById <ImageView>(R.id.imageWaste)
-        imageWaste.setOnClickListener {
-            val wasteIntent = Intent(this, WasteActivity::class.java)
+        //val imageWaste = findViewById <ImageView>(R.id.imageTrash)
+        logView.imageWaste.setOnClickListener {
+            val wasteIntent = Intent(activity, WasteActivity::class.java)
             startActivity(wasteIntent)
         }
 
 
-        buttonConsumption.setOnClickListener {
-            val consumableIntent = Intent(this, ConsumableActivity::class.java)
+        logView.buttonConsumption.setOnClickListener {
+            val consumableIntent = Intent(activity, ConsumableActivity::class.java)
             startActivity(consumableIntent)
         }
 
-        imageApple.setOnClickListener {
-            val appleIntent = Intent(this, ConsumableActivity::class.java)
+        logView.imageApple.setOnClickListener {
+            val appleIntent = Intent(activity, ConsumableActivity::class.java)
             startActivity(appleIntent)
         }
 
-//        settings_image.setOnClickListener {
+//        logView.settings_image.setOnClickListener {
 //            signOut()
 //            createSignInIntent()
 //        }
@@ -78,7 +93,7 @@ class LogActivity : AppCompatActivity() {
 //            println("You are not signed in!")
 //            createSignInIntent()
 //        }
-
+        return logView
     } //end on create
 
 
@@ -134,6 +149,7 @@ class LogActivity : AppCompatActivity() {
 //            }
 //        // [END auth_fui_signout]
 //    }
+
 
 
 }
