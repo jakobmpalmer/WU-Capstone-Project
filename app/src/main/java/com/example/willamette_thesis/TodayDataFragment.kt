@@ -28,41 +28,70 @@ class TodayDataFragment : Fragment() {
             val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
             val dateDoc = db.collection(userPath).document(dateToday) // Doc of data for todays date
             val travelCollection = dateDoc.collection("travel-data") //Travel data for the day
-            val travelTotal = dateDoc.collection("travel-data").document("total-data")
+
+            val totalRef = db.collection(userPath).document(dateToday).collection("total-data")
+            val travelTotalRef = totalRef.document("travel-total")
+            val consumpTotalRef = totalRef.document("consump-total")
+            val wasteTotalRef = totalRef.document("waste-total")
             // val travelRef = db.collection(userPath).document("travel-data")
            // val wasteRef = db.collection(userPath).document("waste-data")
            // val consumpRef = db.collection(userPath).document("consumable-data")
 
-
-
-            var totalMiles = 0f
-
-            travelCollection
-                .get()
-                .addOnSuccessListener { result ->
-                    println("successful listener")
-                    for (doc in result) {
-                        Log.d(TAG, "${doc.id} => ${doc.data}")
-                        println("Successfully got $doc from collection.. 48")
-                        var busData = doc.get("bus_data")
-                        var carData = doc.get("car_data")
-                        var planeData = doc.get("plane_data")
-                        var walkData = doc.get("walk_data")
-
-                        totalMiles = busData.toString().toFloat() + carData.toString().toFloat() + planeData.toString().toFloat() + walkData.toString().toFloat()
-                        println("its WORKING!!!!! $totalMiles")
-                    }
-                    totalMilesVar.text = ("$totalMiles miles")
-                    carbonFootrpintText.text = calculateCarbonFPCar(totalMiles).toString() + " C02e"
-                    var totalKm = totalMiles * 1.6
-                    totalKmVar.text = ("$totalKm Kilometers")
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "Error getting documents: ", exception)
-                }
+//            val tabs = todayTabLayout
+//            //val calendarTab = calendarTab
+//
+//            val dataLayout = todayTabLayout
+//            dataLayout.addTab(dataLayout.newTab().setText("Today!"));
+//            dataLayout.addTab(dataLayout.newTab().setText("Calendar"));
 
 
 
+
+            travelTotalRef.get().addOnSuccessListener { result ->
+                var totalMiles = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
+                totalMilesVar.text = ("$totalMiles miles")
+                var totalKm: Float = totalMiles * 1.61.toFloat()
+                totalKmVar.text = ("$totalKm Kilometers")
+
+                var carTotalValue = if (result.get("car_total") != null) result.get("car_total").toString().toFloat() else 0f
+                var busTotalValue = if (result.get("bus_total") != null) result.get("bus_total").toString().toFloat() else 0f
+                var planeTotalValue = if (result.get("plane_total") != null) result.get("plane_total").toString().toFloat() else 0f
+                var walkTotalValue = if (result.get("walk_total") != null) result.get("walk_total").toString().toFloat() else 0f
+
+                carTotalVar.text = carTotalValue.toString()
+                busTotalVar.text = busTotalValue.toString()
+                planeTotalVar.text = planeTotalValue.toString()
+                walkTotalVar.text = walkTotalValue.toString()
+
+                var totalCarbonFp = if(result.get("carbon_fp_sum")!= null) result.get("carbon_fp_sum") else 0f
+                carbonFootrpintVar.text = ("$totalCarbonFp C02ee")
+
+            }.addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting travel total: ", exception)
+            }
+
+            consumpTotalRef.get().addOnSuccessListener { result ->
+                var totalConsump = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
+                totalMeatVar.text = ("$totalConsump lbs")
+            }.addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting Consumption Total: ", exception)
+            }
+
+            wasteTotalRef.get().addOnSuccessListener { result ->
+                var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
+                totalWasteVar.text = ("$totalWaste lbs")
+
+                var plasticTotalValue = if (result.get("plastic_total") != null) result.get("car_total").toString().toFloat() else 0f
+                var recycleTotalValue = if (result.get("recycle_total") != null) result.get("bus_total").toString().toFloat() else 0f
+                var trashTotalValue = if (result.get("trash_total") != null) result.get("plane_total").toString().toFloat() else 0f
+
+                plasticsTotalVar.text = plasticTotalValue.toString()
+                recycleTotalVar.text = recycleTotalValue.toString()
+                trashTotalVar.text = trashTotalValue.toString()
+
+            }.addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting Waste Total: ", exception)
+            }
 
             //---------------------------------------------------------------------------------------------------------------
 
@@ -70,9 +99,9 @@ class TodayDataFragment : Fragment() {
 //            val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
             println("userPath: $userPath")
             val dateRef = db.collection(userPath).document(dateToday)
-            println("dateRed: " + dateRef)
+            println("dateRef: $dateRef")
             val travelRefDay = dateRef.collection("travel-data")
-            println("travelRefDay: " + travelRefDay)
+            println("travelRefDay: $travelRefDay")
             //val singleEntry = db.collection(userPath).document(dateToday).collection(<"ENTER DESIRED ENTRY TIME">)
 
 
@@ -228,15 +257,6 @@ class TodayDataFragment : Fragment() {
 //        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
 //    }
 
-    private fun sumDay(): Float {
-        var sumMiles = 0f
-
-        return sumMiles
-    }
-
-    private fun calculateCarbonFPCar(miles: Float) : Float{
-        return miles * 8.31f
-    }
 
 
 

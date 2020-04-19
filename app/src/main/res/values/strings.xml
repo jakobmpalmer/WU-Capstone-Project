@@ -18,10 +18,12 @@
         <item>36 oz</item>
     </string-array>
 
+    <string name="null_int">0</string>
+
 
     <string name="water_button">Water Button</string>
     <string name="gas_button">Gas Button</string>
-    <string name="default_int_value">0</string>
+<!--    <string name="default_int_value">0</string>-->
 
     <string name="title_data_display">data_display</string>
     <string name="transportation">Transportation</string>

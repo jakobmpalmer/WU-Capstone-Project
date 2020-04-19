@@ -3,15 +3,29 @@ package com.example.willamette_thesis
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_home.*
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
-public class HomeActivity : AppCompatActivity() {
+
+class HomeActivity : AppCompatActivity() {
+
+    var enterWaste = false
+    var enterTravel = false
+    var enterConsum = false
+
+
+    //lateinit var toolbar: ActionBar
+    private val db = FirebaseFirestore.getInstance()
+
+    //var user = firebase.auth().currentUser;
+    private val TAG = "Home Activity Problem"
 
     private val RC_SIGN_IN = 123
 
@@ -19,36 +33,22 @@ public class HomeActivity : AppCompatActivity() {
     private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
     private var calendar: Calendar = GregorianCalendar(this.pdt)
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        //setSupportActionBar(toolbar)
+        //supportActionBar?.setDisplayShowTitleEnabled(false)
+        //setUpNavigation()
+        //toolbar = supportActionBar!!
 
-        val loggingBtn = findViewById<Button>(R.id.logging_btn)
-        val analyticsBtn = findViewById<Button>(R.id.analytics_btn)
-        val settingsBtn = findViewById<Button>(R.id.settings_btn)
-
-        loggingBtn.setOnClickListener{
-            val logIntent = Intent(this, LogActivity::class.java)
-            startActivity(logIntent)
-        }
-
-        analyticsBtn.setOnClickListener{
-            val analyticsIntent = Intent(this, AnalyticsActivity::class.java)
-            startActivity(analyticsIntent)
-        }
-
-        settingsBtn.setOnClickListener{
-            val settingsIntent = Intent(this, SettingsActivity()::class.java)
-            startActivity(settingsIntent)
-        }
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.dataNavigationView)
+        val navController: NavController = Navigation.findNavController(this, R.id.home_fragment)
+        NavigationUI.setupWithNavController(bottomNavigation, navController)
 
 
-        settings_image.setOnClickListener {
-            signOut()
-            createSignInIntent()
-        }
-
-
+    //Sign-in
         if(FirebaseAuth.getInstance().currentUser != null){
             println("Signed in as, " + FirebaseAuth.getInstance().currentUser)
         } else {
@@ -56,10 +56,8 @@ public class HomeActivity : AppCompatActivity() {
             println("You are not signed in!")
             createSignInIntent()
         }
+    } // OnCreate
 
-
-
-    } // Oncreate
 
 
     private fun createSignInIntent() {
@@ -86,8 +84,8 @@ public class HomeActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SIGN_IN) {
-            val response = IdpResponse.fromResultIntent(data)
+//        if (requestCode == RC_SIGN_IN) {
+//            val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
@@ -99,10 +97,8 @@ public class HomeActivity : AppCompatActivity() {
                 // response.getError().getErrorCode() and handle the error.
                 // ...
             }
+        // [END auth_fui_result]
         }
-    }
-    // [END auth_fui_result]
-
 
     private fun signOut() {
         // [START auth_fui_signout]

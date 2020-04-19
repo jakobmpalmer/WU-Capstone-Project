@@ -31,9 +31,15 @@ class ConsumableActivity : AppCompatActivity() {
     private var calendar: Calendar = GregorianCalendar(pdt)
 
 
+    val appHome = HomeActivity()
+    var ourDate = appHome.getOurDate()
+    var ourTime = appHome.getOurTime()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         println("CREATED")
         super.onCreate(savedInstanceState)
+        println("ids= $ids, pdt=$pdt, calendar=$calendar")
+        println("appHome= $appHome, ourTime=$ourTime, ourDate=$ourDate")
         setContentView(R.layout.activity_consumable)
         //setSupportActionBar(toolbar)
 
@@ -48,29 +54,64 @@ class ConsumableActivity : AppCompatActivity() {
         submitConsum_Button.setOnClickListener{ it: View? ->
             //var input = car_input.toString().toDouble()
             Toast.makeText(this@ConsumableActivity, "Consumable info for the day has been recorded", Toast.LENGTH_SHORT).show()
-            storeData(getOurDate(), getOurTime())
+            //storeData(getOurDate(), getOurTime())
+            storeData(ourDate, ourTime)
         }
 
     } //Oncreate
 
 
 
-    private fun storeData(ourDate: String, ourTime: String) {
+    private fun storeData(theDate: String, theTime: String) {
+        val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+        val totalRef = db.collection(userPath).document(ourDate).collection("total-data")
+        val consumpTotalRef = totalRef.document("consump-total")
+
         // Create a new user with a first and last name
-        val water_data = if (water_text.text.isNotEmpty()) water_text.text.toString().toInt() else 0
-        val food_data = if (food_text.text.isNotEmpty()) food_text.text.toString().toInt() else 0
-        //val trash_data = if (trash_text.text != null) trash_text.text.toString().toInt() else 0
+        val cowData = if (cow_text.text.isNotEmpty()) cow_text.text.toString().toInt() else 0
+        val chickenData = if (chicken_text.text.isNotEmpty()) chicken_text.text.toString().toInt() else 0
+        val pigData = if (pig_text.text.isNotEmpty()) pig_text.text.toString().toInt() else 0
 
 
         val data = hashMapOf(
-            "water_data" to water_data,
-            "food_data" to food_data
+            "cow_data" to cowData,
+            "chicken_data" to chickenData,
+            "pig_data" to pigData
         )
+        println("Storing:: CowData: $cowData, ChickenData: $chickenData, PigData: $pigData")
+        println("Storing under Date: $theDate and Time: $theTime")
+        println("CurrentUser: ${FirebaseAuth.getInstance().currentUser?.email}")
+
+
+
+        consumpTotalRef.get().addOnSuccessListener { result ->
+            var oldCowTotal = result?.get("cow_total").toString().toFloatOrNull()
+            var oldPigTotal = result?.get("pig_total").toString().toFloatOrNull()
+            var oldChickenTotal = result?.get("chicken_total").toString().toFloatOrNull()
+
+
+            var newCowTotal = cowData + if (oldCowTotal != null) oldCowTotal else 0f
+            var newPigTotal = pigData + if (oldPigTotal != null) oldPigTotal else 0f
+            var newChickenTotal = chickenData + if (oldChickenTotal != null) oldChickenTotal else 0f
+            var sumTotal = newCowTotal + newPigTotal + newChickenTotal
+
+            val totalData = hashMapOf(
+                "cow_total" to newCowTotal,
+                "pig_total" to newPigTotal,
+                "chicken_total" to newChickenTotal,
+                "sum_total" to sumTotal
+            )
+
+            //totalRef.update(totalData as Map<String, Float>)
+            println("Saving total data:: $totalData")
+            consumpTotalRef.set(totalData)
+        } // travelTotal.get
+
 
 // Add a new document with a generated ID
-        val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+        //val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
         //db.collection(userPath).document("/consumable-data").set(data)
-        db.collection(userPath).document(ourDate).collection("consumable-data").document(ourTime).set(data)
+        db.collection(userPath).document(theDate).collection("consumable-data").document(theTime).set(data)
     }
 
 //
@@ -162,23 +203,39 @@ class ConsumableActivity : AppCompatActivity() {
 //    var ref: DatabaseReference = database.getReference("server/saving-data/fireblog")
     //*-*-*
 
-    fun getOurDate() : String{
-        var ourYear = calendar.get(Calendar.YEAR)
-        var ourMonth = calendar.get(Calendar.MONTH)
-        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
+//    fun getOurDate() : String{
+//        var ourYear = calendar.get(Calendar.YEAR)
+//        var ourMonth = calendar.get(Calendar.MONTH)
+//        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
+//
+//        return ("$ourYear, $ourMonth, $ourDay")
+//    }
+//
+//    private fun getOurTime() : String{
+//        var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
+//        var ourMin = calendar.get(Calendar.MINUTE)
+//        var ourSec = calendar.get(Calendar.SECOND)
+//        var ourMilisec = calendar.get(Calendar.MILLISECOND)
+//
+//        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
+//    }
 
-        return ("$ourYear, $ourMonth, $ourDay")
+    fun consumableImpact() : Double{
+        val cow_data = if (cow_text.text.isNotEmpty()) cow_text.text.toString().toInt() else 0
+        val chicken_data = if (chicken_text.text.isNotEmpty()) chicken_text.text.toString().toInt() else 0
+        val pig_data = if (pig_text.text.isNotEmpty()) pig_text.text.toString().toInt() else 0
+
+        val cowImpact = (cow_data/5.33) * 1799
+        // cow_data is number of 3oz portions had. We need amount of pounds, so we divide by 5.33, as a pound is 16oz,
+        // and there are 5.33 of 3oz in 16oz.
+        // to produce 1lb of steak/beef takes 1,799 gallons of water
+        val chickenImpact = (chicken_data/5.33) * 468 // to produce 1lb of poultry takes 468 gallons of water
+        val pigImpact = (pig_data/5.33) * 576 // to produce 1lb of pork takes 576 gallons of water
+
+        val waterFootprint = cowImpact + chickenImpact + pigImpact
+
+        return waterFootprint
     }
-
-    private fun getOurTime() : String{
-        var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
-        var ourMin = calendar.get(Calendar.MINUTE)
-        var ourSec = calendar.get(Calendar.SECOND)
-        var ourMilisec = calendar.get(Calendar.MILLISECOND)
-
-        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
-    }
-
 
 
 }

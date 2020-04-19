@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.activity_car.*
+import kotlinx.android.synthetic.main.activity_car.view.*
 import kotlinx.android.synthetic.main.activity_waste.*
 import kotlinx.android.synthetic.main.activity_settings.view.*
 

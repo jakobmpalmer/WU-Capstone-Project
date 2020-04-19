@@ -30,11 +30,16 @@
             android:theme="@style/AppTheme">
         </activity>
 
-        <activity android:name=".LogActivity">
+        <activity android:name=".LogFragment">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity android:name=".LogActivity">-->
+<!--            <intent-filter>-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
 
         <activity android:name=".CarActivity" />
         
@@ -50,8 +55,13 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".AnalyticsActivity" />
-
+<!--        <activity android:name=".HomeActivity" />-->
+<activity
+    android:name=".LogNavigator"
+    android:label="log_navigator"
+    android:theme="@style/AppTheme">
+</activity>
+        <activity android:name=".OldConsumableActivity" />
 
     </application>
 
