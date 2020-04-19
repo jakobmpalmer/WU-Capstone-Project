@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/data_nav_graph"
-    app:startDestination="@id/fragment_log">
 
+    app:startDestination="@id/fragment_log">
     <!--First fragment-->
     <!--Second fragment-->
     <fragment
