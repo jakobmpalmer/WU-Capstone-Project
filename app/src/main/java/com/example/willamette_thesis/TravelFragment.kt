@@ -5,18 +5,22 @@ package com.example.willamette_thesis
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_car.*
+import kotlinx.android.synthetic.main.activity_car.view.*
 import java.util.*
 
 
-class CarActivity : AppCompatActivity() {
+class TravelFragment : Fragment() {
 
     //private lateinit var database: DatabaseReference
     private val db = FirebaseFirestore.getInstance()
@@ -28,28 +32,32 @@ class CarActivity : AppCompatActivity() {
     private var calendar: Calendar = GregorianCalendar(this.pdt)
 
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_car)
+        //setContentView(R.layout.activity_car)
+        val travelView: View = inflater.inflate(
+            R.layout.activity_car,
+            container,
+            false
+        )
 
-        val submitButton = findViewById<Button>(R.id.button1)
+        //println("\n\n----------------\n Beginning TRAVELFRAGMENT\n----------------\n\n")
+        //val submitButton = findViewById<Button>(R.id.button1)
 
-        submitButton.setOnClickListener{ it: View? ->
+        travelView.button1.setOnClickListener{ it: View? ->
             //var input = car_input.toString().toDouble()
             if(car_text.text.isEmpty()){
                 println("21Empty")
             } else if(car_text.text.isBlank()){
                 println("21Blank")
             } else if(car_text.text.isNullOrBlank()){
-            println("21Null of Blank")
+                println("21Null of Blank")
             } else {
                 println("None21")
             }
 
 
-            Toast.makeText(this@CarActivity, "Transportation info for the day has been recorded", LENGTH_SHORT).show()
+            Toast.makeText(activity, "Transportation info for the day has been recorded", LENGTH_SHORT).show()
 
             //var ourData = getTranspoData()
             //storeData("DATE", ourData)
@@ -60,6 +68,7 @@ class CarActivity : AppCompatActivity() {
 
         //database = FirebaseDatabase.getInstance().reference
 
+        return travelView
     }
 
 
@@ -84,18 +93,19 @@ class CarActivity : AppCompatActivity() {
 //        println("Done")
 //    }
 
-/* Method used to write user data to the cloud firestore
-*  2 / 24 / 2020
-*
-* */
+    /* Method used to write user data to the cloud firestore
+    *  2 / 24 / 2020
+    *
+    * */
     private fun storeData(ourDate: String, ourTime: String) {
 
         //val updates = HashMap<String, Any>()
 
         val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
         val travelRef = db.collection(userPath).document(ourDate).collection("travel-data")
+//        val totalRef = db.collection(userPath).document(ourDate).collection("travel-data").document("day-total")
         val totalRef = db.collection(userPath).document(ourDate).collection("total-data")
-        val travelTotalRef = totalRef.document("travel-total")
+        val travelTotalRef = db.collection(userPath).document(ourDate).collection("total-data").document("travel-total")
         //updates[totalRef + '/car_data'] =
 
         val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toFloat() else 0f
@@ -104,45 +114,46 @@ class CarActivity : AppCompatActivity() {
         val walkData = if (walk_text.text.isNotEmpty()) walk_text.text.toString().toFloat() else 0f
 
         println("ourdata= $carData, $busData, $planeData, $walkData")
-        println("our CarbonFootprint: ${calcImpact()}")
 
         val data = hashMapOf(
             "car_data" to carData,
             "bus_data" to busData,
             "plane_data" to planeData,
-            "walk_data" to walkData,
-            "carbon_footprint" to calcImpact()
+            "walk_data" to walkData
         )
 
-
-        travelTotalRef.get().addOnSuccessListener { result ->
-            var oldBusTotal = result?.get("bus_total").toString().toFloatOrNull()
-            var oldCarTotal = result?.get("car_total").toString().toFloatOrNull()
-            var oldPlaneTotal = result?.get("plane_total").toString().toFloatOrNull()
-            var oldWalkTotal = result?.get("walk_total").toString().toFloatOrNull()
-            var oldCarbonFpTotal = result?.get("carbon_fp_sum").toString().toFloatOrNull()
+        var oldBusTotal = travelTotalRef.get().result?.get("bus_total").toString().toFloatOrNull()
+        var oldCarTotal = travelTotalRef.get().result?.get("car_total").toString().toFloatOrNull()
+        var oldPlaneTotal = travelTotalRef.get().result?.get("plane_total").toString().toFloatOrNull()
+        var oldWalkTotal = travelTotalRef.get().result?.get("walk_total").toString().toFloatOrNull()
 
 
-            var newCarTotal = carData + if (oldCarTotal != null) oldCarTotal else 0f
-            var newBusTotal = busData + if (oldBusTotal != null) oldBusTotal else 0f
-            var newPlaneTotal = planeData + if (oldPlaneTotal != null) oldPlaneTotal else 0f
-            var newWalkTotal = walkData + if (oldWalkTotal != null) oldWalkTotal else 0f
-            var newCarbonFpTotal = calcImpact() + if (oldCarbonFpTotal != null) oldCarbonFpTotal else 0f
-            var sumTotal = newCarTotal + newBusTotal + newPlaneTotal + newWalkTotal
+        var newCarTotal = carData + if (oldCarTotal != null) oldCarTotal else 0f
+        var newBusTotal = busData + if (oldBusTotal != null) oldBusTotal else 0f
+        var newPlaneTotal = planeData + if (oldPlaneTotal != null) oldPlaneTotal else 0f
+        var newWalkTotal = walkData + if (oldWalkTotal != null) oldWalkTotal else 0f
 
-            val totalData = hashMapOf(
-                "car_total" to newCarTotal,
-                "bus_total" to newBusTotal,
-                "plane_total" to newPlaneTotal,
-                "walk_total" to newWalkTotal,
-                "sum_total" to sumTotal,
-                "carbon_fp_sum" to newCarbonFpTotal
-            )
 
-            //totalRef.update(totalData as Map<String, Float>)
-            println("Saving total data:: $totalData")
-            travelTotalRef.set(totalData)
-        } // travelTotal.get
+        val totalData = hashMapOf(
+            "car_total" to newCarTotal,
+            "bus_total" to newBusTotal,
+            "plane_total" to newPlaneTotal,
+            "walk_total" to newWalkTotal
+        )
+
+        //totalRef.update(totalData as Map<String, Float>)
+        println("Saving total data:: $totalData")
+        travelTotalRef.set(totalData)
+
+
+        // var newCarTotal = totalRef.get("car_total").result.toString().toFloat() + carData
+
+//        val totalData = hashMapOf(
+//            "car_total" to if(travelRef["car_total"].result) + carData,
+//            "bus_total" to totalRef.get("bus_total") + busData,
+//            "plane_total" to totalRef.get("plane_total") + planeData,
+//            "walk_total" to totalRef.get("walk_total") + walkData
+//        )
 //
 //        updates["/car_data"] = carTotal
 // Add a new document with a generated ID
@@ -162,7 +173,6 @@ class CarActivity : AppCompatActivity() {
         //totalRef.set(updatedTotal)
     }
 
-
     fun getOurDate() : String{
         var ourYear = calendar.get(Calendar.YEAR)
         var ourMonth = calendar.get(Calendar.MONTH)
@@ -181,33 +191,7 @@ class CarActivity : AppCompatActivity() {
     }
 
 
-    fun calcImpact(fuel_rate : Double = 21.25, miles_per_gal : Double = 21.3): Double{
-        // fuel rate is the standard rate of CO2 commissions for fuel. 21.25 is the average of petrol (20lbs)
-        // and diesel (22.5). If we get the type of fuel the user user we can make if more accurate.
-        // miles_per_gal is how many miles a car can go with a gallon of fuel. Depends on brand and make of car.
-        // we are using an average as default (21.3), but can make it more precise if need be.
 
-        val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toInt() else 0
-        val busData = if (bus_text.text.isNotEmpty()) bus_text.text.toString().toInt() else 0
-        val planeData = if (plane_text.text.isNotEmpty()) plane_text.text.toString().toInt() else 0
-        val walkData = if (walk_text.text.isNotEmpty()) walk_text.text.toString().toInt() else 0
-
-        val flight_hours = planeData/565
-        // 565 is the average num of miles in an hour
-        val flight_type = if (flight_hours >= 4) 4400 else 1100
-
-
-        val carEmission = (carData-walkData/miles_per_gal) * fuel_rate
-        // taking walkData from carData, as we make the assumption that walking is a replacement for using a car
-        val busEmission = ((busData/miles_per_gal) * 22.5) / 60
-        // Assumption that buses use diesel, hence the fuel rate used is 22.5. We divide by 60 as on average
-        // a bus has an av seating capacity of 40-80, so we average that out
-        val planeEmission = planeData * flight_type * 21.25
-        // 21.25 is average on fuel types, as users are unlikely to have this info
-
-        return (carEmission + busEmission + planeEmission)
-
-    }
 
 
 }

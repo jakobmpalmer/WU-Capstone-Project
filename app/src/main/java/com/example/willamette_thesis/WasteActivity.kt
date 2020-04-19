@@ -90,5 +90,20 @@ class WasteActivity : AppCompatActivity() {
         return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
     }
 
+    fun wasteImpact() : Pair<Double, Double>{
+        val plastic_data = if (plastic_text.text.isNotEmpty()) plastic_text.text.toString().toInt() else 0
+        val recycle_data = if (recycle_text.text.isNotEmpty()) recycle_text.text.toString().toInt() else 0
+        val trash_data = if (trash_text.text.isNotEmpty()) trash_text.text.toString().toInt() else 0
+
+        val plasticImpact = ((plastic_data - recycle_data)* 20.0 * 2.0)/128
+        // Idicates gallons of water wasted. Assumes average 20oz water bottle size. Multiplying by two as producing plastic
+        // bottle takes about double they size in water. We divide by 128 as there are 120 oz in a gallon of water
+        val trashImpact = trash_data * 22.0
+        // indicates weight in lbs of trash produced
+
+        val impact_returned = Pair(plasticImpact,trashImpact)
+        return impact_returned
+    }
+
 
 }

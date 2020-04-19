@@ -1,7 +1,6 @@
 package com.example.willamette_thesis
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -44,7 +43,7 @@ class LogActivity : AppCompatActivity() {
             startActivity(wasteIntent)
         }
 
-        val imageWaste = findViewById <ImageView>(R.id.imageTrash)
+        val imageWaste = findViewById <ImageView>(R.id.imageWaste)
         imageWaste.setOnClickListener {
             val wasteIntent = Intent(this, WasteActivity::class.java)
             startActivity(wasteIntent)
