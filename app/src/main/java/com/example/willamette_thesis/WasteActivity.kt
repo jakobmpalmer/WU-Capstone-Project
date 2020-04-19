@@ -47,20 +47,48 @@ class WasteActivity : AppCompatActivity() {
 
     private fun storeData(someDate: String, someTime: String) {
         // Create a new user with a first and last name
-        val plastic_data = if (plastic_text.text.isNotEmpty()) plastic_text.text.toString().toInt() else 0
-        val recycle_data = if (recycle_text.text.isNotEmpty()) recycle_text.text.toString().toInt() else 0
-        val trash_data = if (trash_text.text.isNotEmpty()) trash_text.text.toString().toInt() else 0
+        val plasticData = if (plastic_text.text.isNotEmpty()) plastic_text.text.toString().toInt() else 0
+        val recycleData = if (recycle_text.text.isNotEmpty()) recycle_text.text.toString().toInt() else 0
+        val trashData = if (trash_text.text.isNotEmpty()) trash_text.text.toString().toInt() else 0
 
 
         val data = hashMapOf(
 //            "date" to someDate,
 //            "time" to someTime,
-            "plastic_data" to plastic_data,
-            "recycle_data" to recycle_data,
-            "trash_data" to trash_data
+            "plastic_data" to plasticData,
+            "recycle_data" to recycleData,
+            "trash_data" to trashData
         )
 // Add a new document with a generated ID
         val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+
+
+        val totalRef = db.collection(userPath).document(someDate).collection("total-data")
+        val wasteTotalRef = totalRef.document("waste-total")
+
+
+        wasteTotalRef.get().addOnSuccessListener { result ->
+            var oldPlasticTotal = result?.get("plastic_total").toString().toFloatOrNull()
+            var oldRecycleTotal = result?.get("recycle_total").toString().toFloatOrNull()
+            var oldTrashTotal = result?.get("trash_total").toString().toFloatOrNull()
+
+
+            var newPlasticTotal = plasticData + if (oldPlasticTotal != null) oldPlasticTotal else 0f
+            var newRecycleTotal = recycleData + if (oldRecycleTotal != null) oldRecycleTotal else 0f
+            var newTrashTotal = trashData + if (oldTrashTotal != null) oldTrashTotal else 0f
+            var sumTotal = newPlasticTotal + newRecycleTotal + newTrashTotal
+
+            val totalData = hashMapOf(
+                "plastic_total" to newPlasticTotal,
+                "recycle_total" to newRecycleTotal,
+                "trash_total" to newTrashTotal,
+                "sum_total" to sumTotal
+            )
+
+            //totalRef.update(totalData as Map<String, Float>)
+            println("Saving total data:: $totalData")
+            wasteTotalRef.set(totalData)
+        }
 //        db.collection(userPath)
 //            .add(data)
 //            .addOnSuccessListener { documentReference ->

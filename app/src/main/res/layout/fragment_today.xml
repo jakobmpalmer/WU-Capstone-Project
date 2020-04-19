@@ -378,7 +378,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/cowTotalVal"
+                    android:id="@+id/cowTotalVar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -403,7 +403,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/chickenTotalVal"
+                    android:id="@+id/chickenTotalVar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -428,7 +428,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView29"
+                    android:id="@+id/pigTotalVar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
