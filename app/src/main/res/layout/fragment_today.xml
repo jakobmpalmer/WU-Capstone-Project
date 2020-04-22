@@ -48,7 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#4CAF50"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -65,7 +64,8 @@
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/textView15"
@@ -75,7 +75,8 @@
                     android:text="@string/car_miles"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
 
             </LinearLayout>
 
@@ -93,7 +94,8 @@
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/textView18"
@@ -103,7 +105,8 @@
                     android:text="@string/bus_miles"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -120,7 +123,8 @@
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/textView12"
@@ -130,7 +134,8 @@
                     android:text="@string/plane_miles"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -147,7 +152,8 @@
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/textView13"
@@ -157,7 +163,8 @@
                     android:text="@string/walk_miles"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -177,7 +184,8 @@
                 android:layout_weight="1"
                 android:text="Carbon Footprint:"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
 
             <TextView
                 android:id="@+id/carbonFootrpintVar"
@@ -186,7 +194,8 @@
                 android:layout_weight="1"
                 android:text="@string/null_int"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
         </LinearLayout>
 
         <LinearLayout
@@ -203,7 +212,8 @@
                 android:layout_weight="1"
                 android:text="Total Miles: "
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
 
             <TextView
                 android:id="@+id/totalMilesVar"
@@ -212,7 +222,8 @@
                 android:layout_weight="1"
                 android:text="@string/null_int"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
         </LinearLayout>
 
         <!--TOTAL-->
@@ -231,7 +242,8 @@
                 android:layout_weight="1"
                 android:text="Total Kilometers"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
 
             <TextView
                 android:id="@+id/totalKmVar"
@@ -240,7 +252,8 @@
                 android:layout_weight="1"
                 android:text="@string/null_int"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
         </LinearLayout>
 
         <LinearLayout
@@ -265,7 +278,8 @@
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/textView14"
@@ -275,7 +289,8 @@
                     android:text="Total Plastic:"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -292,7 +307,8 @@
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/textView17"
@@ -302,7 +318,8 @@
                     android:text="Total Recycling:"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -319,7 +336,8 @@
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/textView19"
@@ -329,7 +347,8 @@
                     android:text="Total Trash:"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -350,7 +369,8 @@
                 android:text="Plastic Weight:"
                 android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
 
             <TextView
                 android:id="@+id/totalWasteVar"
@@ -360,7 +380,8 @@
                 android:text="0"
                 android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
         </LinearLayout>
 
         <LinearLayout
@@ -384,7 +405,8 @@
                     android:layout_weight="1"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/cowTotalTitle"
@@ -393,7 +415,8 @@
                     android:layout_weight="1"
                     android:text="Bovine Total"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -409,7 +432,8 @@
                     android:layout_weight="1"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/chickenTotalTitle"
@@ -418,7 +442,8 @@
                     android:layout_weight="1"
                     android:text="Chicken"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -434,7 +459,8 @@
                     android:layout_weight="1"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:background="@color/displayPrimary"/>
 
                 <TextView
                     android:id="@+id/textView30"
@@ -443,7 +469,8 @@
                     android:layout_weight="1"
                     android:text="Pig"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:background="@color/displayPrimary"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -461,7 +488,8 @@
                 android:layout_weight="1"
                 android:text="Meat Stuff:"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
 
             <TextView
                 android:id="@+id/totalMeatVar"
@@ -470,7 +498,8 @@
                 android:layout_weight="1"
                 android:text="@string/null_int"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:background="@color/displaySecondary"/>
         </LinearLayout>
 
     </LinearLayout>
