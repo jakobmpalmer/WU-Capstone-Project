@@ -7,6 +7,8 @@
     <color name="colorPrimaryDark">#2B547E</color>
     <color name="colorAccent">#A19772</color>
 
+    <color name="displayPrimary">#4CAF50</color>
+    <color name="displaySecondary">#8BC34A</color>
     
     <color name="originalBackground">#FFFF</color>
     <color name="natureSettings_background">#AFE6D4</color>
