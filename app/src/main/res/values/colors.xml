@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="ecogreen">#009921</color>
-    <color name="oceanblue">#0058e6</color>
+
+    <color name="profileColor">#f2b400</color>
+
+    <color name="colorPrimary">#2B547E</color>
+    <color name="colorPrimaryDark">#2B547E</color>
+    <color name="colorAccent">#A19772</color>
+
     
     <color name="originalBackground">#FFFF</color>
     <color name="natureSettings_background">#AFE6D4</color>
@@ -13,4 +15,29 @@
     <color name="originalCar_text">#7C8280</color>
     <color name="natureCar_text">#17926A</color>
     <color name="natureWaste_text">#CDE06E</color>
+
+    <color name="greenText">#3EA055</color>
+    <color name="greenBackground">#e8f7cb</color>
+    <color name="greenIcon">#667C26</color>
+    <color name="greenTop">#9DC209</color>
+    <color name="greenAccent">#AFE6D4</color>
+
+    <color name="blueText">#659EC7</color>
+    <color name="blueBackground">#e3f2fa</color>
+    <color name="blueIcon">#8EEBEC</color>
+    <color name="blueTop">#77BFC7</color>
+    <color name="blueAccent">#1569C7</color>
+
+    <color name="pinkText">#bd5404</color>
+    <color name="pinkBackground">#f7ddc8</color>
+    <color name="pinkIcon">#d49cf7</color>
+    <color name="pinkTop">#C77F77</color>
+    <color name="pinkAccent">#FC6C85</color>
+
+    <color name="orangeText">#E55451</color>
+    <color name="orangeBackground">#fff0cf</color>
+    <color name="orangeIcon">#FF0000</color>
+    <color name="orangeTop">#F87431</color>
+    <color name="orangeAccent">#E78A61</color>
+
 </resources>

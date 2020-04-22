@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_logging.view.*
 
@@ -33,6 +34,11 @@ class LogFragment : Fragment() {
 //            val carImgIntent = Intent(activity, LogNavigator::class.java)
 //            startActivity(carImgIntent)
 //        }
+
+        logView.imageProf.setOnClickListener {
+            val profileIntent = Intent(activity, ProfileActivity::class.java)
+            startActivity(profileIntent)
+        }
 
 
         logView.buttonTransportation.setOnClickListener{

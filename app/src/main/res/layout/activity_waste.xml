@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFF"
     tools:context=".WasteActivity">
 
     <EditText
@@ -21,30 +20,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/line_"
+        android:textSize="62sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Waste Management"
-        android:textColor="@color/colorPrimary"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/line_"
-        android:textColor="@color/colorPrimary"
-        android:textSize="62sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
 
     <TextView
         android:id="@+id/textView5"
@@ -54,7 +50,6 @@
         android:layout_marginTop="24dp"
         android:text="Number of single use plastic items used:"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -68,7 +63,6 @@
         android:layout_marginTop="52dp"
         android:text="Number of items recycled:"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView9"
@@ -82,7 +76,6 @@
         android:layout_marginTop="36dp"
         android:text="Number of bags of trash produced:"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView11"

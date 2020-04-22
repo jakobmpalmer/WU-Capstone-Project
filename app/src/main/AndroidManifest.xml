@@ -13,35 +13,32 @@
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SettingsActivity"
             android:label="setting_activity"
-            android:theme="@style/AppTheme">
-        </activity>
-
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="profile_activity"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".WasteActivity"
             android:label="waste_activity"
-            android:theme="@style/AppTheme">
-        </activity>
-
+            android:theme="@style/AppTheme"/>
         <activity android:name=".LogFragment">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-<!--        <activity android:name=".LogActivity">-->
-<!--            <intent-filter>-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
+        </activity> <!-- <activity android:name=".LogActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity android:name=".CarActivity" />
-        
         <activity
             android:name=".ConsumableActivity"
             android:label="@string/app_name"
@@ -53,14 +50,11 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
-<!--        <activity android:name=".HomeActivity" />-->
-<activity
-    android:name=".LogNavigator"
-    android:label="log_navigator"
-    android:theme="@style/AppTheme">
-</activity>
-
+        </activity> <!-- <activity android:name=".HomeActivity" /> -->
+        <activity
+            android:name=".LogNavigator"
+            android:label="log_navigator"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

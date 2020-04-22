@@ -3,6 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="selected_item">Selected item:</string>
 
+    <string name="profile">Your\nProfile</string>
+    <string name="since">User Since: </string>
+    <string name="carType">Car Type: </string>
+
+
     <string name="car_miles">Car Miles: </string>
     <string name="bus_miles">Bus Miles: </string>
     <string name="plane_miles">Plane Miles: </string>
@@ -18,12 +23,32 @@
         <item>36 oz</item>
     </string-array>
 
+    <string-array name="carTypes">
+        <item>Coupe</item>
+        <item>Convertible</item>
+        <item>Sedan</item>
+        <item>Wagon</item>
+        <item>Convertible</item>
+        <item>4dr Hatchback</item>
+        <item>2dr Hatchback</item>
+        <item>4dr SUV</item>
+        <item>2dr SUV</item>
+        <item>Convertible SUV</item>
+        <item>Passenger Minivan</item>
+        <item>Cargo Minivan</item>
+        <item>Cargo Van</item>
+        <item>Passenger Van</item>
+        <item>Crew Cab Pickup</item>
+        <item>Regular Cab Pickup</item>
+        <item>Extended Cab Pickup</item>
+    </string-array>
+
     <string name="null_int">0</string>
 
 
     <string name="water_button">Water Button</string>
     <string name="gas_button">Gas Button</string>
-<!--    <string name="default_int_value">0</string>-->
+    <!--    <string name="default_int_value">0</string>-->
 
     <string name="title_data_display">data_display</string>
     <string name="transportation">Transportation</string>
@@ -33,11 +58,10 @@
     <string name="title_activity_waste">activity_waste</string>
 
 
-
-        <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_application_id" translatable="false">com.example.willamette_thesis</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fbcom.example.willamette_thesis</string>
-        <!-- Twitter consumer key and secret -->
+    <!-- Twitter consumer key and secret -->
 
 
 </resources>
