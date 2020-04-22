@@ -27,9 +27,14 @@ class TravelFragment : Fragment() {
     //add the tag
     val TAG: String = "ECO-FR3ndly"
 
-    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
-    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
-    private var calendar: Calendar = GregorianCalendar(this.pdt)
+//    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
+//    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
+//    private var calendar: Calendar = GregorianCalendar(this.pdt)
+
+    val appHome = HomeActivity()
+    val ourDate = appHome.getOurDate()
+    val ourTime = appHome.getOurTime()
+    val currentUser = appHome.getUserEmail()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -63,7 +68,7 @@ class TravelFragment : Fragment() {
             //storeData("DATE", ourData)
             //storeData("DATE", "[0,0,125]")
             //storeData(LocalDateTime.now().toString(), getTranspoData()) //REQUIRES API MIN 26 --Current 24
-            storeData(getOurDate(), getOurTime())
+            storeData(ourDate, ourTime)
         }
 
         //database = FirebaseDatabase.getInstance().reference
@@ -173,22 +178,22 @@ class TravelFragment : Fragment() {
         //totalRef.set(updatedTotal)
     }
 
-    fun getOurDate() : String{
-        var ourYear = calendar.get(Calendar.YEAR)
-        var ourMonth = calendar.get(Calendar.MONTH)
-        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
-
-        return ("$ourYear, $ourMonth, $ourDay")
-    }
-
-    private fun getOurTime() : String{
-        var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
-        var ourMin = calendar.get(Calendar.MINUTE)
-        var ourSec = calendar.get(Calendar.SECOND)
-        var ourMilisec = calendar.get(Calendar.MILLISECOND)
-
-        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
-    }
+//    fun getOurDate() : String{
+//        var ourYear = calendar.get(Calendar.YEAR)
+//        var ourMonth = calendar.get(Calendar.MONTH)
+//        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
+//
+//        return ("$ourYear, $ourMonth, $ourDay")
+//    }
+//
+//    private fun getOurTime() : String{
+//        var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
+//        var ourMin = calendar.get(Calendar.MINUTE)
+//        var ourSec = calendar.get(Calendar.SECOND)
+//        var ourMilisec = calendar.get(Calendar.MILLISECOND)
+//
+//        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
+//    }
 
 
 

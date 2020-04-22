@@ -133,5 +133,9 @@ class HomeActivity : AppCompatActivity() {
         return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
     }
 
+    fun getUserEmail(): String{
+        return (FirebaseAuth.getInstance().currentUser?.email ?: "Not Logged In")
+    }
+
 
 }

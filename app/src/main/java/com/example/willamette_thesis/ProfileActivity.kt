@@ -10,6 +10,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.profile_activity.*
 import java.util.*
 
 class ProfileActivity  : AppCompatActivity(){
@@ -18,9 +19,7 @@ class ProfileActivity  : AppCompatActivity(){
     //add the tag
     val TAG: String = "ECO-FR3ndly"
 
-    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
-    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
-    private var calendar: Calendar = GregorianCalendar(this.pdt)
+    val appHome = HomeActivity()
 
     lateinit var choose_car : Spinner
     lateinit var chosen_mpg : TextView
@@ -35,6 +34,8 @@ class ProfileActivity  : AppCompatActivity(){
 
         choose_car = findViewById(R.id.spinnerCar) as Spinner
         chosen_mpg = findViewById(R.id.milesPerGallon) as TextView
+
+        userEmailText.text = "Email: " + appHome.getUserEmail()
 
 
         ArrayAdapter.createFromResource(
