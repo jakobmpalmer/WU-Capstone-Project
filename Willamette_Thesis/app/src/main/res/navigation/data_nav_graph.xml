@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/data_nav_graph"
+
+    app:startDestination="@id/fragment_log">
+    <!--First fragment-->
+    <!--Second fragment-->
+    <fragment
+        android:id="@+id/fragment_data"
+        android:name="com.example.willamette_thesis.TodayDataFragment"
+        android:label="transpo_frag">
+        <action
+            android:id="@+id/action_fragment_data_to_fragment_settings"
+            app:destination="@id/fragment_settings" />
+        <action
+            android:id="@+id/action_fragment_data_to_logFragment"
+            app:destination="@id/fragment_log" />
+    </fragment>
+    <!--Third fragment-->
+
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.example.willamette_thesis.HomeActivity"
+        android:label="home_fragment">
+        <action
+            android:id="@+id/action_home_fragment_to_fragment_data"
+            app:destination="@id/fragment_data" />
+        <action
+            android:id="@+id/action_home_fragment_to_fragment_settings"
+            app:destination="@id/fragment_settings" />
+        <action
+            android:id="@+id/action_home_fragment_to_logFragment"
+            app:destination="@id/fragment_log" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="com.example.willamette_thesis.SettingsFragment"
+        android:label="settings_frag" >
+        <action
+            android:id="@+id/action_fragment_settings_to_fragment_data"
+            app:destination="@id/fragment_data" />
+        <action
+            android:id="@+id/action_fragment_settings_to_logFragment"
+            app:destination="@id/fragment_log" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_log"
+        android:name="com.example.willamette_thesis.LogFragment"
+        android:label="LogFragment" >
+        <action
+            android:id="@+id/action_logFragment_to_fragment_data"
+            app:destination="@id/fragment_data" />
+        <action
+            android:id="@+id/action_logFragment_to_fragment_settings"
+            app:destination="@id/fragment_settings" />
+        <action
+            android:id="@+id/action_fragment_log_to_logNavigator"
+            app:destination="@id/logNavigator" />
+    </fragment>
+    <activity
+        android:id="@+id/logNavigator"
+        android:name="com.example.willamette_thesis.LogNavigator"
+        android:label="LogNavigator" />
+
+</navigation>

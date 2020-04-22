@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/logging_nav_graph">
+
+    <fragment
+        android:id="@+id/travelFragment"
+        android:name="com.example.willamette_thesis.TravelFragment"
+        android:label="TravelFragment"
+        app:navGraph="@navigation/logging_nav_graph" >
+        <action
+            android:id="@+id/action_travelFragment_to_consumpDataFragment"
+            app:destination="@id/consumpDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/consumpDataFragment"
+        android:name="com.example.willamette_thesis.ConsumpDataFragment"
+        android:label="ConsumpDataFragment" >
+        <action
+            android:id="@+id/action_consumpDataFragment_to_travelFragment"
+            app:destination="@id/travelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logFragment"
+        android:name="com.example.willamette_thesis.LogFragment"
+        android:label="LogFragment" >
+        <action
+            android:id="@+id/action_logFragment_to_travelFragment"
+            app:destination="@id/travelFragment" />
+        <action
+            android:id="@+id/action_logFragment_to_consumpDataFragment"
+            app:destination="@id/consumpDataFragment" />
+    </fragment>
+</navigation>
