@@ -155,6 +155,18 @@ class ProfileActivity  : AppCompatActivity(){
     }
 
     fun updateTextViews(){
+        db.collection(userPath).document("mileage_selected").get().addOnSuccessListener {result ->
+            chosen_mpg.text = result?.get("mpg").toString().toFloatOrNull().toString()
+        }
+        db.collection(userPath).document("fuel_selected").get().addOnSuccessListener {result ->
+            shown_fuel.text = result?.get("fuel_rate").toString().toFloatOrNull()?.toDouble().toString()
+        }
+        db.collection(userPath).document("car_selected").get().addOnSuccessListener {result ->
+            shown_car.text = result?.get("carType").toString()
+        }
+    }
+
+    fun updateTextViews2(){
         val mileageRef = db.collection(userPath).document("mileage_selected")
         val source = Source.CACHE
         mileageRef.get(source).addOnCompleteListener { task ->

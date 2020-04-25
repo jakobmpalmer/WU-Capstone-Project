@@ -29,6 +29,8 @@ class CarActivity : AppCompatActivity() {
     private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
     private var calendar: Calendar = GregorianCalendar(this.pdt)
 
+
+
     //val appProfile = ProfileActivity()
     //val mpg = appProfile.getMileageSelected()  // gets mileage selected
     //val fuel_rate_selected = appProfile.getFuelSelected()
@@ -102,13 +104,23 @@ class CarActivity : AppCompatActivity() {
         val travelTotalRef = totalRef.document("travel-total")
         //updates[totalRef + '/car_data'] =
 
+        var mileage : Double = 19.73
+        var fuel : Double = 21.25
+
+        db.collection(userPath).document("mileage_selected").get().addOnSuccessListener {result ->
+            mileage = result?.get("mpg").toString().toFloatOrNull()!!.toDouble()
+        }
+        db.collection(userPath).document("fuel_selected").get().addOnSuccessListener {result ->
+            fuel = result?.get("fuel_rate").toString().toFloatOrNull()!!.toDouble()
+        }
+
         val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toFloat() else 0f
         val busData = if (bus_text.text.isNotEmpty()) bus_text.text.toString().toFloat() else 0f
         val planeData = if (plane_text.text.isNotEmpty()) plane_text.text.toString().toFloat() else 0f
         val walkData = if (walk_text.text.isNotEmpty()) walk_text.text.toString().toFloat() else 0f
 
         println("ourdata= $carData, $busData, $planeData, $walkData")
-        println("our CarbonFootprint: ${calcImpact()}")
+        println("our CarbonFootprint: ${calcImpact(fuel_rate = fuel, miles_per_gal = mileage)}")
 
         val data = hashMapOf(
 
@@ -116,7 +128,7 @@ class CarActivity : AppCompatActivity() {
             "bus_data" to busData,
             "plane_data" to planeData,
             "walk_data" to walkData,
-            "carbon_footprint" to calcImpact()
+            "carbon_footprint" to calcImpact(fuel_rate = fuel, miles_per_gal = mileage)
         )
 
 
@@ -132,7 +144,7 @@ class CarActivity : AppCompatActivity() {
             var newBusTotal = busData + if (oldBusTotal != null) oldBusTotal else 0f
             var newPlaneTotal = planeData + if (oldPlaneTotal != null) oldPlaneTotal else 0f
             var newWalkTotal = walkData + if (oldWalkTotal != null) oldWalkTotal else 0f
-            var newCarbonFpTotal = calcImpact() + if (oldCarbonFpTotal != null) oldCarbonFpTotal else 0f
+            var newCarbonFpTotal = calcImpact(fuel_rate = fuel, miles_per_gal = mileage) + if (oldCarbonFpTotal != null) oldCarbonFpTotal else 0f
                                     // is using correct fuel rate and mpg
             var sumTotal = newCarTotal + newBusTotal + newPlaneTotal + newWalkTotal
 
