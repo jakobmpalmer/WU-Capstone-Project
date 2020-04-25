@@ -11,6 +11,8 @@ import com.firebase.ui.auth.AuthUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+//import sun.jvm.hotspot.utilities.IntArray
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -137,5 +139,12 @@ class HomeActivity : AppCompatActivity() {
         return (FirebaseAuth.getInstance().currentUser?.email ?: "Not Logged In")
     }
 
+    fun getAccountCreationDate() : String? {
+        var date =  Date(FirebaseAuth.getInstance().currentUser?.metadata!!.creationTimestamp.toLong())
+        val simple_format = SimpleDateFormat("MM-dd-yyyy")
+        val date_formatted = simple_format.format(date)
 
+        return date_formatted
+
+    }
 }

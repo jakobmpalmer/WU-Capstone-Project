@@ -125,7 +125,7 @@ class WasteActivity : AppCompatActivity() {
 
         val plasticImpact = ((plastic_data - recycle_data)* 20.0 * 2.0)/128
         // Idicates gallons of water wasted. Assumes average 20oz water bottle size. Multiplying by two as producing plastic
-        // bottle takes about double they size in water. We divide by 128 as there are 120 oz in a gallon of water
+        // bottle takes about double they size in water. We divide by 128 as there are 128 oz in a gallon of water
         val trashImpact = trash_data * 22.0
         // indicates weight in lbs of trash produced
 

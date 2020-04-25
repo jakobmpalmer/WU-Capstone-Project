@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/originalBackground"
     tools:context=".SettingsActivity">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/line_"
+        android:textSize="62dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
     <TextView
         android:id="@+id/textView8"
@@ -13,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Settings"
-        android:textColor="@color/originalSettings_text"
         android:textSize="32sp"
         android:textStyle='bold'
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,24 +30,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/line_"
-        android:textColor="@color/originalSettings_text"
-        android:textSize="62dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-    <TextView
         android:id="@+id/textView10"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:text="Nature Setting:\nUses a nature-inspired color palette"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -73,6 +70,7 @@
         android:layout_marginTop="8dp"
         android:background="#0099FF"
         android:text="Nature Setting"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,6 +83,7 @@
         android:layout_marginTop="8dp"
         android:background="#0099FF"
         android:text="Original Setting"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/nature_button"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/nature_button"
@@ -94,8 +93,9 @@
         android:id="@+id/logout_btn"
         android:layout_width="0dp"
         android:layout_height="35dp"
-        android:background="#03A9F4"
+        android:background="#0099FF"
         android:text="@string/com_facebook_loginview_log_out_button"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/original_button"
         app:layout_constraintStart_toStartOf="@+id/original_button"

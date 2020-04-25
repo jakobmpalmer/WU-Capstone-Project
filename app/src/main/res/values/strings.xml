@@ -4,8 +4,8 @@
     <string name="selected_item">Selected item:</string>
 
     <string name="profile">Your\nProfile</string>
-    <string name="since">User Since: </string>
-    <string name="carType">Car Type: </string>
+    <string name="since">User Since </string>
+    <string name="changeCarType">Change Car Type to: </string>
 
 
     <string name="car_miles">Car Miles: </string>
@@ -24,11 +24,11 @@
     </string-array>
 
     <string-array name="carTypes">
+        <item>Average</item>
         <item>Coupe</item>
         <item>Convertible</item>
         <item>Sedan</item>
         <item>Wagon</item>
-        <item>Convertible</item>
         <item>4dr Hatchback</item>
         <item>2dr Hatchback</item>
         <item>4dr SUV</item>
@@ -41,6 +41,38 @@
         <item>Crew Cab Pickup</item>
         <item>Regular Cab Pickup</item>
         <item>Extended Cab Pickup</item>
+    </string-array>
+
+    <string-array name="carMileage">
+        <item>19.73</item>
+        <item>17.76</item>
+        <item>18.05</item>
+        <item>21.67</item>
+        <item>21.60</item>
+        <item>31.73</item>
+        <item>23.90</item>
+        <item>18.47</item>
+        <item>14.49</item>
+        <item>20.21</item>
+        <item>16.96</item>
+        <item>18.85</item>
+        <item>12.74</item>
+        <item>12.52</item>
+        <item>15.63</item>
+        <item>15.74</item>
+        <item>15.32</item>
+    </string-array>
+
+    <string-array name="fuelTypes">
+        <item>Average</item>
+        <item>Petrol</item>
+        <item>Diesel</item>
+    </string-array>
+
+    <string-array name="fuelRate">
+        <item>21.25</item>
+        <item>20.0</item>
+        <item>22.5</item>
     </string-array>
 
     <string name="null_int">0</string>

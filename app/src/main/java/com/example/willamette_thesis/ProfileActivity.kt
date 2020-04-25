@@ -1,17 +1,18 @@
 package com.example.willamette_thesis
 
-import android.app.Activity
-import java.io.File
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.profile_activity.*
 import java.util.*
+
 
 class ProfileActivity  : AppCompatActivity(){
 
@@ -19,10 +20,23 @@ class ProfileActivity  : AppCompatActivity(){
     //add the tag
     val TAG: String = "ECO-FR3ndly"
 
+    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
+    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
+    private var calendar: Calendar = GregorianCalendar(this.pdt)
+
     val appHome = HomeActivity()
 
     lateinit var choose_car : Spinner
     lateinit var chosen_mpg : TextView
+    lateinit var shown_car : TextView
+    lateinit var choose_fuel : Spinner
+    lateinit var shown_fuel : TextView
+    var fuel_selected : Double = 21.25
+    var indexCar = 0
+    var indexFuel = 0
+    var saveCar = ""
+
+    val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +48,31 @@ class ProfileActivity  : AppCompatActivity(){
 
         choose_car = findViewById(R.id.spinnerCar) as Spinner
         chosen_mpg = findViewById(R.id.milesPerGallon) as TextView
+        shown_car = findViewById(R.id.carShown) as TextView
+        choose_fuel = findViewById(R.id.fuelSpinner) as Spinner
+        shown_fuel = findViewById(R.id.fuelShown) as TextView
 
-        userEmailText.text = "Email: " + appHome.getUserEmail()
+        userEmailText.text = appHome.getUserEmail()
+        dateCreation.text = appHome.getAccountCreationDate().toString()
+
+        setSpinners()
 
 
+        val submitButton = findViewById<Button>(R.id.submit_profile)
+        submitButton.setOnClickListener{
+
+            saveMileageSelected(indexCar)
+            saveFuelSelected(indexFuel)
+            updateTextViews()
+
+        }
+
+        updateTextViews()
+
+
+}
+
+    fun setSpinners(){
         ArrayAdapter.createFromResource(
             this,
             R.array.carTypes,
@@ -45,8 +80,111 @@ class ProfileActivity  : AppCompatActivity(){
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             choose_car.adapter = adapter
+
+            choose_car.onItemSelectedListener = object :
+
+                AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    chosen_mpg.text = "None Selected"
+                }
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    indexCar = p2
+                    val res: Resources = resources
+                    saveCar = res.getStringArray(R.array.carTypes).get(p2)
+                }
+            }
         }
 
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.fuelTypes,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            choose_fuel.adapter = adapter
+
+            choose_fuel.onItemSelectedListener = object :
+
+                AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    indexFuel = p2
+
+                }
+            }
+        }
+
+    }
+
+    fun saveMileageSelected(p2:Int) {
+        //val mpg = findViewById(R.id.milesPerGallon) as TextView
+        //val mpg_double = mpg.text.toString().toDouble()
+
+        val res : Resources = resources
+        val data_mpg = res.getStringArray(R.array.carMileage).get(p2).toDouble()
+
+        //val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+
+        val data = hashMapOf("mpg" to data_mpg)
+        db.collection(userPath).document("mileage_selected").set(data)
+        db.collection(userPath).document("car_selected").set(hashMapOf("carType" to saveCar))
+
+    }
+
+    fun saveFuelSelected(p2:Int) {
+        //val mpg = findViewById(R.id.milesPerGallon) as TextView
+        //val mpg_double = mpg.text.toString().toDouble()
+
+        val res : Resources = resources
+        val fuel = res.getStringArray(R.array.fuelRate).get(p2).toDouble()
+
+        //val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+
+        val data = hashMapOf("fuel_rate" to fuel)
+        db.collection(userPath).document("fuel_selected").set(data)
+
+    }
+
+    fun getOurDate() : String{
+        var ourYear = calendar.get(Calendar.YEAR)
+        var ourMonth = calendar.get(Calendar.MONTH)
+        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        return ("$ourYear, $ourMonth, $ourDay")
+    }
+
+    fun updateTextViews(){
+        val mileageRef = db.collection(userPath).document("mileage_selected")
+        val source = Source.CACHE
+        mileageRef.get(source).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                chosen_mpg.text = task.result?.data.toString()
+            } else {
+                Log.d(TAG, "Cached get failed: ", task.exception)
+            }
+        }
+        val fuelRef = db.collection(userPath).document("fuel_selected")
+        fuelRef.get(source).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                shown_fuel.text = task.result?.data.toString()
+            } else {
+                Log.d(TAG, "Cached get failed: ", task.exception)
+            }
+        }
+
+        val carRef = db.collection(userPath).document("car_selected")
+        carRef.get(source).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                shown_car.text = task.result?.data.toString()
+            } else {
+                Log.d(TAG, "Cached get failed: ", task.exception)
+            }
+        }
+    }
 
 }
-}
+
+
+
+

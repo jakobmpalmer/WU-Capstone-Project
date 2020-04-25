@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_car.*
+import kotlinx.android.synthetic.main.profile_activity.*
 import java.util.*
 
 
@@ -23,11 +24,14 @@ class CarActivity : AppCompatActivity() {
     //add the tag
     val TAG: String = "ECO-FR3ndly"
 
+
     private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
     private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
     private var calendar: Calendar = GregorianCalendar(this.pdt)
 
-
+    //val appProfile = ProfileActivity()
+    //val mpg = appProfile.getMileageSelected()  // gets mileage selected
+    //val fuel_rate_selected = appProfile.getFuelSelected()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +51,6 @@ class CarActivity : AppCompatActivity() {
             } else {
                 println("None21")
             }
-
 
             Toast.makeText(this@CarActivity, "Transportation info for the day has been recorded", LENGTH_SHORT).show()
 
@@ -92,6 +95,7 @@ class CarActivity : AppCompatActivity() {
 
         //val updates = HashMap<String, Any>()
 
+
         val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
         val travelRef = db.collection(userPath).document(ourDate).collection("travel-data")
         val totalRef = db.collection(userPath).document(ourDate).collection("total-data")
@@ -107,6 +111,7 @@ class CarActivity : AppCompatActivity() {
         println("our CarbonFootprint: ${calcImpact()}")
 
         val data = hashMapOf(
+
             "car_data" to carData,
             "bus_data" to busData,
             "plane_data" to planeData,
@@ -128,6 +133,7 @@ class CarActivity : AppCompatActivity() {
             var newPlaneTotal = planeData + if (oldPlaneTotal != null) oldPlaneTotal else 0f
             var newWalkTotal = walkData + if (oldWalkTotal != null) oldWalkTotal else 0f
             var newCarbonFpTotal = calcImpact() + if (oldCarbonFpTotal != null) oldCarbonFpTotal else 0f
+                                    // is using correct fuel rate and mpg
             var sumTotal = newCarTotal + newBusTotal + newPlaneTotal + newWalkTotal
 
             val totalData = hashMapOf(
@@ -181,11 +187,12 @@ class CarActivity : AppCompatActivity() {
     }
 
 
-    fun calcImpact(fuel_rate : Double = 21.25, miles_per_gal : Double = 21.3): Double{
+    fun calcImpact(fuel_rate : Double = 21.25, miles_per_gal : Double = 19.73): Double{
         // fuel rate is the standard rate of CO2 commissions for fuel. 21.25 is the average of petrol (20lbs)
         // and diesel (22.5). If we get the type of fuel the user user we can make if more accurate.
         // miles_per_gal is how many miles a car can go with a gallon of fuel. Depends on brand and make of car.
         // we are using an average as default (21.3), but can make it more precise if need be.
+
 
         val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toInt() else 0
         val busData = if (bus_text.text.isNotEmpty()) bus_text.text.toString().toInt() else 0
@@ -199,9 +206,10 @@ class CarActivity : AppCompatActivity() {
 
         val carEmission = (carData-walkData/miles_per_gal) * fuel_rate
         // taking walkData from carData, as we make the assumption that walking is a replacement for using a car
-        val busEmission = ((busData/miles_per_gal) * 22.5) / 60
+        val busEmission = ((busData/12.52) * 22.5) / 60
         // Assumption that buses use diesel, hence the fuel rate used is 22.5. We divide by 60 as on average
         // a bus has an av seating capacity of 40-80, so we average that out
+        // 12.52 is used as miles per gal, as we assume that it is a Passenger Van
         val planeEmission = planeData * flight_type * 21.25
         // 21.25 is average on fuel types, as users are unlikely to have this info
 
