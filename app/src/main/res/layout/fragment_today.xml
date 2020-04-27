@@ -486,10 +486,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Meat Stuff:"
+                android:background="@color/displaySecondary"
+                android:text="Total Meat Consumed:"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/totalMeatVar"
