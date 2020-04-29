@@ -1,74 +1,93 @@
 package com.example.willamette_thesis
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog.show
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.example.willamette_thesis.R.color.*
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_settings.*
-import kotlinx.android.synthetic.main.activity_car.*
-import kotlinx.android.synthetic.main.activity_car.view.*
-import kotlinx.android.synthetic.main.activity_waste.*
 import kotlinx.android.synthetic.main.activity_settings.view.*
+import java.lang.reflect.Member.PUBLIC
+import kotlin.reflect.KVisibility
 
 
 class SettingsFragment : Fragment() {
 
     private val db = FirebaseFirestore.getInstance()
+
+    private var PRIVATE_MODE = 0
+    private val PREF_FILE = "com.theme.prefs"
+    private val PREF_THEME = "theme-preference"
+
+
     //add the tag
     val TAG: String = "ECO-FR3ndly"
+    val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
 
-    @SuppressLint("ResourceAsColor")
+
+    @SuppressLint("ResourceAsColor", "WrongConstant")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
-        println("Creating settings!")
+
+
+
 
         val settingsView = inflater.inflate(R.layout.activity_settings, container, false)
+
         //setContentView(R.layout.activity_settings)
+
+        val prefs = this.activity?.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)
+
 
         settingsView.nature_button.setOnClickListener {
 
-            textView8.setTextColor(natureSettings_text)
-            textView9.setTextColor(natureSettings_text)
+            //val data = hashMapOf("chosen_theme" to "nature")
+            //db.collection(userPath).document("app_theme").set(data)
 
-            //transportation_text.setTextColor(natureCar_text)
-            transpoActivityTitle.setTextColor(natureCar_text)
-            //miles_text.setTextColor(natureCar_text)
-            car_text.setTextColor(natureCar_text)
-            bus_text.setTextColor(natureCar_text)
-            plane_text.setTextColor(natureCar_text)
-            walk_text.setTextColor(natureCar_text)
+            val editor = prefs!!.edit()
+            editor.putString(PREF_THEME, "nature")
+            editor.apply()
 
-            textView3.setTextColor(natureWaste_text)
-            textView4.setTextColor(natureWaste_text)
-            plastic_text.setTextColor(natureWaste_text)
-            recycle_text.setTextColor(natureWaste_text)
-            trash_text.setTextColor(natureWaste_text)
-        }
+
+            //val sharedPref: SharedPreferences? = activity?.getPreferences(PRIVATE_MODE)
+            //with (sharedPref?.edit()) {
+              //  this?.putString(PREF_NAME, "nature")
+               // this?.commit()
+           // }
+
+            //val sharedPref = activity?.getPreferences(PUBLIC)
+            //with (sharedPref?.edit()) {
+              //  this?.putString(getString(R.string.themeNature), "nature")
+                //this?.commit()
+
+            Toast.makeText(activity, "Settings Preferences Applied to Nature", Toast.LENGTH_SHORT).show();
+
+            }
+
+
+
+
 
         settingsView.original_button.setOnClickListener {
-            textView8.setTextColor(originalSettings_text)
-            textView9.setTextColor(originalSettings_text)
 
-            //transportation_text.setTextColor(originalCar_text)
-            transpoActivityTitle.setTextColor(originalCar_text)
-            //miles_text.setTextColor(originalCar_text)
-            car_text.setTextColor(originalCar_text)
-            bus_text.setTextColor(originalCar_text)
-            plane_text.setTextColor(originalCar_text)
-            walk_text.setTextColor(originalCar_text)
+            val editor = prefs!!.edit()
+            editor.putString(PREF_THEME, "original")
+            editor.apply()
 
-            textView3.setTextColor(colorPrimary)
-            textView4.setTextColor(colorPrimary)
-            plastic_text.setTextColor(colorPrimary)
-            recycle_text.setTextColor(colorPrimary)
-            trash_text.setTextColor(colorPrimary)
+
+            Toast.makeText(activity, "Settings Preferences Applied to Original", Toast.LENGTH_SHORT).show();
+
         }
 
         settingsView.logout_btn.setOnClickListener {
@@ -112,5 +131,9 @@ class SettingsFragment : Fragment() {
             1)
         // [END auth_fui_create_intent]
     }
+
+
+
+
 }
 

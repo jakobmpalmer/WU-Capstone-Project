@@ -3,56 +3,64 @@ package com.example.willamette_thesis
 //import com.google.firebase.database.DatabaseReference
 //import com.google.firebase.database.FirebaseDatabase
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_car.*
-import kotlinx.android.synthetic.main.profile_activity.*
 import java.util.*
 
 
 class CarActivity : AppCompatActivity() {
 
-    //private lateinit var database: DatabaseReference
     private val db = FirebaseFirestore.getInstance()
+    private val PREF_FILE = "com.theme.prefs"
+    private val PREF_THEME = "theme-preference"
+
+
     //add the tag
     val TAG: String = "ECO-FR3ndly"
+
+    val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
 
 
     private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
     private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
     private var calendar: Calendar = GregorianCalendar(this.pdt)
 
-
-
-    //val appProfile = ProfileActivity()
-    //val mpg = appProfile.getMileageSelected()  // gets mileage selected
-    //val fuel_rate_selected = appProfile.getFuelSelected()
+    var mileage : Double = 19.73
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
+        val sharedPref = this.getSharedPreferences(PREF_FILE,Context.MODE_PRIVATE)?: return
+        val name = sharedPref.getString(PREF_THEME, "original")
+        if (name == "nature"){
+            setTheme(R.style.Green)
+        }else if(name == "original"){
+            setTheme(R.style.AppTheme)
+        }else{
+            setTheme(R.style.Pink)
+        }
+
+
         setContentView(R.layout.activity_car)
 
         val submitButton = findViewById<Button>(R.id.button1)
 
         submitButton.setOnClickListener{ it: View? ->
-            //var input = car_input.toString().toDouble()
-            if(car_text.text.isEmpty()){
-                println("21Empty")
-            } else if(car_text.text.isBlank()){
-                println("21Blank")
-            } else if(car_text.text.isNullOrBlank()){
-            println("21Null of Blank")
-            } else {
-                println("None21")
-            }
+
 
             Toast.makeText(this@CarActivity, "Transportation info for the day has been recorded", LENGTH_SHORT).show()
 
@@ -104,14 +112,16 @@ class CarActivity : AppCompatActivity() {
         val travelTotalRef = totalRef.document("travel-total")
         //updates[totalRef + '/car_data'] =
 
-        var mileage : Double = 19.73
+        //var mileage : Double = 19.73
         var fuel : Double = 21.25
 
         db.collection(userPath).document("mileage_selected").get().addOnSuccessListener {result ->
             mileage = result?.get("mpg").toString().toFloatOrNull()!!.toDouble()
+            print("MILEAGE: $mileage")
         }
         db.collection(userPath).document("fuel_selected").get().addOnSuccessListener {result ->
             fuel = result?.get("fuel_rate").toString().toFloatOrNull()!!.toDouble()
+            print("FUEL: $fuel")
         }
 
         val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toFloat() else 0f
@@ -216,7 +226,7 @@ class CarActivity : AppCompatActivity() {
         val flight_type = if (flight_hours >= 4) 4400 else 1100
 
 
-        val carEmission = (carData-walkData/miles_per_gal) * fuel_rate
+        val carEmission = ((carData-walkData)/miles_per_gal) * fuel_rate
         // taking walkData from carData, as we make the assumption that walking is a replacement for using a car
         val busEmission = ((busData/12.52) * 22.5) / 60
         // Assumption that buses use diesel, hence the fuel rate used is 22.5. We divide by 60 as on average
@@ -226,6 +236,24 @@ class CarActivity : AppCompatActivity() {
         // 21.25 is average on fuel types, as users are unlikely to have this info
 
         return (carEmission + busEmission + planeEmission)
+
+    }
+
+    fun getSavedTheme(): Int {
+        //var d = findViewById<TextView>(R.id.milesString)
+        var chosenTheme = R.style.Pink
+
+        db.collection(userPath).document("app_theme").get().addOnSuccessListener { result ->
+            if (result?.get("chosen_theme").toString() == "nature"){
+                chosenTheme = R.style.Green
+            } else if(result?.get("chosen_theme").toString() == "original"){
+                chosenTheme = R.style.AppTheme
+            }else{
+                chosenTheme = R.style.Orange
+            }
+            //d.text = result?.get("chosen_theme").toString()
+        }
+        return chosenTheme
 
     }
 
