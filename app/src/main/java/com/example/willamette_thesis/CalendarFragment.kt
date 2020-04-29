@@ -1,17 +1,13 @@
 package com.example.willamette_thesis
 
-import android.R.attr.maxDate
-import android.R.attr.minDate
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.CalendarView.OnDateChangeListener
-import android.widget.DatePicker.OnDateChangedListener
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_calendar.view.*
 import java.util.*
 
 
@@ -24,6 +20,14 @@ class CalendarFragment: Fragment() {
     private var calendar: Calendar = GregorianCalendar(this.pdt)
 
     private val appHome = HomeActivity()
+    private val currentUser = appHome.getUserEmail()
+    private val dateToday = appHome.getOurDate()
+
+
+    val db = FirebaseFirestore.getInstance()
+    private var todayDataRef = db.collection(currentUser).document(dateToday)
+    private var totalRef = todayDataRef.collection("total-data")
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,104 +41,52 @@ class CalendarFragment: Fragment() {
         )
 
         if (DO_DEBUG) println("\n\n\n\tEntering Calendar Fragment")
-        println("")
 
-        val cal = CalendarView(this.context)
+        val cal = calView.calendarView
         cal.setDate(System.currentTimeMillis(), true, false)
-        var aDate = cal.date
 
-//        cal.setOnDateChangeListener { cal, year, month, dayOfMonth ->
-//            println("changed dates! $dayOfMonth")
-//        }
+//        var currentDateFormatted = System.currentTimeMillis().to
+        var currentDateFormatted = cal.dateTextAppearance
+        if (DO_DEBUG) println("$currentDateFormatted <---- currentDateFormatted")
 
-//        cal.setOnDateChangeListener(CalendarView.OnDateChangeListener().onSelectedDayChange(_, year, month, day) {
-//                println("changed dates!")
-//        })
-//
-//
-//        OnDateChangeListener(cal, year, month, day).onSelectedDayChange(_, year, month, day) {
-//            println("changed dates!")
-//        })
-//
-//        datePicker.init(currentCalendar.get(Calendar.YEAR),
-//            currentCalendar.get(Calendar.MONTH),
-//            currentCalendar.get(Calendar.DAY_OF_MONTH),
-//            OnDateChangedListener { view, selYear, selMonth, selDay ->
-//                val dateSelectionType: String = getDateSelectionType(
-//                    minDate.getTimeInMillis(),
-//                    maxDate.getTimeInMillis(), selYear, selMonth, selDay
-//                )
-//                if (dateSelectionType == "IS_BETWEEN_RANGE") {
-//                    return@OnDateChangedListener
-//                }
-//                if (dateSelectionType == "IS_LESS_THAN_MIN") {
-//                    datePicker.updateDate(
-//                        minDate[Calendar.YEAR], minDate[Calendar.MONTH],
-//                        minDate[Calendar.DAY_OF_MONTH]
-//                    )
-//                    return@OnDateChangedListener
-//                }
-//                if (dateSelectionType == "IS_MORE_THAN_MAX") {
-//                    datePicker.updateDate(
-//                        maxDate[Calendar.YEAR],
-//                        maxDate[Calendar.MONTH],
-//                        maxDate[Calendar.DAY_OF_MONTH]
-//                    )
-//                    return@OnDateChangedListener
-//                }
-//            })
+        var currentDayRef = dateToday
+        val currentDayText = calView.currentDateText
+        currentDayText.text = "${appHome.getOurDay()}/${appHome.getOurMonth() + 1}/${appHome.getOurYear()}"
+        cal.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            if (DO_DEBUG) println("changed dates!")
+            var userMonth = month + 1
+            val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
+            if (DO_DEBUG) Toast.makeText(this@CalendarFragment.context, msg, Toast.LENGTH_SHORT).show()
+            currentDayText.text = "$dayOfMonth/$userMonth/$year"
+            currentDayRef = "$dayOfMonth,$userMonth,$year"
+            if (DO_DEBUG) println("currentDayRef: $currentDayRef")
 
-//        cal.setOnDateChangeListener { view, year, month, dayOfMonth ->
-//            println("cal.date == aDate")
-//            val v = cal.date
-//            println("$v == $aDate")
-//            if (cal.date != aDate) {
-//                aDate = cal.date
-//                Toast.makeText(
-//                    view.context,
-//                    "Year=$year Month=$month Day=$dayOfMonth",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//                println("changed dates!")
-//                //cal.setBackgroundColor(Color.RED);
-//            }
-//        }
-        var eventOccursOn: Long = 0
-
-        cal.setOnDateChangeListener { _, year, month, day ->
-
-            //show the selected date as a toast
-            Toast.makeText(
-                this.context,
-                "$day/$month/$year",
-                Toast.LENGTH_LONG
-            ).show()
-            val c = Calendar.getInstance()
-            c[year, month] = day
-            eventOccursOn = c.timeInMillis //this is what you want to use later
-            println("eOO: = $eventOccursOn")
+            if (DO_DEBUG) println("todayDataRef before: {${todayDataRef.toString()}}")
+            updateMyRefs(currentDayRef)
+            if (DO_DEBUG) println("todayDataRef After: {${todayDataRef.toString()}}")
         }
-
-        println("eOO: = $eventOccursOn")
-
+//SOLUTION: to get time in milisecs from jan1 1970
+//        var eventOccursOn: Long = 0
 //
-//        val ourDate = appHome.getOurDate()
-//        val ourTime = appHome.getOurTime()
+//        cal.setOnDateChangeListener { _, year, month, day ->
 //
-//        println("Our current date: $ourDate")
-//        val miliDate = calendar.timeInMillis
-//        println("Attempting to set, $miliDate")
-//        calendarView.date = (miliDate)
-//        //ourCal.date = miliDate
-//        println("We set, $miliDate")
-//        calBtn.setOnClickListener {
-//            println("Calbtn pressed..")
-//            println(cal.dateTextAppearance)
+//            //show the selected date as a toast
+//            Toast.makeText(this.context, "$day/$month/$year", Toast.LENGTH_LONG).show()
+//
+//            val c = Calendar.getInstance()
+//            c[year, month] = day
+//            eventOccursOn = c.timeInMillis //this is what you want to use later
+//            println("eOO: = $eventOccursOn")
 //        }
-
-
-
+//        println("eOO: = $eventOccursOn")
 
         return calView
     }
+
+    private fun updateMyRefs(currentDay: String){
+        todayDataRef = db.collection(currentUser).document(currentDay)
+        totalRef = todayDataRef.collection("total-data")
+        if (DO_DEBUG) println("updating ref, ${todayDataRef.toString()}")
+    }
+
 }
