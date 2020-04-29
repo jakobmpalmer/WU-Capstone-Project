@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+<!--    <item android:id="@+id/home"-->
+<!--        android:title="Home"-->
+<!--        app:showAsAction="always"-->
+<!--        android:orderInCategory="1"-->
+<!--        android:icon="@drawable/ic_bar_chart"/>-->
+
     <item
-        android:id="@+id/fragment_data"
+        android:id="@+id/screenSlidePagerActivity"
         android:title="Data"
         android:orderInCategory="1"
         android:icon="@drawable/car" />
 
     <item
-        android:id="@+id/fragment_log"
+        android:id="@+id/loggingMenuItem"
         android:icon="@drawable/recycle"
         android:orderInCategory="2"
-        android:title="Waste" />
+        android:title="Logging" />
 
     <item
-        android:id="@+id/fragment_settings"
+        android:id="@+id/settingsMenuItem"
         android:icon="@drawable/settings_image"
         android:orderInCategory="3"
         android:title="Settings" />

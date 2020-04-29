@@ -49,7 +49,7 @@ class TodayDataFragment : Fragment() {
 
             travelTotalRef.get().addOnSuccessListener { result ->
                 var totalMiles = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
-                totalMilesVar.text = ("$totalMiles miles")
+                totalMilesVar.text = if(totalMiles != null) ("$totalMiles miles") else 0.toString()
                 var totalKm: Float = totalMiles * 1.61.toFloat()
                 totalKmVar.text = ("$totalKm Kilometers")
 
@@ -64,6 +64,7 @@ class TodayDataFragment : Fragment() {
                 walkTotalVar.text = walkTotalValue.toString()
 
                 var totalCarbonFp = if(result.get("carbon_fp_sum")!= null) result.get("carbon_fp_sum") else 0f
+                totalCarbonFp = totalCarbonFp
                 carbonFootrpintVar.text = ("$totalCarbonFp C02e")
 
             }.addOnFailureListener { exception ->
