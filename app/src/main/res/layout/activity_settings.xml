@@ -94,7 +94,7 @@
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:background="#0099FF"
-        android:text="@string/com_facebook_loginview_log_out_button"
+        android:text="@string/logout_str"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/original_button"

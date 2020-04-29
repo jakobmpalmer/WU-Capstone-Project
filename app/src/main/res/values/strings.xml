@@ -7,6 +7,9 @@
     <string name="since">User Since </string>
     <string name="changeCarType">Change Car Type to: </string>
 
+    <string name="logout_str">Logout</string>
+    <string name="login_str">Login</string>
+
 
     <string name="car_miles">Car Miles: </string>
     <string name="bus_miles">Bus Miles: </string>

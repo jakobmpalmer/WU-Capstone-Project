@@ -34,13 +34,13 @@ class LogFragment : Fragment() {
 //            val carImgIntent = Intent(activity, LogNavigator::class.java)
 //            startActivity(carImgIntent)
 //        }
-
+//Profile
         logView.imageProf.setOnClickListener {
             val profileIntent = Intent(activity, ProfileActivity::class.java)
             startActivity(profileIntent)
         }
 
-
+// Transportation
         logView.buttonTransportation.setOnClickListener{
             //val carImgIntent = Intent(this, CarActivity::class.java)
             val carImgIntent = Intent(activity, CarActivity::class.java)
@@ -54,7 +54,7 @@ class LogFragment : Fragment() {
         }
 
 
-
+//Waste
         logView.buttonWaste.setOnClickListener{
             val wasteIntent = Intent(activity, WasteActivity::class.java)
             startActivity(wasteIntent)
@@ -66,7 +66,7 @@ class LogFragment : Fragment() {
         }
 
 
-
+//Consumable
         logView.buttonConsumption.setOnClickListener {
             val consumableIntent = Intent(activity, ConsumableActivity::class.java)
             startActivity(consumableIntent)

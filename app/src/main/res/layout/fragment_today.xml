@@ -7,31 +7,31 @@
     android:layout_height="match_parent">
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/todayTabLayout"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/todayTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Today" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/calendarTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calendar" />
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/todayTabLayout"-->
+<!--        android:layout_width="409dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
 <!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/todayTab"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:text="Wednesday" />-->
-    </com.google.android.material.tabs.TabLayout>
+<!--            android:text="Today" />-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/calendarTab"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Calendar" />-->
+
+<!--&lt;!&ndash;        <com.google.android.material.tabs.TabItem&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="Wednesday" />&ndash;&gt;-->
+<!--    </com.google.android.material.tabs.TabLayout>-->
 
     <LinearLayout
         android:id="@+id/todayLayout"
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todayTabLayout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/travelTotalVals"
@@ -61,22 +61,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/car_miles"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -91,22 +91,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView18"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/bus_miles"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -120,22 +120,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/plane_miles"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -149,22 +149,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/walk_miles"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -182,20 +182,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="Carbon Footprint:"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/carbonFootrpintVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="@string/null_int"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -210,20 +210,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="Total Miles: "
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/totalMilesVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="@string/null_int"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
         </LinearLayout>
 
         <!--TOTAL-->
@@ -240,20 +240,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="Total Kilometers"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/totalKmVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="@string/null_int"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -275,22 +275,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="Total Plastic:"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -304,22 +304,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView17"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="Total Recycling:"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -333,22 +333,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="Total Trash:"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@color/displayPrimary"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -366,22 +366,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="Plastic Weight:"
                 android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/totalWasteVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="0"
                 android:textAlignment="viewStart"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -403,20 +403,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:background="@color/displayPrimary"/>
+                    android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/cowTotalTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="Bovine Total"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:background="@color/displayPrimary"/>
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
             <LinearLayout
@@ -430,20 +430,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:background="@color/displayPrimary"/>
+                    android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/chickenTotalTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="Chicken"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:background="@color/displayPrimary"/>
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
             <LinearLayout
@@ -457,20 +457,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:background="@color/displayPrimary"/>
+                    android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/textView30"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/displayPrimary"
                     android:text="Pig"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:background="@color/displayPrimary"/>
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
 
@@ -496,10 +496,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/displaySecondary"
                 android:text="@string/null_int"
                 android:textColor="#FFFFFF"
-                android:textSize="26sp"
-                android:background="@color/displaySecondary"/>
+                android:textSize="26sp" />
         </LinearLayout>
 
     </LinearLayout>

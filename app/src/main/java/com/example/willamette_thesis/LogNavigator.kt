@@ -9,7 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class LogNavigator: AppCompatActivity()  {
 
-    val logHome = LogNavigator()
+    //val logHome = LogNavigator()
     val appHome = HomeActivity()
 
     override fun onCreate(savedInstanceState: Bundle?){
