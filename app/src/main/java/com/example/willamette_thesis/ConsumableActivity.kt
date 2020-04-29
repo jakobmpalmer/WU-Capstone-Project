@@ -1,5 +1,6 @@
 package com.example.willamette_thesis
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -19,6 +20,8 @@ class ConsumableActivity : AppCompatActivity() {
 
     private var waterCount = 0
     private val db = FirebaseFirestore.getInstance()
+    private val PREF_FILE = "com.theme.prefs"
+    private val PREF_THEME = "theme-preference"
 
     object OurVariables {
         var waterTotal = 0
@@ -36,10 +39,21 @@ class ConsumableActivity : AppCompatActivity() {
     var ourTime = appHome.getOurTime()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        println("CREATED")
+        //println("CREATED")
         super.onCreate(savedInstanceState)
-        println("ids= $ids, pdt=$pdt, calendar=$calendar")
-        println("appHome= $appHome, ourTime=$ourTime, ourDate=$ourDate")
+        //println("ids= $ids, pdt=$pdt, calendar=$calendar")
+        //println("appHome= $appHome, ourTime=$ourTime, ourDate=$ourDate")
+
+        val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)?: return
+        val name = sharedPref.getString(PREF_THEME, "original")
+        if (name == "nature"){
+            setTheme(R.style.Blue)
+        }else if(name == "original"){
+            setTheme(R.style.AppTheme)
+        }else{
+            setTheme(R.style.Pink)
+        }
+
         setContentView(R.layout.activity_consumable)
         //setSupportActionBar(toolbar)
 
@@ -50,6 +64,7 @@ class ConsumableActivity : AppCompatActivity() {
 //                .setAction("Action", null).show()
 //            fabAction()
 //        }
+
 
         submitConsum_Button.setOnClickListener{ it: View? ->
             //var input = car_input.toString().toDouble()
