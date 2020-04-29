@@ -1,5 +1,6 @@
 package com.example.willamette_thesis
 
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -146,14 +147,6 @@ class ProfileActivity  : AppCompatActivity(){
 
     }
 
-    fun getOurDate() : String{
-        var ourYear = calendar.get(Calendar.YEAR)
-        var ourMonth = calendar.get(Calendar.MONTH)
-        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
-
-        return ("$ourYear, $ourMonth, $ourDay")
-    }
-
     fun updateTextViews(){
         db.collection(userPath).document("mileage_selected").get().addOnSuccessListener {result ->
             chosen_mpg.text = result?.get("mpg").toString().toFloatOrNull().toString()
@@ -163,35 +156,6 @@ class ProfileActivity  : AppCompatActivity(){
         }
         db.collection(userPath).document("car_selected").get().addOnSuccessListener {result ->
             shown_car.text = result?.get("carType").toString()
-        }
-    }
-
-    fun updateTextViews2(){
-        val mileageRef = db.collection(userPath).document("mileage_selected")
-        val source = Source.CACHE
-        mileageRef.get(source).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                chosen_mpg.text = task.result?.data.toString()
-            } else {
-                Log.d(TAG, "Cached get failed: ", task.exception)
-            }
-        }
-        val fuelRef = db.collection(userPath).document("fuel_selected")
-        fuelRef.get(source).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                shown_fuel.text = task.result?.data.toString()
-            } else {
-                Log.d(TAG, "Cached get failed: ", task.exception)
-            }
-        }
-
-        val carRef = db.collection(userPath).document("car_selected")
-        carRef.get(source).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                shown_car.text = task.result?.data.toString()
-            } else {
-                Log.d(TAG, "Cached get failed: ", task.exception)
-            }
         }
     }
 

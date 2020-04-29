@@ -1,6 +1,7 @@
 package com.example.willamette_thesis
 
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -16,6 +17,8 @@ class WasteActivity : AppCompatActivity() {
 
 
     private val db = FirebaseFirestore.getInstance()
+    private val PREF_FILE = "com.theme.prefs"
+    private val PREF_THEME = "theme-preference"
     //add the tag
     val TAG: String = "ECO-FR3ndly"
 
@@ -30,6 +33,17 @@ class WasteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)?: return
+        val name = sharedPref.getString(PREF_THEME, "original")
+        if (name == "nature"){
+            setTheme(R.style.Pink)
+        }else if(name == "original"){
+            setTheme(R.style.AppTheme)
+        }else{
+            setTheme(R.style.Orange)
+        }
+
         setContentView(R.layout.activity_waste)
         //val binding = R.layout.ActivityWasteBinding.inflate(layoutInflater)
         //setContentView(binding.root)
