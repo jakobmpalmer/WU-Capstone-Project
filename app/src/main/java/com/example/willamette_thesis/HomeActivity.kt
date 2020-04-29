@@ -186,6 +186,10 @@ class HomeActivity : AppCompatActivity() {
         return ("$ourYear, $ourMonth, $ourDay")
     }
 
+    fun getOurYear(): Int { return calendar.get(Calendar.YEAR) }
+    fun getOurMonth(): Int { return calendar.get(Calendar.MONTH) }
+    fun getOurDay(): Int { return calendar.get(Calendar.DAY_OF_MONTH) }
+
     public fun getOurTime() : String{
         var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
         var ourMin = calendar.get(Calendar.MINUTE)
