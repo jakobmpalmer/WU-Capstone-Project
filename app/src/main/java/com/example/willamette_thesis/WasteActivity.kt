@@ -40,8 +40,6 @@ class WasteActivity : AppCompatActivity() {
             setTheme(R.style.Pink)
         }else if(name == "original"){
             setTheme(R.style.AppTheme)
-        }else{
-            setTheme(R.style.Orange)
         }
 
         setContentView(R.layout.activity_waste)

@@ -11,15 +11,9 @@
     <color name="displaySecondary">#8BC34A</color>
 
     <color name="originalBackground">#FFFF</color>
-    <color name="natureSettings_background">#AFE6D4</color>
-    <color name="originalSettings_text">#146B73</color>
-    <color name="natureSettings_text">#2D9E17</color>
-    <color name="originalCar_text">#7C8280</color>
-    <color name="natureCar_text">#17926A</color>
-    <color name="natureWaste_text">#CDE06E</color>
 
     <color name="greenText">#3EA055</color>
-    <color name="greenBackground">#e8f7cb</color>
+    <color name="greenBackground">#fafce3</color>
     <color name="greenIcon">#667C26</color>
     <color name="greenTop">#9DC209</color>
     <color name="greenAccent">#AFE6D4</color>

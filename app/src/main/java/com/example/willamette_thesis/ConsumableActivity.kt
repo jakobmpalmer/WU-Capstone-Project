@@ -50,8 +50,6 @@ class ConsumableActivity : AppCompatActivity() {
             setTheme(R.style.Blue)
         }else if(name == "original"){
             setTheme(R.style.AppTheme)
-        }else{
-            setTheme(R.style.Pink)
         }
 
         setContentView(R.layout.activity_consumable)

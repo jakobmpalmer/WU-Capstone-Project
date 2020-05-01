@@ -1,25 +1,19 @@
 package com.example.willamette_thesis
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog.show
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.edit
 import androidx.fragment.app.Fragment
-import com.example.willamette_thesis.R.color.*
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_settings.view.*
-import java.lang.reflect.Member.PUBLIC
-import kotlin.reflect.KVisibility
 
 
 class SettingsFragment : Fragment() {
@@ -40,9 +34,6 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
 
-
-
-
         val settingsView = inflater.inflate(R.layout.activity_settings, container, false)
 
         //setContentView(R.layout.activity_settings)
@@ -52,42 +43,26 @@ class SettingsFragment : Fragment() {
 
         settingsView.nature_button.setOnClickListener {
 
-            //val data = hashMapOf("chosen_theme" to "nature")
-            //db.collection(userPath).document("app_theme").set(data)
-
-            val editor = prefs!!.edit()
-            editor.putString(PREF_THEME, "nature")
-            editor.apply()
-
-
-            //val sharedPref: SharedPreferences? = activity?.getPreferences(PRIVATE_MODE)
-            //with (sharedPref?.edit()) {
-              //  this?.putString(PREF_NAME, "nature")
-               // this?.commit()
-           // }
-
-            //val sharedPref = activity?.getPreferences(PUBLIC)
-            //with (sharedPref?.edit()) {
-              //  this?.putString(getString(R.string.themeNature), "nature")
-                //this?.commit()
-
+            storePrefs(prefs, PREF_THEME, "nature")
             Toast.makeText(activity, "Settings Preferences Applied to Nature", Toast.LENGTH_SHORT).show();
+
+            //val ft= fragmentManager!!.beginTransaction()
+            //if (Build.VERSION.SDK_INT >= 26) {
+            //    ft.setReorderingAllowed(false)
+            //}
+            //ft.detach(this).attach(this).commit()
+            val profileIntent = Intent(activity, HomeActivity::class.java)
+            startActivity(profileIntent)
 
             }
 
-
-
-
-
         settingsView.original_button.setOnClickListener {
 
-            val editor = prefs!!.edit()
-            editor.putString(PREF_THEME, "original")
-            editor.apply()
 
-
+            storePrefs(prefs, PREF_THEME, "original")
             Toast.makeText(activity, "Settings Preferences Applied to Original", Toast.LENGTH_SHORT).show();
-
+            val profileIntent = Intent(activity, HomeActivity::class.java)
+            startActivity(profileIntent)
         }
 
         settingsView.logout_btn.setOnClickListener {
@@ -132,8 +107,11 @@ class SettingsFragment : Fragment() {
         // [END auth_fui_create_intent]
     }
 
-
-
+    fun storePrefs(prefs: SharedPreferences?, prefName:String, input:String ){
+        val editor = prefs!!.edit()
+        editor.putString(prefName, input)
+        editor.apply()
+    }
 
 }
 

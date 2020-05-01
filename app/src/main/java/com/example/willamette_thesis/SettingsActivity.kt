@@ -21,44 +21,6 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        nature_button.setOnClickListener {
-
-            textView8.setTextColor(natureSettings_text)
-            textView9.setTextColor(natureSettings_text)
-
-            //transportation_text.setTextColor(natureCar_text)
-            transpoActivityTitle.setTextColor(natureCar_text)
-            //miles_text.setTextColor(natureCar_text)
-            car_text.setTextColor(natureCar_text)
-            bus_text.setTextColor(natureCar_text)
-            plane_text.setTextColor(natureCar_text)
-            walk_text.setTextColor(natureCar_text)
-
-            textView3.setTextColor(natureWaste_text)
-            textView4.setTextColor(natureWaste_text)
-            plastic_text.setTextColor(natureWaste_text)
-            recycle_text.setTextColor(natureWaste_text)
-            trash_text.setTextColor(natureWaste_text)
-        }
-
-        original_button.setOnClickListener {
-            textView8.setTextColor(originalSettings_text)
-            textView9.setTextColor(originalSettings_text)
-
-            //transportation_text.setTextColor(originalCar_text)
-            transpoActivityTitle.setTextColor(originalCar_text)
-            //miles_text.setTextColor(originalCar_text)
-            car_text.setTextColor(originalCar_text)
-            bus_text.setTextColor(originalCar_text)
-            plane_text.setTextColor(originalCar_text)
-            walk_text.setTextColor(originalCar_text)
-
-            textView3.setTextColor(colorPrimary)
-            textView4.setTextColor(colorPrimary)
-            plastic_text.setTextColor(colorPrimary)
-            recycle_text.setTextColor(colorPrimary)
-            trash_text.setTextColor(colorPrimary)
-        }
 
         logout_btn.setOnClickListener {
             signOut()

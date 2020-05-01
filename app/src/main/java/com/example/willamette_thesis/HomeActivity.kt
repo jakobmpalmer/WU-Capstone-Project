@@ -3,6 +3,7 @@ package com.example.willamette_thesis
 //import sun.jvm.hotspot.utilities.IntArray
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,8 @@ class HomeActivity : AppCompatActivity() {
 
     //lateinit var toolbar: ActionBar
     private val db = FirebaseFirestore.getInstance()
+    private val PREF_FILE = "com.theme.prefs"
+    private val PREF_THEME = "theme-preference"
 
     //var user = firebase.auth().currentUser;
     private val TAG = "Home Activity Problem"
@@ -48,13 +51,20 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)?: return
+        val name = sharedPref.getString(PREF_THEME, "original")
+        if (name == "nature"){
+            setTheme(R.style.Green)
+        }else if(name == "original"){
+            setTheme(R.style.AppTheme)
+        }
+
         setContentView(R.layout.activity_home)
         //setSupportActionBar(toolbar)
         //supportActionBar?.setDisplayShowTitleEnabled(false)
         //setUpNavigation()
         //toolbar = supportActionBar!!
-
-
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.botNavigationView)
         val navController: NavController = Navigation.findNavController(this, R.id.home_fragment)

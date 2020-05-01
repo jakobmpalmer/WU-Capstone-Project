@@ -49,18 +49,13 @@ class CarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
         val sharedPref = this.getSharedPreferences(PREF_FILE,Context.MODE_PRIVATE)?: return
         val name = sharedPref.getString(PREF_THEME, "original")
         if (name == "nature"){
-            setTheme(R.style.Green)
+            setTheme(R.style.Orange)
         }else if(name == "original"){
             setTheme(R.style.AppTheme)
-        }else{
-            setTheme(R.style.Pink)
         }
-
 
         setContentView(R.layout.activity_car)
 
@@ -259,11 +254,6 @@ class CarActivity : AppCompatActivity() {
             var sumTotal = newCarTotal + newBusTotal + newPlaneTotal + newWalkTotal
 
 
-
-
-
-
-
             val totalData = hashMapOf(
                 "car_total" to newCarTotal,
                 "bus_total" to newBusTotal,
@@ -349,24 +339,6 @@ class CarActivity : AppCompatActivity() {
         // 21.25 is average on fuel types, as users are unlikely to have this info
 
         return (carEmission + busEmission + planeEmission)
-
-    }
-
-    fun getSavedTheme(): Int {
-        //var d = findViewById<TextView>(R.id.milesString)
-        var chosenTheme = R.style.Pink
-
-        db.collection(userPath).document("app_theme").get().addOnSuccessListener { result ->
-            if (result?.get("chosen_theme").toString() == "nature"){
-                chosenTheme = R.style.Green
-            } else if(result?.get("chosen_theme").toString() == "original"){
-                chosenTheme = R.style.AppTheme
-            }else{
-                chosenTheme = R.style.Orange
-            }
-            //d.text = result?.get("chosen_theme").toString()
-        }
-        return chosenTheme
 
     }
 

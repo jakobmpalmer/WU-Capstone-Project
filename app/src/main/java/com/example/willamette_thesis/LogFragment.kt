@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_logging.view.*
 
@@ -21,6 +22,7 @@ class LogFragment : Fragment() {
 
         println("Entering Log Fragment.")
 
+
         val logView: View = inflater.inflate(
             R.layout.activity_logging,
             container,
@@ -28,12 +30,6 @@ class LogFragment : Fragment() {
         )
 
 
-
-//val buttonTransportation = findViewById<Button>(R.id.buttonTransportation)
-//        logView.buttonTransportation.setOnClickListener {
-//            val carImgIntent = Intent(activity, LogNavigator::class.java)
-//            startActivity(carImgIntent)
-//        }
 //Profile
         logView.imageProf.setOnClickListener {
             val profileIntent = Intent(activity, ProfileActivity::class.java)
