@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/data_nav_graph"
+    app:startDestination="@id/calendarFragment">
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.willamette_thesis.CalendarFragment"
+        android:label="CalendarFragment" >
+        <action
+            android:id="@+id/action_calendarFragment_to_todayDataFragment"
+            app:destination="@id/todayDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todayDataFragment"
+        android:name="com.example.willamette_thesis.TodayDataFragment"
+        android:label="TodayDataFragment" >
+        <action
+            android:id="@+id/action_todayDataFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/data_nav_graph"
+
+    app:startDestination="@id/loggingMenuItem">
+    <!--First fragment-->
+    <!--Second fragment-->
+    <fragment
+        android:id="@+id/dataMenuItem"
+        android:name="com.example.willamette_thesis.TodayDataFragment"
+        android:label="transpo_frag" />
+    <!--Third fragment-->
+
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.example.willamette_thesis.HomeActivity"
+        android:label="home_fragment">
+        <action
+            android:id="@+id/action_home_fragment_to_loggingMenuItem"
+            app:destination="@id/loggingMenuItem" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsMenuItem"
+        android:name="com.example.willamette_thesis.SettingsFragment"
+        android:label="settings_frag" />
+    <fragment
+        android:id="@+id/loggingMenuItem"
+        android:name="com.example.willamette_thesis.LogFragment"
+        android:label="LogFragment">
+        <action
+            android:id="@+id/action_loggingMenuItem_to_screenSlidePagerActivity"
+            app:destination="@id/screenSlidePagerActivity" />
+        <action
+            android:id="@+id/action_loggingMenuItem_to_settingsMenuItem"
+            app:destination="@id/settingsMenuItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/screenSlidePagerActivity"
+        android:name="com.example.willamette_thesis.ScreenSlidePagerActivity"
+        android:label="ScreenSlidePagerActivity" />
+
+</navigation>
