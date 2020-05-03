@@ -29,9 +29,13 @@ class CarActivity2 : AppCompatActivity() {
     val TAG: String = "ECO-FR3ndly"
 
 
-    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
-    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
-    private var calendar: Calendar = GregorianCalendar(this.pdt)
+//    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
+////    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
+////    private var calendar: Calendar = GregorianCalendar(this.pdt)
+
+    private val appHome = HomeActivity()
+    private val ourTime = appHome.getOurTime()
+    private val ourDate = appHome.getOurDate()
 
 
     @SuppressLint("ResourceType")
@@ -49,36 +53,6 @@ class CarActivity2 : AppCompatActivity() {
 
     }
 
-    fun changeTheme(){
-        val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE) ?: return
-        val name = sharedPref.getString(PREF_THEME, "original")
-        if (name == "nature") {
-            setTheme(R.style.Blue)
-        } else if (name == "original") {
-            setTheme(R.style.AppTheme)
-        }
-    }
-
-    fun getPref(sharedPref: SharedPreferences,pref_to_retrieve: String, default : Float) : Float{
-        val value_retrieved = sharedPref.getFloat(pref_to_retrieve, default)
-        return value_retrieved
-    }
-
-    fun getOurDate() : String{
-        var ourYear = calendar.get(Calendar.YEAR)
-        var ourMonth = calendar.get(Calendar.MONTH)
-        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
-
-        return ("$ourYear, $ourMonth, $ourDay")
-    }
-
-    fun savePrefInput(prefName:String, input:Float){
-        val prefs = this.getSharedPreferences("com.prevCarVals.prefs", Context.MODE_PRIVATE)
-        val editor = prefs!!.edit()
-        editor.putFloat(prefName, input)
-        editor.apply()
-    }
-
     fun storeData(ourDate: String){
 
         var carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toDouble() else 0.0
@@ -89,6 +63,7 @@ class CarActivity2 : AppCompatActivity() {
         println("Data pre Firebase: $carData")
 
         db.collection(userPath).document(ourDate).collection("transportation").document(ourDate).get().addOnSuccessListener {result ->
+        //db.collection(userPath).document(ourDate).collection("travel-data").document(ourTime).set(data)
 
             println("carPRE $carData, bus $busData, plane $planeData, walk $walkData")
 
@@ -131,6 +106,7 @@ class CarActivity2 : AppCompatActivity() {
             "carb_footprint" to carb_footprint
         )
 
+        //db.collection(userPath).document(ourDate).collection("travel-data").document(ourTime).set(data)
         db.collection(userPath).document(ourDate).collection("transportation").document(ourDate).set(data)
 
     }
@@ -165,4 +141,43 @@ class CarActivity2 : AppCompatActivity() {
         return (carEmission + busEmission + planeEmission)
 
     }
+
+
+
+    fun changeTheme(){
+        val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE) ?: return
+        val name = sharedPref.getString(PREF_THEME, "original")
+        if (name == "nature") {
+            setTheme(R.style.Blue)
+        } else if (name == "original") {
+            setTheme(R.style.AppTheme)
+        }
+    }
+
+    fun getPref(sharedPref: SharedPreferences,pref_to_retrieve: String, default : Float) : Float{
+        val value_retrieved = sharedPref.getFloat(pref_to_retrieve, default)
+        return value_retrieved
+    }
+
+    fun getOurDate() : String{
+//        var ourYear = calendar.get(Calendar.YEAR)
+//        var ourMonth = calendar.get(Calendar.MONTH)
+//        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        var ourYear = appHome.getOurYear()
+        var ourMonth = appHome.getOurMonth()
+        var ourDay = appHome.getOurDay()
+
+        return ("$ourYear, $ourMonth, $ourDay")
+    }
+
+    fun savePrefInput(prefName:String, input:Float){
+        val prefs = this.getSharedPreferences("com.prevCarVals.prefs", Context.MODE_PRIVATE)
+        val editor = prefs!!.edit()
+        editor.putFloat(prefName, input)
+        editor.apply()
+    }
+
+
+
 }
