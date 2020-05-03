@@ -30,7 +30,8 @@ class TodayDataFragment : Fragment() {
             val travelCollection = dateDoc.collection("travel-data") //Travel data for the day
 
             val totalRef = db.collection(userPath).document(dateToday).collection("total-data")
-            val travelTotalRef = totalRef.document("travel-total")
+            //val travelTotalRef = totalRef.document("travel-total")
+            val travelTotalRef = db.collection(userPath).document(dateToday).collection("transportation").document(dateToday)
             val consumpTotalRef = totalRef.document("consump-total")
             val wasteTotalRef = totalRef.document("waste-total")
             // val travelRef = db.collection(userPath).document("travel-data")
@@ -48,22 +49,27 @@ class TodayDataFragment : Fragment() {
 
 
             travelTotalRef.get().addOnSuccessListener { result ->
-                var totalMiles = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
-                totalMilesVar.text = if(totalMiles != null) ("$totalMiles miles") else 0.toString()
-                var totalKm: Float = totalMiles * 1.61.toFloat()
-                totalKmVar.text = ("$totalKm Kilometers")
 
-                var carTotalValue = if (result.get("car_total") != null) result.get("car_total").toString().toFloat() else 0f
-                var busTotalValue = if (result.get("bus_total") != null) result.get("bus_total").toString().toFloat() else 0f
-                var planeTotalValue = if (result.get("plane_total") != null) result.get("plane_total").toString().toFloat() else 0f
-                var walkTotalValue = if (result.get("walk_total") != null) result.get("walk_total").toString().toFloat() else 0f
+                var carTotalValue = if (result.get("car_miles") != null) result.get("car_miles").toString().toFloat() else 0f
+                var busTotalValue = if (result.get("bus_miles") != null) result.get("bus_miles").toString().toFloat() else 0f
+                var planeTotalValue = if (result.get("plane_miles") != null) result.get("plane_miles").toString().toFloat() else 0f
+                var walkTotalValue = if (result.get("walk_miles") != null) result.get("walk_miles").toString().toFloat() else 0f
 
                 carTotalVar.text = carTotalValue.toString()
                 busTotalVar.text = busTotalValue.toString()
                 planeTotalVar.text = planeTotalValue.toString()
                 walkTotalVar.text = walkTotalValue.toString()
 
-                var totalCarbonFp = if(result.get("carbon_fp_sum")!= null) result.get("carbon_fp_sum") else 0f
+                //var totalMiles = if (result.get("sum_miles") != null) result.get("sum_total").toString().toFloat() else 0f
+                //totalMilesVar.text = if(totalMiles != null) ("$totalMiles miles") else 0.toString()
+                var totalMiles = carTotalValue + busTotalValue + planeTotalValue + walkTotalValue
+                totalMilesVar.text = totalMiles.toString()
+                var totalKm: Float = totalMiles * 1.61.toFloat()
+                totalKmVar.text = ("$totalKm Kilometers")
+
+
+                //var totalCarbonFp = if(result.get("carbon_fp_sum")!= null) result.get("carbon_fp_sum") else 0f
+                var totalCarbonFp = if(result.get("carb_footprint")!= null) result.get("carb_footprint") else 0f
                 totalCarbonFp = totalCarbonFp
                 carbonFootrpintVar.text = ("$totalCarbonFp C02e")
 
