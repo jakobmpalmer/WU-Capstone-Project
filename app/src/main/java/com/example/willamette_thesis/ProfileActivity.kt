@@ -59,7 +59,8 @@ class ProfileActivity  : AppCompatActivity(){
         choose_fuel = findViewById(R.id.fuelSpinner) as Spinner
         shown_fuel = findViewById(R.id.fuelShown) as TextView
 
-        userEmailText.text = appHome.getUserEmail()
+        //userEmailText.text = appHome.getUserEmail()
+        userEmailText.text = "user@mail.com"
         dateCreation.text = appHome.getAccountCreationDate().toString()
 
         setSpinners()

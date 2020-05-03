@@ -40,9 +40,10 @@ class CarActivity2 : AppCompatActivity() {
         changeTheme()
         setContentView(R.layout.activity_car)
 
+        // if day is not in firebase reset inputPrefs
+
         val submitButton = findViewById<Button>(R.id.button1)
         submitButton.setOnClickListener{ it: View? ->
-
             storeData(getOurDate())
             Toast.makeText(this@CarActivity2, "Transportation info for the day has been recorded", Toast.LENGTH_SHORT).show()
         }
@@ -86,18 +87,14 @@ class CarActivity2 : AppCompatActivity() {
         var planeData = if (plane_text.text.isNotEmpty()) plane_text.text.toString().toDouble() else 0.0
         var walkData = if (walk_text.text.isNotEmpty()) walk_text.text.toString().toDouble() else 0.0
 
-        println("Data pre Firebase: $carData")
 
         db.collection(userPath).document(ourDate).collection("transportation").document(ourDate).get().addOnSuccessListener {result ->
-
-            println("carPRE $carData, bus $busData, plane $planeData, walk $walkData")
 
             carData += result?.get("car_miles").toString().toDouble()
             busData += result?.get("bus_miles").toString().toDouble()
             planeData += result?.get("plane_miles").toString().toDouble()
             walkData += result?.get("walk_miles").toString().toDouble()
 
-            println("car $carData, bus $busData, plane $planeData, walk $walkData")
 
             savePrefInput("car", carData.toFloat())
             savePrefInput("bus", busData.toFloat())
@@ -118,12 +115,8 @@ class CarActivity2 : AppCompatActivity() {
 
 
         val carb_footprint = calcImpact(car,bus,plane,walk,fuel,mpg)
-        println("fuel: $fuel")
-        println("mpg: $mpg")
-        println("CARBON FOOTPRINT: $carb_footprint")
 
         val data = hashMapOf(
-
             "car_miles" to car,
             "bus_miles" to bus,
             "plane_miles" to plane,
