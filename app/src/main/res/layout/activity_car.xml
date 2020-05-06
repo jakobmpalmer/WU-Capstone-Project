@@ -7,7 +7,6 @@
     tools:context=".CarActivity">
 
 
-
     <TextView
         android:id="@+id/transpoActivityTitle"
         android:layout_width="wrap_content"
@@ -98,10 +97,12 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="152dp"
-        android:layout_height="96dp"
+        android:layout_width="148dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/car"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,7 +153,7 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
         android:background="#0099FF"
         android:text="submit"
         android:textColor="#FFFFFF"
