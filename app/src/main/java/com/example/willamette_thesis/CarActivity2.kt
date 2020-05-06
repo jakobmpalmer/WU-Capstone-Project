@@ -75,6 +75,7 @@ class CarActivity2 : AppCompatActivity() {
             db.collection("users").document(userPath).collection(ourDate).document("transportation").set(data)
 
         }
+
     }
 
 
