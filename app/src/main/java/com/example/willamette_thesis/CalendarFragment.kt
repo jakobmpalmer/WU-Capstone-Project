@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -51,14 +52,16 @@ class CalendarFragment: Fragment() {
         if (DO_DEBUG) println("\n\n\n\tEntering Calendar Fragment")
 
 
-        val tLayout = calView.dataTabLayout
-
+        val tLayout = calView.metricTabLayout
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = calView.metricView
+        println(tLayout.toString())
+
         val pagerAdapter = ScreenSlidePagerAdapter(this)
 
-
+        println("${calView.toString()} here!")
         mPager.adapter = pagerAdapter
+        println("${calView.toString()} here27!")
         TabLayoutMediator(tLayout, mPager) { tab, position ->
 //            tab.text = "OBJECT ${(position + 1)}"
             tab.text = when (position) {
@@ -129,16 +132,13 @@ class CalendarFragment: Fragment() {
         override fun createFragment(position: Int): Fragment{
             when (position) {
                 0 -> {
-                    return plasticsFragment()
+                    return PlasticsFragment()
                 }
                 1 -> {
-                    return plasticsFragment()
-                }
-                2 -> {
-                    return CalendarFragment()
+                    return PlasticsFragment()
                 }
                 else -> {
-                    return TodayDataFragment()
+                    return CalendarFragment()
                 }
             }
         }

@@ -24,7 +24,9 @@
         android:id="@+id/metricTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="24dp">
 
         <com.google.android.material.tabs.TabItem
@@ -45,8 +47,8 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/metricView"
-        android:layout_width="409dp"
-        android:layout_height="348dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
