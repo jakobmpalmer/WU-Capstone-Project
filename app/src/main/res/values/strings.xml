@@ -10,11 +10,15 @@
     <string name="logout_str">Logout</string>
     <string name="login_str">Login</string>
 
+    <string name="carbon_fp_text">Carbon Footprint</string>
 
     <string name="car_miles">Car Miles: </string>
     <string name="bus_miles">Bus Miles: </string>
     <string name="plane_miles">Plane Miles: </string>
     <string name="walk_miles">Walk Miles: </string>
+
+    <string name="themeNature">nature</string>
+    <string name="themeDefault">original</string>
 
 
     <string-array name="WaterSizes">

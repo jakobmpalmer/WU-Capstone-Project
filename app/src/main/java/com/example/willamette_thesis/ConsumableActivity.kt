@@ -106,13 +106,12 @@ class ConsumableActivity : AppCompatActivity() {
             var newCowTotal = cowData + if (oldCowTotal != null) oldCowTotal else 0f
             var newPigTotal = pigData + if (oldPigTotal != null) oldPigTotal else 0f
             var newChickenTotal = chickenData + if (oldChickenTotal != null) oldChickenTotal else 0f
-            var sumTotal = newCowTotal + newPigTotal + newChickenTotal
+            //var sumTotal = newCowTotal + newPigTotal + newChickenTotal
 
             val totalData = hashMapOf(
                 "cow_total" to newCowTotal,
                 "pig_total" to newPigTotal,
-                "chicken_total" to newChickenTotal,
-                "sum_total" to sumTotal
+                "chicken_total" to newChickenTotal
             )
 
             //totalRef.update(totalData as Map<String, Float>)

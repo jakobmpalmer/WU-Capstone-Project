@@ -101,6 +101,7 @@ class CarActivity2 : AppCompatActivity() {
 
         //db.collection(userPath).document(ourDate).collection("travel-data").document(ourTime).set(data)
         db.collection(userPath).document(ourDate).collection("transportation").document(ourDate).set(data)
+        //db.collection(users).document(userPath).collection(ourDate).document("transpo-data").set(data)
 
     }
 

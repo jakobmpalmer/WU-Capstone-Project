@@ -6,10 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.data_display_layout.view.*
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
 import java.util.*
 
+
+private const val NUM_PAGES = 3
 
 class CalendarFragment: Fragment() {
 
@@ -30,6 +36,8 @@ class CalendarFragment: Fragment() {
 
 
 
+    private lateinit var mPager: ViewPager2
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.data_display_layout)
@@ -42,6 +50,27 @@ class CalendarFragment: Fragment() {
 
         if (DO_DEBUG) println("\n\n\n\tEntering Calendar Fragment")
 
+
+        val tLayout = calView.dataTabLayout
+
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager = calView.metricView
+        val pagerAdapter = ScreenSlidePagerAdapter(this)
+
+
+        mPager.adapter = pagerAdapter
+        TabLayoutMediator(tLayout, mPager) { tab, position ->
+//            tab.text = "OBJECT ${(position + 1)}"
+            tab.text = when (position) {
+                0 -> "Waste"
+                1 -> "Transportation"
+                else -> "Consumable"
+            }
+        }.attach()
+
+
+
+
         val cal = calView.calendarView
         cal.setDate(System.currentTimeMillis(), true, false)
 
@@ -49,15 +78,19 @@ class CalendarFragment: Fragment() {
         var currentDateFormatted = cal.dateTextAppearance
         if (DO_DEBUG) println("$currentDateFormatted <---- currentDateFormatted")
 
+
+
+
+
         var currentDayRef = dateToday
-        val currentDayText = calView.currentDateText
-        currentDayText.text = "${appHome.getOurDay()}/${appHome.getOurMonth() + 1}/${appHome.getOurYear()}"
+        //val currentDayText = calView.currentDateText
+        //currentDayText.text = "${appHome.getOurDay()}/${appHome.getOurMonth() + 1}/${appHome.getOurYear()}"
         cal.setOnDateChangeListener { view, year, month, dayOfMonth ->
             if (DO_DEBUG) println("changed dates!")
             var userMonth = month + 1
             val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
             if (DO_DEBUG) Toast.makeText(this@CalendarFragment.context, msg, Toast.LENGTH_SHORT).show()
-            currentDayText.text = "$dayOfMonth/$userMonth/$year"
+            //currentDayText.text = "$dayOfMonth/$userMonth/$year"
             currentDayRef = "$dayOfMonth,$userMonth,$year"
             if (DO_DEBUG) println("currentDayRef: $currentDayRef")
 
@@ -87,6 +120,28 @@ class CalendarFragment: Fragment() {
         todayDataRef = db.collection(currentUser).document(currentDay)
         totalRef = todayDataRef.collection("total-data")
         if (DO_DEBUG) println("updating ref, ${todayDataRef.toString()}")
+    }
+
+
+
+    private inner class ScreenSlidePagerAdapter(fa: Fragment) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = NUM_PAGES
+        override fun createFragment(position: Int): Fragment{
+            when (position) {
+                0 -> {
+                    return plasticsFragment()
+                }
+                1 -> {
+                    return plasticsFragment()
+                }
+                2 -> {
+                    return CalendarFragment()
+                }
+                else -> {
+                    return TodayDataFragment()
+                }
+            }
+        }
     }
 
 }

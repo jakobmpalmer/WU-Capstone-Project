@@ -42,20 +42,10 @@ class ScreenSlidePagerActivity: Fragment() {
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = dataDisplayView.dataPager
-
-        // mPager = findViewById(R.id.dataPager)
-        // The pager adapter, which provides the pages to the view pager widget.
-        //val pagerAdapter = ScreenSlidePagerActivity()
         val pagerAdapter = ScreenSlidePagerAdapter(this)
-        //val pagerAdapter = ScreenSlidePagerAdapter(TodayDataFragment)
-
-//        pagerAdapter.instantiateItem(TodayDataFragment, 0)
-//        pagerAdapter.instantiateItem(TodayDataFragment, 1)
-//        pagerAdapter.setPrimaryItem(TodayDataFragment, 0)
 
 
         mPager.adapter = pagerAdapter
-
 
         TabLayoutMediator(tLayout, mPager) { tab, position ->
 //            tab.text = "OBJECT ${(position + 1)}"
