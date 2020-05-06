@@ -54,10 +54,10 @@ class CarActivity2 : AppCompatActivity() {
 
         db.collection("users").document(userPath).collection(ourDate).document("transportation").get().addOnSuccessListener {result ->
 
-            carData += result?.get("car_miles").toString().toDouble()
-            busData += result?.get("bus_miles").toString().toDouble()
-            planeData += result?.get("plane_miles").toString().toDouble()
-            walkData += result?.get("walk_miles").toString().toDouble()
+            carData += if (result?.get("car_miles") != null) result.get("car_miles").toString().toDouble() else 0.0
+            busData += if (result?.get("bus_miles") != null) result.get("bus_miles").toString().toDouble() else 0.0
+            planeData += if (result?.get("plane_miles") != null) result.get("plane_miles").toString().toDouble() else 0.0
+            walkData += if (result?.get("walk_miles") != null) result.get("walk_miles").toString().toDouble() else 0.0
 
             val mpg = getPref(sharedPref, PREF_MPG,19.73F)
             val fuel = getPref(sharedPref, PREF_FUEL,21.25F)

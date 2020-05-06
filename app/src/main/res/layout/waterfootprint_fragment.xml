@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
-        android:id="@+id/totalWasteLayout"
+        android:id="@+id/consumLayout"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="#4CAF50"
         android:orientation="horizontal"
@@ -17,13 +18,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="Plastic Total:"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/plasticsTotalVar"
@@ -35,17 +48,6 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/displayPrimary"
-                android:text="Total Plastic:"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,6 +55,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="Recycling Total:"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/recycleTotalVar"
@@ -64,14 +77,32 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/cowTotalTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/displayPrimary"
-                android:text="Total Recycling:"
+                android:text="Bovine Total"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/cowTotalVar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="@string/null_int"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
@@ -84,7 +115,18 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/trashTotalVar"
+                android:id="@+id/chickenTotalTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="Chicken Total"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/chickenTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,14 +135,32 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/textView30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/displayPrimary"
-                android:text="Total Trash:"
+                android:text="Pig   Total:"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/pigTotalVar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="@string/null_int"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
@@ -108,39 +168,44 @@
 
     </LinearLayout>
 
+
     <LinearLayout
-        android:id="@+id/plasticsLayout"
-        android:layout_width="0dp"
+        android:id="@+id/waterFootprintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#8BC34A"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/totalWasteLayout"
-        app:layout_constraintStart_toStartOf="@+id/totalWasteLayout"
-        app:layout_constraintTop_toBottomOf="@+id/totalWasteLayout">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/consumLayout"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/textView22"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/displaySecondary"
-            android:text="Plastic Weight:"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp" />
-
-        <TextView
-            android:id="@+id/totalWasteVar"
+            android:id="@+id/textView32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/displaySecondary"
-            android:text="0"
-            android:textAlignment="viewStart"
+            android:text="Water Footprint:"
+            android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/waterFpVar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/displaySecondary"
+            android:text="@string/null_int"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp" />
+
     </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

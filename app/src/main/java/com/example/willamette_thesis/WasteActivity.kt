@@ -51,9 +51,9 @@ class WasteActivity : AppCompatActivity() {
 
         db.collection("users").document(userPath).collection(ourDate).document("waste").get().addOnSuccessListener {result ->
 
-            plasticData += result?.get("plastic_items").toString().toDouble()
-            recycleData += result?.get("recycled_items").toString().toDouble()
-            trashData += result?.get("trash_lbs").toString().toDouble()
+            plasticData += if (result?.get("plastic_items") != null) result.get("plastic_items").toString().toDouble() else 0.0
+            recycleData += if (result?.get("recycled_items") != null) result.get("recycled_items").toString().toDouble() else 0.0
+            trashData += if (result?.get("trash_lbs") != null) result.get("trash_lbs").toString().toDouble() else 0.0
 
 
             val water_ft_plastic = plasticImpact(plasticData,recycleData)

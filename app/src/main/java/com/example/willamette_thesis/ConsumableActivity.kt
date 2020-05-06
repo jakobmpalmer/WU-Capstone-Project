@@ -41,7 +41,7 @@ class ConsumableActivity : AppCompatActivity() {
 
 
 
-    fun storeData(ourDate:String){
+    private fun storeData(ourDate:String){
         var cowData = if (cow_text.text.isNotEmpty()) cow_text.text.toString().toDouble() else 0.0
         var chickenData = if (chicken_text.text.isNotEmpty()) chicken_text.text.toString().toDouble() else 0.0
         var pigData = if (pig_text.text.isNotEmpty()) pig_text.text.toString().toDouble() else 0.0
@@ -54,9 +54,9 @@ class ConsumableActivity : AppCompatActivity() {
 
         db.collection("users").document(userPath).collection(ourDate).document("consumables").get().addOnSuccessListener {result ->
 
-            cowData += result?.get("cow_oz").toString().toDouble()
-            chickenData += result?.get("chicken_oz").toString().toDouble()
-            pigData += result?.get("pig_oz").toString().toDouble()
+            cowData += if (result?.get("cow_oz") != null) result.get("cow_oz").toString().toDouble() else 0.0
+            chickenData += if (result?.get("chicken_oz") != null) result.get("chicken_oz").toString().toDouble() else 0.0
+            pigData += if (result?.get("pig_oz") != null) result.get("pig_oz").toString().toDouble() else 0.0
 
 
             val water_ft_consum = consumableImpact(cowData, chickenData, pigData)
