@@ -3,7 +3,6 @@ package com.example.willamette_thesis
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -59,14 +58,14 @@ class ConsumableActivity : AppCompatActivity() {
             pigData += if (result?.get("pig_oz") != null) result.get("pig_oz").toString().toDouble() else 0.0
 
 
-            val water_ft_consum = consumableImpact(cowData, chickenData, pigData)
+            val water_fp_consum = consumableImpact(cowData, chickenData, pigData)
             // water footprint from consumables (meat) in gallons of water used
 
             val data = hashMapOf(
                 "cow_oz" to cowData,
                 "chicken_oz" to chickenData,
                 "pig_oz" to pigData,
-                "water_ft_consum" to water_ft_consum
+                "water_fp_consum" to water_fp_consum
             )
 
             db.collection("users").document(userPath).collection(ourDate).document("consumables").set(data)

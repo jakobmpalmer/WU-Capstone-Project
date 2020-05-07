@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_car.*
 import kotlinx.android.synthetic.main.activity_car.view.*
+import kotlinx.android.synthetic.main.fragment_today.view.*
 import java.util.*
 
 
@@ -35,167 +36,61 @@ class TravelFragment : Fragment() {
     val ourDate = appHome.getOurDate()
     val ourTime = appHome.getOurTime()
     val currentUser = appHome.getUserEmail()
+    val calFrag = CalendarFragment()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_car)
-        val travelView: View = inflater.inflate(
-            R.layout.activity_car,
-            container,
-            false
-        )
 
-        //println("\n\n----------------\n Beginning TRAVELFRAGMENT\n----------------\n\n")
-        //val submitButton = findViewById<Button>(R.id.button1)
 
-        travelView.button1.setOnClickListener{ it: View? ->
-            //var input = car_input.toString().toDouble()
-            if(car_text.text.isEmpty()){
-                println("21Empty")
-            } else if(car_text.text.isBlank()){
-                println("21Blank")
-            } else if(car_text.text.isNullOrBlank()){
-                println("21Null of Blank")
-            } else {
-                println("None21")
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+            super.onCreate(savedInstanceState)
+            //setContentView(R.layout.activity_car)
+            val travelView: View = inflater.inflate(
+                R.layout.travel_fragment,
+                container,
+                false
+            )
+
+            var selectedDate = calFrag.getSelectedDate()
+            val selectedDay = calFrag.getSelectedDateRef()
+            //val travelRef = db.collection("users").document(currentUser).collection(selectedDate).document("transportation")
+            val travelRef = selectedDay.document("transportation")
+            println("travelRef gotten!")
+
+
+        //Fetch Values
+            travelRef.get().addOnSuccessListener { result ->
+
+                var carTotalValue = if (result.get("car_miles") != null) result.get("car_miles").toString().toFloat() else 0f
+                var busTotalValue = if (result.get("bus_miles") != null) result.get("bus_miles").toString().toFloat() else 0f
+                var planeTotalValue = if (result.get("plane_miles") != null) result.get("plane_miles").toString().toFloat() else 0f
+                var walkTotalValue = if (result.get("walk_miles") != null) result.get("walk_miles").toString().toFloat() else 0f
+
+                travelView.carTotalVar.text = carTotalValue.toString()
+                travelView.busTotalVar.text = busTotalValue.toString()
+                travelView.planeTotalVar.text = planeTotalValue.toString()
+                travelView.walkTotalVar.text = walkTotalValue.toString()
+
+                //var totalMiles = if (result.get("sum_miles") != null) result.get("sum_total").toString().toFloat() else 0f
+                //totalMilesVar.text = if(totalMiles != null) ("$totalMiles miles") else 0.toString()
+                var totalMiles = carTotalValue + busTotalValue + planeTotalValue + walkTotalValue
+                travelView.totalMilesVar.text = totalMiles.toString()
+                var totalKm: Float = totalMiles * 1.61.toFloat()
+                //totalKmVar.text = ("$totalKm Kilometers")
+
+
+                //var totalCarbonFp = if(result.get("carbon_fp_sum")!= null) result.get("carbon_fp_sum") else 0f
+                var totalCarbonFp = if(result.get("carb_footprint")!= null) result.get("carb_footprint") else 0f
+                totalCarbonFp = totalCarbonFp
+                travelView.carbonFootrpintVar.text = ("$totalCarbonFp C02e")
+
+            }.addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting travel total: ", exception)
             }
 
 
-            Toast.makeText(activity, "Transportation info for the day has been recorded", LENGTH_SHORT).show()
 
-            //var ourData = getTranspoData()
-            //storeData("DATE", ourData)
-            //storeData("DATE", "[0,0,125]")
-            //storeData(LocalDateTime.now().toString(), getTranspoData()) //REQUIRES API MIN 26 --Current 24
-            storeData(ourDate, ourTime)
+                return travelView
         }
-
-        //database = FirebaseDatabase.getInstance().reference
-
-        return travelView
-    }
-
-
-// REALTIME METHOD OF STORAGE
-//    private fun storeData(someDate: String){ // Change someData to an intarray?
-//
-//        val ref = FirebaseDatabase.getInstance().getReference("transpo-data") // Refrence to database
-//        println("Got REF")
-//
-//        val car_data = if (car_text.text != null) car_text.text.toString().toInt() else 0
-//        val bus_data = if (bus_text.text != null) bus_text.text.toString().toInt() else 0
-//        val plane_data = if (plane_text.text != null) plane_text.text.toString().toInt() else 0
-//        val walk_data = if (walk_text.text != null) walk_text.text.toString().toInt() else 0
-//        //database.child("users").child(userId).setValue(user)
-//
-//        //database.child("server/saving-data/transpo-data").child()
-//        val dataId = ref!!.push().key!!
-//        println("Got dataID")
-//        val tData = TranspoData(someDate, car_data, bus_data, plane_data, walk_data)
-//        println("Got tData")
-//        ref.child(dataId).setValue(tData)
-//        println("Done")
-//    }
-
-    /* Method used to write user data to the cloud firestore
-    *  2 / 24 / 2020
-    *
-    * */
-    private fun storeData(ourDate: String, ourTime: String) {
-
-        //val updates = HashMap<String, Any>()
-
-        val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
-        val travelRef = db.collection(userPath).document(ourDate).collection("travel-data")
-//        val totalRef = db.collection(userPath).document(ourDate).collection("travel-data").document("day-total")
-        val totalRef = db.collection(userPath).document(ourDate).collection("total-data")
-        val travelTotalRef = db.collection(userPath).document(ourDate).collection("total-data").document("travel-total")
-        //updates[totalRef + '/car_data'] =
-
-        val carData = if (car_text.text.isNotEmpty()) car_text.text.toString().toFloat() else 0f
-        val busData = if (bus_text.text.isNotEmpty()) bus_text.text.toString().toFloat() else 0f
-        val planeData = if (plane_text.text.isNotEmpty()) plane_text.text.toString().toFloat() else 0f
-        val walkData = if (walk_text.text.isNotEmpty()) walk_text.text.toString().toFloat() else 0f
-
-        println("ourdata= $carData, $busData, $planeData, $walkData")
-
-        val data = hashMapOf(
-            "car_data" to carData,
-            "bus_data" to busData,
-            "plane_data" to planeData,
-            "walk_data" to walkData
-        )
-
-        var oldBusTotal = travelTotalRef.get().result?.get("bus_total").toString().toFloatOrNull()
-        var oldCarTotal = travelTotalRef.get().result?.get("car_total").toString().toFloatOrNull()
-        var oldPlaneTotal = travelTotalRef.get().result?.get("plane_total").toString().toFloatOrNull()
-        var oldWalkTotal = travelTotalRef.get().result?.get("walk_total").toString().toFloatOrNull()
-
-
-        var newCarTotal = carData + if (oldCarTotal != null) oldCarTotal else 0f
-        var newBusTotal = busData + if (oldBusTotal != null) oldBusTotal else 0f
-        var newPlaneTotal = planeData + if (oldPlaneTotal != null) oldPlaneTotal else 0f
-        var newWalkTotal = walkData + if (oldWalkTotal != null) oldWalkTotal else 0f
-
-
-        val totalData = hashMapOf(
-            "car_total" to newCarTotal,
-            "bus_total" to newBusTotal,
-            "plane_total" to newPlaneTotal,
-            "walk_total" to newWalkTotal
-        )
-
-        //totalRef.update(totalData as Map<String, Float>)
-        println("Saving total data:: $totalData")
-        travelTotalRef.set(totalData)
-
-
-        // var newCarTotal = totalRef.get("car_total").result.toString().toFloat() + carData
-
-//        val totalData = hashMapOf(
-//            "car_total" to if(travelRef["car_total"].result) + carData,
-//            "bus_total" to totalRef.get("bus_total") + busData,
-//            "plane_total" to totalRef.get("plane_total") + planeData,
-//            "walk_total" to totalRef.get("walk_total") + walkData
-//        )
-//
-//        updates["/car_data"] = carTotal
-// Add a new document with a generated ID
-
-        //db.collection("/travel-data")
-//        db.collection(userPath)
-//            .add(data)
-//            .addOnSuccessListener { documentReference ->
-//                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-//            }
-//            .addOnFailureListener { e ->
-//                Log.w(TAG, "Error adding document", e)
-//            }
-
-        //db.collection(userPath).document("travel-data").set(data)
-        db.collection(userPath).document(ourDate).collection("travel-data").document(ourTime).set(data)
-        //totalRef.set(updatedTotal)
-    }
-
-//    fun getOurDate() : String{
-//        var ourYear = calendar.get(Calendar.YEAR)
-//        var ourMonth = calendar.get(Calendar.MONTH)
-//        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
-//
-//        return ("$ourYear, $ourMonth, $ourDay")
-//    }
-//
-//    private fun getOurTime() : String{
-//        var ourHour = calendar.get(Calendar.HOUR_OF_DAY)
-//        var ourMin = calendar.get(Calendar.MINUTE)
-//        var ourSec = calendar.get(Calendar.SECOND)
-//        var ourMilisec = calendar.get(Calendar.MILLISECOND)
-//
-//        return ("$ourHour, $ourMin, $ourSec, $ourMilisec")
-//    }
-
-
 
 
 

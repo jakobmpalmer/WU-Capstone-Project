@@ -56,14 +56,14 @@ class WasteActivity : AppCompatActivity() {
             trashData += if (result?.get("trash_lbs") != null) result.get("trash_lbs").toString().toDouble() else 0.0
 
 
-            val water_ft_plastic = plasticImpact(plasticData,recycleData)
+            val water_fp_plastic = plasticImpact(plasticData,recycleData)
             // water footprint from plastic impact in gallons of water used
 
             val data = hashMapOf(
                 "plastic_items" to plasticData,
                 "recycled_items" to recycleData,
                 "trash_lbs" to trashData,
-                "water_ft_plastic" to water_ft_plastic
+                "water_fp_plastic" to water_fp_plastic
             )
 
             db.collection("users").document(userPath).collection(ourDate).document("waste").set(data)

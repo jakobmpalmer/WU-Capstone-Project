@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.data_display_layout.view.*
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
@@ -32,8 +34,8 @@ class CalendarFragment: Fragment() {
 
 
     val db = FirebaseFirestore.getInstance()
-    private var todayDataRef = db.collection(currentUser).document(dateToday)
-    private var totalRef = todayDataRef.collection("total-data")
+    private var todayDataRef = db.collection("users").document(currentUser).collection(dateToday)
+    //private var totalRef = todayDataRef.collection("total-data")
 
 
 
@@ -86,6 +88,9 @@ class CalendarFragment: Fragment() {
 
 
         var currentDayRef = dateToday
+        var selectedDay = appHome.getOurDay()
+        var selectedMonth = appHome.getOurMonth()
+        var selectedYear = appHome.getOurYear()
         //val currentDayText = calView.currentDateText
         //currentDayText.text = "${appHome.getOurDay()}/${appHome.getOurMonth() + 1}/${appHome.getOurYear()}"
         cal.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -119,10 +124,23 @@ class CalendarFragment: Fragment() {
         return calView
     }
 
+    fun getSelectedDate(): String{
+        var ourYear = calendar.get(Calendar.YEAR)
+        var ourMonth = calendar.get(Calendar.MONTH)
+        var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        return ("$ourYear, $ourMonth, $ourDay")
+
+    }
+
     private fun updateMyRefs(currentDay: String){
-        todayDataRef = db.collection(currentUser).document(currentDay)
-        totalRef = todayDataRef.collection("total-data")
+        todayDataRef = db.collection("users").document(currentUser).collection(currentDay)
+        //totalRef = todayDataRef.collection("total-data")
         if (DO_DEBUG) println("updating ref, ${todayDataRef.toString()}")
+    }
+
+    fun getSelectedDateRef(): CollectionReference {
+        return todayDataRef
     }
 
 
@@ -132,10 +150,10 @@ class CalendarFragment: Fragment() {
         override fun createFragment(position: Int): Fragment{
             when (position) {
                 0 -> {
-                    return PlasticsFragment()
+                    return WaterFPFragment()
                 }
                 1 -> {
-                    return PlasticsFragment()
+                    return TravelFragment()
                 }
                 else -> {
                     return CalendarFragment()
