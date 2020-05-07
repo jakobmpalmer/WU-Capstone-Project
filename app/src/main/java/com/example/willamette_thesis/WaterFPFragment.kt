@@ -18,11 +18,6 @@ class WaterFPFragment : Fragment() {
     val selectedDay = calFrag.getSelectedDateRef()
 
     val db = FirebaseFirestore.getInstance()
-    //val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
-    //val dateDoc: CollectionReference = db.collection("users").document(userPath).collection(chosenDate) // Doc of data for todays date
-    //val dateCol = chosenDateRef
-//    val todayWasteDoc = dateCol.document("waste")
-
 
     //val travelRef = db.collection("users").document(currentUser).collection(selectedDate).document("transportation")
     val consumpRef = selectedDay.document("consumables")
@@ -46,7 +41,7 @@ class WaterFPFragment : Fragment() {
                 //totalWasteVar.text = ("$totalWaste lbs")
 
                 var plasticTotalValue = if (result.get("plastic_items") != null) result.get("plastic_items").toString().toFloat() else 0f
-                var recycleTotalValue = if (result.get("recycle_items") != null) result.get("recycle_items").toString().toFloat() else 0f
+                var recycleTotalValue = if (result.get("recycled_items") != null) result.get("recycled_items").toString().toFloat() else 0f
                 //var trashTotalValue = if (result.get("trash_lbs") != null) result.get("trash_lbs").toString().toFloat() else 0f
                 var waterFpValue = if (result.get("water_fp_plastic") != null) result.get("water_fp_plastic").toString().toFloat() else 0f
 

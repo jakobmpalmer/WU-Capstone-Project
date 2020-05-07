@@ -88,9 +88,9 @@ class CalendarFragment: Fragment() {
 
 
         var currentDayRef = dateToday
-        var selectedDay = appHome.getOurDay()
-        var selectedMonth = appHome.getOurMonth()
-        var selectedYear = appHome.getOurYear()
+//        var selectedDay = appHome.getOurDay()
+//        var selectedMonth = appHome.getOurMonth()
+//        var selectedYear = appHome.getOurYear()
         //val currentDayText = calView.currentDateText
         //currentDayText.text = "${appHome.getOurDay()}/${appHome.getOurMonth() + 1}/${appHome.getOurYear()}"
         cal.setOnDateChangeListener { view, year, month, dayOfMonth ->

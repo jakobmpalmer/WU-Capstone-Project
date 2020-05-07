@@ -29,17 +29,25 @@ class TodayDataFragment : Fragment() {
 
             val db = FirebaseFirestore.getInstance()
             val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
-            val dateDoc = db.collection(userPath).document(dateToday) // Doc of data for todays date
-            val travelCollection = dateDoc.collection("travel-data") //Travel data for the day
+            val todayFbCollection = db.collection("users").document(userPath).collection(dateToday)
+            //val dateDoc = db.collection(userPath).document(dateToday) // Doc of data for todays date
+            //val travelCollection = dateDoc.collection("travel-data") //Travel data for the day
 
-            val totalRef = db.collection(userPath).document(dateToday).collection("total-data")
+            //val totalRef = db.collection(userPath).document(dateToday).collection("total-data")
             //val travelTotalRef = totalRef.document("travel-total")
-            val travelTotalRef = db.collection(userPath).document(dateToday).collection("transportation").document(dateToday)
-            val consumpTotalRef = totalRef.document("consump-total")
-            val wasteTotalRef = totalRef.document("waste-total")
+//            val travelTotalRef = db.collection(userPath).document(dateToday).collection("transportation").document(dateToday)
+//            val consumpTotalRef = totalRef.document("consump-total")
+//            val wasteTotalRef = totalRef.document("waste-total")
+            //val db = FirebaseFirestore.getInstance()
+
+            //val travelRef = db.collection("users").document(currentUser).collection(selectedDate).document("transportation")
+            val consumpRef =  todayFbCollection.document("consumables")
+            val wasteRef =  todayFbCollection.document("waste")
+            val travelRef =  todayFbCollection.document("transportation")
 
 
-            travelTotalRef.get().addOnSuccessListener { result ->
+
+            travelRef.get().addOnSuccessListener { result ->
 
                 var carTotalValue = if (result.get("car_miles") != null) result.get("car_miles").toString().toFloat() else 0f
                 var busTotalValue = if (result.get("bus_miles") != null) result.get("bus_miles").toString().toFloat() else 0f
@@ -55,7 +63,7 @@ class TodayDataFragment : Fragment() {
                 //totalMilesVar.text = if(totalMiles != null) ("$totalMiles miles") else 0.toString()
                 var totalMiles = carTotalValue + busTotalValue + planeTotalValue + walkTotalValue
                 totalMilesVar.text = totalMiles.toString()
-                var totalKm: Float = totalMiles * 1.61.toFloat()
+                //var totalKm: Float = totalMiles * 1.61.toFloat()
                 //totalKmVar.text = ("$totalKm Kilometers")
 
 
@@ -68,7 +76,7 @@ class TodayDataFragment : Fragment() {
                 Log.d(TAG, "Error getting travel total: ", exception)
             }
 
-            consumpTotalRef.get().addOnSuccessListener { result ->
+            consumpRef.get().addOnSuccessListener { result ->
                 //val totalConsump = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
 //                val waterFP = consumpAct.consumableImpact().toString().toDouble() + wasteAct.wasteImpact().toString().toDouble()
                 //waterFpVar.text = ("$totalConsump lbs")
@@ -86,8 +94,8 @@ class TodayDataFragment : Fragment() {
                 Log.d(TAG, "Error getting Consumption Total: ", exception)
             }
 
-            wasteTotalRef.get().addOnSuccessListener { result ->
-                var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
+            wasteRef.get().addOnSuccessListener { result ->
+                //var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
                 //totalWasteVar.text = ("$totalWaste lbs")
 
                 var plasticTotalValue = if (result.get("plastic_total") != null) result.get("plastic_total").toString().toFloat() else 0f
