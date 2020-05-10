@@ -1,5 +1,7 @@
 package com.example.willamette_thesis
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,30 +13,40 @@ import kotlinx.android.synthetic.main.waterfootprint_fragment.*
 class WaterFPFragment : Fragment() {
 
 
+    val appHome = HomeActivity()
 
     var calFrag = CalendarFragment()
     //var chosenDate = calFrag.getSelectedDate()
     //var chosenDateRef = calFrag.getSelectedDateRef()
     val selectedDay = calFrag.getSelectedDateRef()
 
-    val db = FirebaseFirestore.getInstance()
 
+
+//PREFRENCES
+    var ourSelectedDay: String = ""
+    private val REF_PREF_FILE = "our-calref-prefs"
+
+    val db = FirebaseFirestore.getInstance()
+    val userCol = db.collection("users").document(appHome.getUserEmail())
     //val travelRef = db.collection("users").document(currentUser).collection(selectedDate).document("transportation")
-    val consumpRef = selectedDay.document("consumables")
-    val wasteRef = selectedDay.document("waste")
+//    val consumpRef = selectedDay.document("consumables")
+//    val wasteRef = selectedDay.document("waste")
 
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
             val thisView = inflater.inflate(R.layout.waterfootprint_fragment, container, false)
-//
-//            var plasticTotalValue = 0.0f
-//            var recycleTotalValue = 0.0f
-//            var trashTotalValue = 0.0f
-            //println("current dateDoc ${dateCol}")
+
+            val sharedPref = this.activity!!.getSharedPreferences(REF_PREF_FILE, Context.MODE_PRIVATE)
+            ourSelectedDay = getPref(sharedPref, "ourCurrentDateStr", appHome.getOurDate())
+            println("ourSelectedDateHERE!@!!: $ourSelectedDay")
+
+            val consumpRef = userCol.collection(ourSelectedDay).document("consumables")
+            val wasteRef = userCol.collection(ourSelectedDay).document("waste")
 
             var ourWaterFP = 0.0f
-            println("1Our waterFPP = $ourWaterFP")
+            //println("1Our waterFPP = $ourWaterFP")
+            println("ourday: $selectedDay")
 
             wasteRef.get().addOnSuccessListener { result ->
                 //var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
@@ -49,12 +61,10 @@ class WaterFPFragment : Fragment() {
                 recycleTotalVar.text = recycleTotalValue.toString()
                 //trashTotalVar.text = trashTotalValue.toString()
 
-                println("WaterFP from waste $waterFpValue")
                 var tempWaterFP = waterFpVar.text.toString().toDouble()
                 tempWaterFP += waterFpValue
                 waterFpVar.text = tempWaterFP.toString()
                 //ourWaterFP += waterFpValue
-                println("2Our waterFPP = $ourWaterFP")
 
             }.addOnFailureListener { exception ->
                 println("Couldent access todayWasteDoc")
@@ -72,25 +82,31 @@ class WaterFPFragment : Fragment() {
                 pigTotalVar.text = pigVal.toString()
 
 
-                println("WaterFP from comsump $waterFpVal")
+                //println("WaterFP from comsump $waterFpVal")
                 var tempWaterFP = waterFpVar.text.toString().toDouble()
                 tempWaterFP += waterFpVal
                 waterFpVar.text = tempWaterFP.toString()
                 //ourWaterFP += waterFpVal
-                println("3Our waterFPP = $ourWaterFP")
+                //println("3Our waterFPP = $ourWaterFP")
 
             }.addOnFailureListener { exception ->
                 println("Couldent access comsumpRef")
             }
 
             //waterFpVar.text = ourWaterFP.toString()
-            println("4Our waterFPP = $ourWaterFP")
+            //println("4Our waterFPP = $ourWaterFP")
 
 
 
 
             return thisView
         }
+
+
+    fun getPref(sharedPref: SharedPreferences, pref_to_retrieve: String, default : String) : String {
+        val value_retrieved: String = sharedPref.getString(pref_to_retrieve, default)
+        return value_retrieved
+    }
 
 
 }

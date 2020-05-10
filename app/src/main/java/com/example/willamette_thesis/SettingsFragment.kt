@@ -57,8 +57,15 @@ class SettingsFragment : Fragment() {
 
         settingsView.original_button.setOnClickListener {
 
-
             storePrefs(prefs, PREF_THEME, "original")
+            Toast.makeText(activity, "Settings Preferences Applied to Original", Toast.LENGTH_SHORT).show();
+            val profileIntent = Intent(activity, HomeActivity::class.java)
+            startActivity(profileIntent)
+        }
+
+        settingsView.darkBtn.setOnClickListener {
+
+            storePrefs(prefs, PREF_THEME, "dark")
             Toast.makeText(activity, "Settings Preferences Applied to Original", Toast.LENGTH_SHORT).show();
             val profileIntent = Intent(activity, HomeActivity::class.java)
             startActivity(profileIntent)

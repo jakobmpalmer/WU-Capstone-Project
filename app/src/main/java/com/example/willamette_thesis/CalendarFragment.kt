@@ -1,5 +1,7 @@
 package com.example.willamette_thesis
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,9 +35,15 @@ class CalendarFragment: Fragment() {
 
     val db = FirebaseFirestore.getInstance()
     private var todayDataRef = db.collection("users").document(currentUser).collection(dateToday)
-    private var selectedDateRef = todayDataRef
+//    private var selectedDateRef = todayDataRef
+
+    companion object {
+        var selectedDateRef = FirebaseFirestore.getInstance().collection("users")
+    }
     //private var totalRef = todayDataRef.collection("total-data")
 
+    private val REF_PREF_FILE = "our-calref-prefs"
+    val refPrefs = this.activity?.getSharedPreferences(REF_PREF_FILE, Context.MODE_PRIVATE)
 
 
     private lateinit var mPager: ViewPager2
@@ -84,7 +92,7 @@ class CalendarFragment: Fragment() {
 
 
 
-        var currentDayRef = dateToday
+        var currentDayStr = dateToday
 //        var selectedDay = appHome.getOurDay()
 //        var selectedMonth = appHome.getOurMonth()
 //        var selectedYear = appHome.getOurYear()
@@ -96,8 +104,11 @@ class CalendarFragment: Fragment() {
             val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
             if (DO_DEBUG) Toast.makeText(this@CalendarFragment.context, msg, Toast.LENGTH_SHORT).show()
             //currentDayText.text = "$dayOfMonth/$userMonth/$year"
-            currentDayRef = "$dayOfMonth, $userMonth, $year"
-            if (DO_DEBUG) println("currentDayRef: $currentDayRef")
+            currentDayStr = "$dayOfMonth, $userMonth, $year"
+            if (DO_DEBUG) println("currentDayRef: $currentDayStr")
+
+            storeFbRefPrefs(refPrefs,"ourCurrentDateStr", "$dayOfMonth, $month, $year")
+            println("We just stored, $dayOfMonth, $month, $year")
 
             var eventOccursOn: Long = 0
             val c = Calendar.getInstance()
@@ -105,7 +116,11 @@ class CalendarFragment: Fragment() {
             eventOccursOn = c.timeInMillis //this is what you want to use later
             println("eOO: = $eventOccursOn")
 
-            //updateMyRefs(currentDayRef)
+            println("pre-update: $selectedDateRef")
+            selectedDateRef = updateMyRefs(currentDayStr)
+            println("post-update: $selectedDateRef")
+            val newAdapter = ScreenSlidePagerAdapter(this)
+            mPager.adapter = newAdapter
 
            cal.setDate(eventOccursOn, true, false)
 
@@ -142,7 +157,8 @@ class CalendarFragment: Fragment() {
         //todayDataRef = db.collection("users").document(currentUser).collection(currentDay)
         var selectedDateFbRef = db.collection("users").document(currentUser).collection(currentDay)
         //totalRef = todayDataRef.collection("total-data")
-        if (DO_DEBUG) println("updating ref, ${todayDataRef.toString()}")
+        if (DO_DEBUG) println("updating ref, ${todayDataRef}")
+        selectedDateRef = selectedDateFbRef
         return selectedDateFbRef
 
     }
@@ -150,6 +166,15 @@ class CalendarFragment: Fragment() {
     fun getSelectedDateRef(): CollectionReference {
         //return todayDataRef
         return selectedDateRef
+    }
+
+
+
+// CHANGE ?. to !!.
+    fun storeFbRefPrefs(prefs: SharedPreferences?, prefDate:String, input:String ){
+        val editor = prefs?.edit()
+        editor?.putString(prefDate, input)
+        editor?.apply()
     }
 
 

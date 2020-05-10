@@ -111,7 +111,9 @@ class CarActivity2 : AppCompatActivity() {
         val name = sharedPref.getString("theme-preference", "original")
         if (name == "nature") {
             setTheme(R.style.Orange)
-        } else if (name == "original") {
+        } else if(name == "dark"){
+            setTheme(R.style.Dark)
+        }else if (name == "original") {
             setTheme(R.style.AppTheme)
         }
     }
