@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.data_display_layout.view.*
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
 import java.util.*
 
@@ -35,6 +32,7 @@ class CalendarFragment: Fragment() {
 
     val db = FirebaseFirestore.getInstance()
     private var todayDataRef = db.collection("users").document(currentUser).collection(dateToday)
+    private var selectedDateRef = todayDataRef
     //private var totalRef = todayDataRef.collection("total-data")
 
 
@@ -53,6 +51,7 @@ class CalendarFragment: Fragment() {
 
         if (DO_DEBUG) println("\n\n\n\tEntering Calendar Fragment")
 
+        selectedDateRef = todayDataRef
 
         val tLayout = calView.metricTabLayout
         // Instantiate a ViewPager and a PagerAdapter.
@@ -60,12 +59,9 @@ class CalendarFragment: Fragment() {
         println(tLayout.toString())
 
         val pagerAdapter = ScreenSlidePagerAdapter(this)
-
-        println("${calView.toString()} here!")
         mPager.adapter = pagerAdapter
-        println("${calView.toString()} here27!")
+
         TabLayoutMediator(tLayout, mPager) { tab, position ->
-//            tab.text = "OBJECT ${(position + 1)}"
             tab.text = when (position) {
                 0 -> "Waste"
                 1 -> "Transportation"
@@ -99,12 +95,20 @@ class CalendarFragment: Fragment() {
             val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
             if (DO_DEBUG) Toast.makeText(this@CalendarFragment.context, msg, Toast.LENGTH_SHORT).show()
             //currentDayText.text = "$dayOfMonth/$userMonth/$year"
-            currentDayRef = "$dayOfMonth,$userMonth,$year"
+            currentDayRef = "$dayOfMonth, $userMonth, $year"
             if (DO_DEBUG) println("currentDayRef: $currentDayRef")
 
-            if (DO_DEBUG) println("todayDataRef before: {${todayDataRef.toString()}}")
-            updateMyRefs(currentDayRef)
-            if (DO_DEBUG) println("todayDataRef After: {${todayDataRef.toString()}}")
+            var eventOccursOn: Long = 0
+            val c = Calendar.getInstance()
+            c[year, month] = dayOfMonth
+            eventOccursOn = c.timeInMillis //this is what you want to use later
+            println("eOO: = $eventOccursOn")
+
+            //updateMyRefs(currentDayRef)
+
+           cal.setDate(eventOccursOn, true, false)
+
+
         }
 //SOLUTION: to get time in milisecs from jan1 1970
 //        var eventOccursOn: Long = 0
@@ -133,14 +137,18 @@ class CalendarFragment: Fragment() {
 
     }
 
-    private fun updateMyRefs(currentDay: String){
-        todayDataRef = db.collection("users").document(currentUser).collection(currentDay)
+    private fun updateMyRefs(currentDay: String) : CollectionReference{
+        //todayDataRef = db.collection("users").document(currentUser).collection(currentDay)
+        var selectedDateFbRef = db.collection("users").document(currentUser).collection(currentDay)
         //totalRef = todayDataRef.collection("total-data")
         if (DO_DEBUG) println("updating ref, ${todayDataRef.toString()}")
+        return selectedDateFbRef
+
     }
 
     fun getSelectedDateRef(): CollectionReference {
-        return todayDataRef
+        //return todayDataRef
+        return selectedDateRef
     }
 
 

@@ -22,9 +22,9 @@ import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
-    var enterWaste = false
-    var enterTravel = false
-    var enterConsum = false
+//    var enterWaste = false
+//    var enterTravel = false
+//    var enterConsum = false
 
 
     //lateinit var toolbar: ActionBar
@@ -41,12 +41,12 @@ class HomeActivity : AppCompatActivity() {
     private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
     private var calendar: Calendar = GregorianCalendar(this.pdt)
 
-    val homeFragment = home_fragment
+    //val homeFragment = home_fragment
 //    val mainDataMenuItem: MenuItem = dataNavigationView.menu.getItem(0)
 //    val mainLogMenuItem: MenuItem = dataNavigationView.menu.getItem(1)
 //    val mainSettingMenuItem: MenuItem = dataNavigationView.menu.getItem(2)
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    //private lateinit var appBarConfiguration: AppBarConfiguration
     //val appBarConfiguration = AppBarConfiguration(navController.graph)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,43 +84,6 @@ class HomeActivity : AppCompatActivity() {
             createSignInIntent()
         }
 
-
-
-//        bottomNavigation.setOnNavigationItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.dataMenuItem -> {
-//                    Toast.makeText(
-//                        this@HomeActivity,
-//                        "Your data",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                    home_fragment.layoutInflater.inflate(R.layout.fragment_today, container, false)
-//                    val profileIntent = Intent(activity, ProfileActivity::class.java)
-//                    startActivity(profileIntent)
-//                //openFragment(HomeActivity.newInstance("", ""))
-//                    //layoutInflater()
-//                //return@OnNavigationItemSelectedListener true
-//                }
-//                R.id.loggingMenuItem -> {Toast.makeText(
-//                    this@HomeActivity,
-//                    "Your logging home!",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-////                openFragment(HomeActivity.newInstance("", ""))
-////                return@OnNavigationItemSelectedListener true
-//                }
-//                R.id.settingsMenuItem -> {
-//                    Toast.makeText(
-//                        this@HomeActivity,
-//                        "beep boop settings..",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-////                openFragment(HomeActivity.newInstance("", ""))
-////                return@OnNavigationItemSelectedListener true
-//                }
-//            }
-//            true
-//        }
 
 
     } // OnCreate
@@ -193,7 +156,8 @@ class HomeActivity : AppCompatActivity() {
         var ourMonth = calendar.get(Calendar.MONTH)
         var ourDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-        return ("$ourYear, $ourMonth, $ourDay")
+        //return ("$ourYear, $ourMonth, $ourDay")
+        return ("$ourDay, $ourMonth, $ourYear")
     }
 
     fun getOurYear(): Int { return calendar.get(Calendar.YEAR) }

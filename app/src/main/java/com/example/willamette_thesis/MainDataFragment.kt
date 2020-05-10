@@ -24,9 +24,13 @@ class MainDataFragment : Fragment() {
                                                container,
                                    false)
 
+
+
         waterPage = mainDataView.waterFpPager
         consumpPage = mainDataView.trashPager
         transpoPage = mainDataView.transpoPager
+
+        //waterPage.currentItem = MyPagerAdapter(this).getItem(0)
 
 
 
@@ -35,8 +39,6 @@ class MainDataFragment : Fragment() {
 
 
 
-
-//
 //    private inner class MyPagerAdapter(fm: FragmentManager?) : FragmentStateAdapter(fm) {
 //        override fun getItem(pos: Int): Fragment {
 //            return when (pos) {
@@ -48,7 +50,7 @@ class MainDataFragment : Fragment() {
 //        }
 //
 //        override fun getCount(): Int {
-//            return 5
+//            return 3
 //        }
 //    }
 

@@ -364,7 +364,8 @@
                     android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -392,7 +393,8 @@
                     android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -407,7 +409,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/displayPrimary"
-                    android:text="Pig   Total:"
+                    android:text="Pig \nTotal:"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
@@ -420,7 +422,8 @@
                     android:background="@color/displayPrimary"
                     android:text="@string/null_int"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>

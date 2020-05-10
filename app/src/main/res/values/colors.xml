@@ -36,4 +36,11 @@
     <color name="orangeTop">#F87431</color>
     <color name="orangeAccent">#E78A61</color>
 
+
+    <color name="darkText">#E55451</color>
+    <color name="darkBackground">#121212</color>
+    <color name="darkIcon">#878080</color>
+    <color name="darkTop">#9C3400</color>
+    <color name="darkAccent">#4861FF</color>
+
 </resources>

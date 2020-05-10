@@ -8,17 +8,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_car.*
-import kotlinx.android.synthetic.main.activity_car.view.*
 import kotlinx.android.synthetic.main.fragment_today.view.*
-import java.util.*
 
 
 class TravelFragment : Fragment() {
@@ -49,10 +41,11 @@ class TravelFragment : Fragment() {
                 container,
                 false
             )
+            println("Creating travel fragment.. .")
 
-            var selectedDate = calFrag.getSelectedDate()
+            //var selectedDate = calFrag.getSelectedDate()
             val selectedDay = calFrag.getSelectedDateRef()
-            //val travelRef = db.collection("users").document(currentUser).collection(selectedDate).document("transportation")
+            println("SelectedDay= $selectedDay")
             val travelRef = selectedDay.document("transportation")
             println("travelRef gotten!")
 
@@ -70,17 +63,12 @@ class TravelFragment : Fragment() {
                 travelView.planeTotalVar.text = planeTotalValue.toString()
                 travelView.walkTotalVar.text = walkTotalValue.toString()
 
-                //var totalMiles = if (result.get("sum_miles") != null) result.get("sum_total").toString().toFloat() else 0f
-                //totalMilesVar.text = if(totalMiles != null) ("$totalMiles miles") else 0.toString()
                 var totalMiles = carTotalValue + busTotalValue + planeTotalValue + walkTotalValue
                 travelView.totalMilesVar.text = totalMiles.toString()
                 var totalKm: Float = totalMiles * 1.61.toFloat()
                 //totalKmVar.text = ("$totalKm Kilometers")
 
-
-                //var totalCarbonFp = if(result.get("carbon_fp_sum")!= null) result.get("carbon_fp_sum") else 0f
                 var totalCarbonFp = if(result.get("carb_footprint")!= null) result.get("carb_footprint") else 0f
-                totalCarbonFp = totalCarbonFp
                 travelView.carbonFootrpintVar.text = ("$totalCarbonFp C02e")
 
             }.addOnFailureListener { exception ->
@@ -90,6 +78,13 @@ class TravelFragment : Fragment() {
 
 
                 return travelView
+        }
+
+        override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+            super.setUserVisibleHint(isVisibleToUser)
+            if (isVisibleToUser) {
+                // Refresh your fragment here
+            }
         }
 
 
