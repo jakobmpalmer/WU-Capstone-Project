@@ -12,6 +12,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_car.*
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.util.*
 
 class CarActivity2 : AppCompatActivity() {
@@ -94,10 +96,14 @@ class CarActivity2 : AppCompatActivity() {
         // Assumption that buses use diesel, hence the fuel rate used is 22.5. We divide by 60 as on average
         // a bus has an av seating capacity of 40-80, so we average that out
         // 12.52 is used as miles per gal, as we assume that it is a Passenger Van
-        val planeEmission = planeData * flight_type * 21.25
+        val planeEmission = (planeData * flight_type * 21.25)/ 150
         // 21.25 is average on fuel types, as users are unlikely to have this info
+        // 150 is average seats in planes (range 150-200), but we picked 150 to be moderate
 
-        return (carEmission + busEmission + planeEmission)
+
+        //val emissionRounded = BigDecimal(carEmission + busEmission + planeEmission).setScale(2, RoundingMode.HALF_EVEN).toDouble()
+
+        return carEmission + busEmission + planeEmission
     }
 
     fun changeTheme(){
