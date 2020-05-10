@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.willamette_thesis.CalendarFragments.WasteFragment
+import com.example.willamette_thesis.calendar_fragments.WasteFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore

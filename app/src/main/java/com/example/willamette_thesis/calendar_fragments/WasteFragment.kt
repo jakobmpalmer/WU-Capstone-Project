@@ -1,4 +1,4 @@
-package com.example.willamette_thesis.CalendarFragments
+package com.example.willamette_thesis.calendar_fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
