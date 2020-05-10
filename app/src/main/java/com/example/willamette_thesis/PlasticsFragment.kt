@@ -11,12 +11,7 @@ class PlasticsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val thisView = inflater.inflate(R.layout.plastic_fragment, container, false)
-
-
-
-
-        return thisView
+        return inflater.inflate(R.layout.plastic_fragment, container, false)
     }
 
 }

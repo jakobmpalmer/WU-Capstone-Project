@@ -66,7 +66,7 @@ class ConsumableActivity : AppCompatActivity() {
                 "cow_oz" to cowData,
                 "chicken_oz" to chickenData,
                 "pig_oz" to pigData,
-                "water_ft_consum" to water_ft_consum
+                "water_fp_consum" to water_ft_consum
             )
 
             db.collection("users").document(userPath).collection(ourDate).document("consumables").set(data)
