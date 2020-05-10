@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_today.*
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 class TodayDataFragment : Fragment() {
@@ -69,7 +71,10 @@ class TodayDataFragment : Fragment() {
 
                 //var totalCarbonFp = if(result.get("carbon_fp_sum")!= null) result.get("carbon_fp_sum") else 0f
                 var totalCarbonFp = if(result.get("carb_footprint")!= null) result.get("carb_footprint") else 0f
-                totalCarbonFp = totalCarbonFp
+                //totalCarbonFp = totalCarbonFp
+                totalCarbonFp = totalCarbonFp.toString().toBigDecimal()
+                totalCarbonFp = totalCarbonFp.setScale(2, RoundingMode.HALF_EVEN).toDouble()
+
                 carbonFootrpintVar.text = ("$totalCarbonFp C02e")
 
             }.addOnFailureListener { exception ->
@@ -87,9 +92,13 @@ class TodayDataFragment : Fragment() {
                 val chickenTotalValue: Float = if (result.get("chicken_oz") != null) result.get("chicken_oz").toString().toFloat() else 0f
                 val waterFpConsump: Float = if (result.get("water_fp_consum") != null) result.get("water_fp_consum").toString().toFloat() else 0f
 
-                cowTotalVar.text = cowTotalValue.toString()
-                pigTotalVar.text = pigTotalValue.toString()
-                chickenTotalVar.text = chickenTotalValue.toString()
+                //cowTotalVar.text = cowTotalValue.toString()
+                //pigTotalVar.text = pigTotalValue.toString()
+                //chickenTotalVar.text = chickenTotalValue.toString()
+
+                cowTotalVar.text = ("$cowTotalValue oz.")
+                pigTotalVar.text = ("$pigTotalValue oz.")
+                chickenTotalVar.text = ("$chickenTotalValue oz.")
 
 
                 waterFpTotal += waterFpConsump.toString().toDouble()
@@ -108,13 +117,19 @@ class TodayDataFragment : Fragment() {
                 var trashTotalValue = if (result.get("trash_lbs") != null) result.get("trash_lbs").toString().toFloat() else 0f
                 var waterFpPlastic = if (result.get("water_fp_plastic") != null) result.get("water_fp_plastic").toString().toFloat() else 0f
 
-                plasticsTotalVar.text = plasticTotalValue.toString()
-                recycleTotalVar.text = recycleTotalValue.toString()
-                trashTotalVar.text = trashTotalValue.toString()
+                //plasticsTotalVar.text = plasticTotalValue.toString()
+                //recycleTotalVar.text = recycleTotalValue.toString()
+                //trashTotalVar.text = trashTotalValue.toString()
+                //plasticTotalValue = plasticTotalValue.toString().toBigDecimal()
+
+                plasticsTotalVar.text = ("$plasticTotalValue units")
+                recycleTotalVar.text = ("$recycleTotalValue units")
+                trashTotalVar.text = ("$trashTotalValue lbs")
 
 
                 waterFpTotal += waterFpPlastic.toString().toDouble()
-                waterFpVar.text = waterFpTotal.toString()
+                //waterFpVar.text = waterFpTotal.toString()
+                waterFpVar.text = ("$waterFpTotal gallons")
 
             }.addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting Waste Total: ", exception)

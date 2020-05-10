@@ -12,6 +12,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_car.*
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.util.*
 
 class CarActivity2 : AppCompatActivity() {
@@ -98,7 +100,10 @@ class CarActivity2 : AppCompatActivity() {
         // 21.25 is average on fuel types, as users are unlikely to have this info
         // 150 is average seats in planes (range 150-200), but we picked 150 to be moderate
 
-        return (carEmission + busEmission + planeEmission)
+
+        //val emissionRounded = BigDecimal(carEmission + busEmission + planeEmission).setScale(2, RoundingMode.HALF_EVEN).toDouble()
+
+        return carEmission + busEmission + planeEmission
     }
 
     fun changeTheme(){
