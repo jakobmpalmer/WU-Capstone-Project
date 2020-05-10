@@ -2,16 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
-        android:id="@+id/totalWasteLayout"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:id="@+id/travelTotalVals"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:layout_weight="1"
-        android:background="#4CAF50"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +25,18 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/plasticsTotalVar"
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="@string/car_miles"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/carTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -36,16 +46,6 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/displayPrimary"
-                android:text="Total Plastic:"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,7 +55,18 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/recycleTotalVar"
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="@string/bus_miles"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/busTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -65,16 +76,6 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/displayPrimary"
-                android:text="Total Recycling:"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +85,18 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/trashTotalVar"
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="@string/plane_miles"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/planeTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -94,50 +106,105 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/displayPrimary"
-                android:text="Total Trash:"
+                android:text="@string/walk_miles"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/walkTotalVar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/displayPrimary"
+                android:text="@string/null_int"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/plasticsLayout"
-        android:layout_width="0dp"
+        android:id="@+id/totalMilesLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#8BC34A"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/totalWasteLayout"
-        app:layout_constraintStart_toStartOf="@+id/totalWasteLayout"
-        app:layout_constraintTop_toBottomOf="@+id/totalWasteLayout">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/travelTotalVals"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/textView22"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/displaySecondary"
-            android:text="Plastic Weight:"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp" />
-
-        <TextView
-            android:id="@+id/totalWasteVar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/displaySecondary"
-            android:text="0"
-            android:textAlignment="viewStart"
+            android:text="Total Miles: "
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/totalMilesVar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/displaySecondary"
+            android:text="@string/null_int"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/carbonFootprintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalMilesLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/displaySecondary"
+            android:text="Carbon Footprint:"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/carbonFootrpintVar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/displaySecondary"
+            android:text="@string/null_int"
+            android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="26sp" />
     </LinearLayout>

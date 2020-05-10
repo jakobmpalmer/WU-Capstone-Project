@@ -3,7 +3,6 @@ package com.example.willamette_thesis
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -41,7 +40,7 @@ class ConsumableActivity : AppCompatActivity() {
 
 
 
-    fun storeData(ourDate:String){
+    private fun storeData(ourDate:String){
         var cowData = if (cow_text.text.isNotEmpty()) cow_text.text.toString().toDouble() else 0.0
         var chickenData = if (chicken_text.text.isNotEmpty()) chicken_text.text.toString().toDouble() else 0.0
         var pigData = if (pig_text.text.isNotEmpty()) pig_text.text.toString().toDouble() else 0.0
@@ -54,19 +53,23 @@ class ConsumableActivity : AppCompatActivity() {
 
         db.collection("users").document(userPath).collection(ourDate).document("consumables").get().addOnSuccessListener {result ->
 
-            cowData += result?.get("cow_oz").toString().toDouble()
-            chickenData += result?.get("chicken_oz").toString().toDouble()
-            pigData += result?.get("pig_oz").toString().toDouble()
+            cowData += if (result?.get("cow_oz") != null) result.get("cow_oz").toString().toDouble() else 0.0
+            chickenData += if (result?.get("chicken_oz") != null) result.get("chicken_oz").toString().toDouble() else 0.0
+            pigData += if (result?.get("pig_oz") != null) result.get("pig_oz").toString().toDouble() else 0.0
 
 
-            val water_ft_consum = consumableImpact(cowData, chickenData, pigData)
+            val water_fp_consum = consumableImpact(cowData, chickenData, pigData)
             // water footprint from consumables (meat) in gallons of water used
 
             val data = hashMapOf(
                 "cow_oz" to cowData,
                 "chicken_oz" to chickenData,
                 "pig_oz" to pigData,
-                "water_fp_consum" to water_ft_consum
+//<<<<<<< HEAD
+                //"water_fp_consum" to water_ft_consum
+//=======
+                "water_fp_consum" to water_fp_consum
+//>>>>>>> fa28fc229a98c77ced0dd2c5d7e54343ab9ab7c8
             )
 
             db.collection("users").document(userPath).collection(ourDate).document("consumables").set(data)

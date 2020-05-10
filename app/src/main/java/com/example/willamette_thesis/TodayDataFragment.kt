@@ -29,17 +29,25 @@ class TodayDataFragment : Fragment() {
 
             val db = FirebaseFirestore.getInstance()
             val userPath = (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
-            val dateDoc = db.collection(userPath).document(dateToday) // Doc of data for todays date
-            val travelCollection = dateDoc.collection("travel-data") //Travel data for the day
+            val todayFbCollection = db.collection("users").document(userPath).collection(dateToday)
+            //val dateDoc = db.collection(userPath).document(dateToday) // Doc of data for todays date
+            //val travelCollection = dateDoc.collection("travel-data") //Travel data for the day
 
-            val totalRef = db.collection(userPath).document(dateToday).collection("total-data")
+            //val totalRef = db.collection(userPath).document(dateToday).collection("total-data")
             //val travelTotalRef = totalRef.document("travel-total")
-            val travelTotalRef = db.collection(userPath).document(dateToday).collection("transportation").document(dateToday)
-            val consumpTotalRef = totalRef.document("consump-total")
-            val wasteTotalRef = totalRef.document("waste-total")
+//            val travelTotalRef = db.collection(userPath).document(dateToday).collection("transportation").document(dateToday)
+//            val consumpTotalRef = totalRef.document("consump-total")
+//            val wasteTotalRef = totalRef.document("waste-total")
+            //val db = FirebaseFirestore.getInstance()
 
+            //val travelRef = db.collection("users").document(currentUser).collection(selectedDate).document("transportation")
+            val consumpRef =  todayFbCollection.document("consumables")
+            val wasteRef =  todayFbCollection.document("waste")
+            val travelRef =  todayFbCollection.document("transportation")
 
-            travelTotalRef.get().addOnSuccessListener { result ->
+            var waterFpTotal  = 0.0
+
+            travelRef.get().addOnSuccessListener { result ->
 
                 var carTotalValue = if (result.get("car_miles") != null) result.get("car_miles").toString().toFloat() else 0f
                 var busTotalValue = if (result.get("bus_miles") != null) result.get("bus_miles").toString().toFloat() else 0f
@@ -55,7 +63,7 @@ class TodayDataFragment : Fragment() {
                 //totalMilesVar.text = if(totalMiles != null) ("$totalMiles miles") else 0.toString()
                 var totalMiles = carTotalValue + busTotalValue + planeTotalValue + walkTotalValue
                 totalMilesVar.text = totalMiles.toString()
-                var totalKm: Float = totalMiles * 1.61.toFloat()
+                //var totalKm: Float = totalMiles * 1.61.toFloat()
                 //totalKmVar.text = ("$totalKm Kilometers")
 
 
@@ -68,35 +76,45 @@ class TodayDataFragment : Fragment() {
                 Log.d(TAG, "Error getting travel total: ", exception)
             }
 
-            consumpTotalRef.get().addOnSuccessListener { result ->
+            consumpRef.get().addOnSuccessListener { result ->
                 //val totalConsump = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
 //                val waterFP = consumpAct.consumableImpact().toString().toDouble() + wasteAct.wasteImpact().toString().toDouble()
                 //waterFpVar.text = ("$totalConsump lbs")
                 //waterFpVar.text = ("$waterFP gals/water")
 
-                val cowTotalValue: Float = if (result.get("cow_total") != null) result.get("cow_total").toString().toFloat() else 0f
-                val pigTotalValue: Float = if (result.get("pig_total") != null) result.get("pig_total").toString().toFloat() else 0f
-                val chickenTotalValue: Float = if (result.get("chicken_total") != null) result.get("chicken_total").toString().toFloat() else 0f
+                val cowTotalValue: Float = if (result.get("cow_oz") != null) result.get("cow_oz").toString().toFloat() else 0f
+                val pigTotalValue: Float = if (result.get("pig_oz") != null) result.get("pig_oz").toString().toFloat() else 0f
+                val chickenTotalValue: Float = if (result.get("chicken_oz") != null) result.get("chicken_oz").toString().toFloat() else 0f
+                val waterFpConsump: Float = if (result.get("water_fp_consum") != null) result.get("water_fp_consum").toString().toFloat() else 0f
 
                 cowTotalVar.text = cowTotalValue.toString()
                 pigTotalVar.text = pigTotalValue.toString()
                 chickenTotalVar.text = chickenTotalValue.toString()
 
+
+                waterFpTotal += waterFpConsump.toString().toDouble()
+                waterFpVar.text = waterFpTotal.toString()
+
             }.addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting Consumption Total: ", exception)
             }
 
-            wasteTotalRef.get().addOnSuccessListener { result ->
-                var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
+            wasteRef.get().addOnSuccessListener { result ->
+                //var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
                 //totalWasteVar.text = ("$totalWaste lbs")
 
-                var plasticTotalValue = if (result.get("plastic_total") != null) result.get("plastic_total").toString().toFloat() else 0f
-                var recycleTotalValue = if (result.get("recycle_total") != null) result.get("recycle_total").toString().toFloat() else 0f
-                var trashTotalValue = if (result.get("trash_total") != null) result.get("trash_total").toString().toFloat() else 0f
+                var plasticTotalValue = if (result.get("plastic_items") != null) result.get("plastic_items").toString().toFloat() else 0f
+                var recycleTotalValue = if (result.get("recycle_items") != null) result.get("recycle_items").toString().toFloat() else 0f
+                var trashTotalValue = if (result.get("trash_lbs") != null) result.get("trash_lbs").toString().toFloat() else 0f
+                var waterFpPlastic = if (result.get("water_fp_plastic") != null) result.get("water_fp_plastic").toString().toFloat() else 0f
 
                 plasticsTotalVar.text = plasticTotalValue.toString()
                 recycleTotalVar.text = recycleTotalValue.toString()
                 trashTotalVar.text = trashTotalValue.toString()
+
+
+                waterFpTotal += waterFpPlastic.toString().toDouble()
+                waterFpVar.text = waterFpTotal.toString()
 
             }.addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting Waste Total: ", exception)

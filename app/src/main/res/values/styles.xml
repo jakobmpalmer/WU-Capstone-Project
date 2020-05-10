@@ -52,5 +52,14 @@
     </style>
 
 
+    <style name="Dark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/darkText</item>
+        <item name="android:background">@color/darkBackground</item>
+        <item name="colorPrimary">@color/darkIcon</item>
+        <item name="colorPrimaryDark">@color/darkTop</item>
+        <item name="colorAccent">@color/darkAccent</item>
+    </style>
+
+
 
 </resources>
