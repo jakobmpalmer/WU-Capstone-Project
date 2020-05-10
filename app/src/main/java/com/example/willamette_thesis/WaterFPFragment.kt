@@ -37,7 +37,7 @@ class WaterFPFragment : Fragment() {
             println("1Our waterFPP = $ourWaterFP")
 
             wasteRef.get().addOnSuccessListener { result ->
-                var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
+                //var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
                 //totalWasteVar.text = ("$totalWaste lbs")
 
                 var plasticTotalValue = if (result.get("plastic_items") != null) result.get("plastic_items").toString().toFloat() else 0f

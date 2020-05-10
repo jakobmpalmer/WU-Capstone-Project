@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.willamette_thesis.CalendarFragments.WasteFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -63,9 +64,9 @@ class CalendarFragment: Fragment() {
 
         TabLayoutMediator(tLayout, mPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Waste"
-                1 -> "Transportation"
-                else -> "Consumable"
+                0 -> "Water"
+                1 -> "Carbon"
+                else -> "Trash"
             }
         }.attach()
 
@@ -164,7 +165,7 @@ class CalendarFragment: Fragment() {
                     return TravelFragment()
                 }
                 else -> {
-                    return CalendarFragment()
+                    return WasteFragment()
                 }
             }
         }
