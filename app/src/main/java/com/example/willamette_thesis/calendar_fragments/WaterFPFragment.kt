@@ -32,6 +32,8 @@ class WaterFPFragment : Fragment() {
     //private val REF_PREF_FILE = "our-calref-prefs"
     private val REF_PREF_FILE = "com.calref.prefs"
 
+    var runningWaterFP: Double = 0.0
+
     //private var mLastClickTime: Long = 0
 
     val db = FirebaseFirestore.getInstance()
@@ -50,6 +52,7 @@ class WaterFPFragment : Fragment() {
             //println("ourday: $selectedDay")
 
 
+
             //if (SystemClock.elapsedRealtime() - mLastClickTime < 3000){
 
             wasteRef.get().addOnSuccessListener { result ->
@@ -61,10 +64,8 @@ class WaterFPFragment : Fragment() {
                 plasticsTotalVar.text = if(plasticTotalValue.toString() != null) plasticTotalValue.toString() else "0 lbs"
                 recycleTotalVar.text = if(recycleTotalValue.toString() != null) recycleTotalValue.toString() else "0 lbs"
 
-                var tempWaterFP = waterFpVar.text.toString().toDouble()
-                tempWaterFP += waterFpValue
-                waterFpVar.text = tempWaterFP.toString()
-                //ourWaterFP += waterFpValue
+                runningWaterFP += waterFpValue.toString().toDouble()
+                waterFpVar.text = ("$runningWaterFP gallons")
 
             }.addOnFailureListener { exception ->
                 println("Couldent access todayWasteDoc")
@@ -84,10 +85,8 @@ class WaterFPFragment : Fragment() {
                 cowTotalVar.text = if(cowVal.toString() != null) cowVal.toString() else "0 oz"
                 pigTotalVar.text = if(pigVal.toString() != null) pigVal.toString() else "0 oz"
 
-
-                var tempWaterFP = waterFpVar.text.toString().toDouble()
-                tempWaterFP += waterFpVal
-                waterFpVar.text = tempWaterFP.toString()
+                runningWaterFP += waterFpVal.toString().toDouble()
+                waterFpVar.text = ("$runningWaterFP gallons")
 
             }.addOnFailureListener { exception ->
                 println("Couldent access comsumpRef")
