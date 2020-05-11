@@ -92,6 +92,7 @@ class CarActivity2 : AppCompatActivity() {
 
         val carEmission = ((carData-walkData)/miles_per_gal) * fuel_rate
         // taking walkData from carData, as we make the assumption that walking is a replacement for using a car
+        //fuel rate is pounds of CO2 emitted per gallon
         val busEmission = ((busData/12.52) * 22.5) / 60
         // Assumption that buses use diesel, hence the fuel rate used is 22.5. We divide by 60 as on average
         // a bus has an av seating capacity of 40-80, so we average that out
@@ -103,7 +104,7 @@ class CarActivity2 : AppCompatActivity() {
 
         //val emissionRounded = BigDecimal(carEmission + busEmission + planeEmission).setScale(2, RoundingMode.HALF_EVEN).toDouble()
 
-        return carEmission + busEmission + planeEmission
+        return carEmission + busEmission + planeEmission // in punds of CO2
     }
 
     fun changeTheme(){

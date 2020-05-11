@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.profile_activity.*
+import java.math.RoundingMode
 import java.util.*
 
 
@@ -23,6 +24,8 @@ class ProfileActivity  : AppCompatActivity(){
     private val PREF_FILE = "com.profile.prefs"
     private val PREF_MPG = "profile-pref-mpg"
     private val PREF_FUEL = "profile-pref-fuel"
+    private val PREF_CAR = "profile-pref-car"
+
 
     //add the tag
     val TAG: String = "ECO-FR3ndly"
@@ -68,21 +71,25 @@ class ProfileActivity  : AppCompatActivity(){
         val submitButton = findViewById<Button>(R.id.submit_profile)
         submitButton.setOnClickListener{
 
-            saveMileageSelected(indexCar)
-            saveFuelSelected(indexFuel)
-            updateTextViews()
+            //saveMileageSelected(indexCar)
+            //saveFuelSelected(indexFuel)
+            //updateTextViews()
 
             val prefs = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)
             val res : Resources = resources
             val mpg_selected = res.getStringArray(R.array.carMileage).get(indexCar).toFloat()
+            val car_selected = res.getStringArray(R.array.carTypes).get(indexCar).toString()
             val fuel_selected = res.getStringArray(R.array.fuelRate).get(indexFuel).toFloat()
             savePrefProfile(prefs, PREF_MPG, mpg_selected)
             savePrefProfile(prefs, PREF_FUEL, fuel_selected)
+            savePrefCar(prefs, PREF_CAR,car_selected)
+
+            updateText()
 
         }
 
-        updateTextViews()
-
+        //updateTextViews()
+        updateText()
 
 }
 
@@ -151,6 +158,11 @@ class ProfileActivity  : AppCompatActivity(){
         editor.putFloat(prefName, input)
         editor.apply()
     }
+    fun savePrefCar(prefs: SharedPreferences?, prefName:String, input:String){
+        val editor = prefs!!.edit()
+        editor.putString(prefName, input)
+        editor.apply()
+    }
 
     fun saveFuelSelected(p2:Int) {
         //val mpg = findViewById(R.id.milesPerGallon) as TextView
@@ -176,6 +188,21 @@ class ProfileActivity  : AppCompatActivity(){
         db.collection(userPath).document("car_selected").get().addOnSuccessListener {result ->
             shown_car.text = result?.get("carType").toString()
         }
+    }
+
+    fun updateText(){
+
+
+        val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE) ?: return
+        var mpg = sharedPref.getFloat(PREF_MPG, 19.73f).toString().toBigDecimal()
+        val fuel = sharedPref.getFloat(PREF_FUEL, 21.25f).toDouble().toString()
+        val car = sharedPref.getString(PREF_CAR, "Average")
+
+        mpg = mpg.setScale(2, RoundingMode.HALF_EVEN)
+
+        chosen_mpg.text = mpg.toDouble().toString()
+        shown_fuel.text = fuel
+        shown_car.text = car
     }
 
 }
