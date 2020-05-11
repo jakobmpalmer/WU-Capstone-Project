@@ -1,8 +1,18 @@
 package com.example.willamette_thesis
 
+/*
+WaterFPFragment.ks
+The purpose of this class is to create and control the water footprint fragment on the calender fragment.
+The control involves creating a firebase reference, as well as a reference to the shared preferences.
+This firebase reference is responsible for getting waste and consumable data to calculate the total
+water footprint.
+ */
+
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.SystemClock
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,54 +22,42 @@ import kotlinx.android.synthetic.main.waterfootprint_fragment.*
 
 class WaterFPFragment : Fragment() {
 
-
     val appHome = HomeActivity()
-
     var calFrag = CalendarFragment()
-    //var chosenDate = calFrag.getSelectedDate()
-    //var chosenDateRef = calFrag.getSelectedDateRef()
-    val selectedDay = calFrag.getSelectedDateRef()
-
-
+    //val selectedDay = calFrag.getSelectedDateRef()
 
 //PREFRENCES
     var ourSelectedDay: String = ""
     private val REF_PREF_FILE = "our-calref-prefs"
 
+    private var mLastClickTime: Long = 0
+
     val db = FirebaseFirestore.getInstance()
     val userCol = db.collection("users").document(appHome.getUserEmail())
-    //val travelRef = db.collection("users").document(currentUser).collection(selectedDate).document("transportation")
-//    val consumpRef = selectedDay.document("consumables")
-//    val wasteRef = selectedDay.document("waste")
-
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
             val thisView = inflater.inflate(R.layout.waterfootprint_fragment, container, false)
-
             val sharedPref = this.activity!!.getSharedPreferences(REF_PREF_FILE, Context.MODE_PRIVATE)
+            //val sharedPref = PreferenceManager.getDefaultSharedPreferences(this.context)
             ourSelectedDay = getPref(sharedPref, "ourCurrentDateStr", appHome.getOurDate())
             println("ourSelectedDateHERE!@!!: $ourSelectedDay")
 
             val consumpRef = userCol.collection(ourSelectedDay).document("consumables")
             val wasteRef = userCol.collection(ourSelectedDay).document("waste")
+            //println("ourday: $selectedDay")
 
-            var ourWaterFP = 0.0f
-            //println("1Our waterFPP = $ourWaterFP")
-            println("ourday: $selectedDay")
+
+            //if (SystemClock.elapsedRealtime() - mLastClickTime < 3000){
 
             wasteRef.get().addOnSuccessListener { result ->
-                //var totalWaste = if (result.get("sum_total") != null) result.get("sum_total").toString().toFloat() else 0f
-                //totalWasteVar.text = ("$totalWaste lbs")
 
                 var plasticTotalValue = if (result.get("plastic_items") != null) result.get("plastic_items").toString().toFloat() else 0f
                 var recycleTotalValue = if (result.get("recycled_items") != null) result.get("recycled_items").toString().toFloat() else 0f
-                //var trashTotalValue = if (result.get("trash_lbs") != null) result.get("trash_lbs").toString().toFloat() else 0f
                 var waterFpValue = if (result.get("water_fp_plastic") != null) result.get("water_fp_plastic").toString().toFloat() else 0f
 
                 plasticsTotalVar.text = plasticTotalValue.toString()
                 recycleTotalVar.text = recycleTotalValue.toString()
-                //trashTotalVar.text = trashTotalValue.toString()
 
                 var tempWaterFP = waterFpVar.text.toString().toDouble()
                 tempWaterFP += waterFpValue
@@ -69,6 +67,9 @@ class WaterFPFragment : Fragment() {
             }.addOnFailureListener { exception ->
                 println("Couldent access todayWasteDoc")
             }
+
+            //}
+            //mLastClickTime = SystemClock.elapsedRealtime()
 
             consumpRef.get().addOnSuccessListener { result ->
 
@@ -82,22 +83,13 @@ class WaterFPFragment : Fragment() {
                 pigTotalVar.text = pigVal.toString()
 
 
-                //println("WaterFP from comsump $waterFpVal")
                 var tempWaterFP = waterFpVar.text.toString().toDouble()
                 tempWaterFP += waterFpVal
                 waterFpVar.text = tempWaterFP.toString()
-                //ourWaterFP += waterFpVal
-                //println("3Our waterFPP = $ourWaterFP")
 
             }.addOnFailureListener { exception ->
                 println("Couldent access comsumpRef")
             }
-
-            //waterFpVar.text = ourWaterFP.toString()
-            //println("4Our waterFPP = $ourWaterFP")
-
-
-
 
             return thisView
         }

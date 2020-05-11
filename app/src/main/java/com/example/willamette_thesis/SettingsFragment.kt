@@ -119,5 +119,17 @@ class SettingsFragment : Fragment() {
         editor.apply()
     }
 
+    fun changeTheme(sharedPref: SharedPreferences, thisContext: Context){
+        //val sharedPref = this.getSharedPreferences("com.theme.prefs", Context.MODE_PRIVATE) ?: return
+        val name = sharedPref.getString("theme-preference", "original")
+        if (name == "nature") {
+            thisContext.setTheme(R.style.Orange)
+        } else if(name == "dark"){
+            thisContext.setTheme(R.style.Dark)
+        }else if (name == "original") {
+            thisContext.setTheme(R.style.AppTheme)
+        }
+    }
+
 }
 

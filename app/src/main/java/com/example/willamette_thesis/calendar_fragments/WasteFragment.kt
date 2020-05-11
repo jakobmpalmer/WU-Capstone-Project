@@ -1,5 +1,11 @@
 package com.example.willamette_thesis.calendar_fragments
 
+/*
+WasteFragment.ks
+This class is responsible for creating the Waste fragment on the calendar activity. It gets waste data from firebase, and
+is responsible for displaying the total trash in pounds.
+ */
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

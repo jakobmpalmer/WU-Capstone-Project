@@ -43,7 +43,10 @@ class CalendarFragment: Fragment() {
     //private var totalRef = todayDataRef.collection("total-data")
 
     private val REF_PREF_FILE = "our-calref-prefs"
-    val refPrefs = this.activity?.getSharedPreferences(REF_PREF_FILE, Context.MODE_PRIVATE)
+
+    //val refPrefs = this.activity?.getSharedPreferences(this.REF_PREF_FILE, Context.MODE_PRIVATE)
+    val refPrefs = this.activity?.getSharedPreferences(this.REF_PREF_FILE, Context.MODE_PRIVATE)
+
 
 
     private lateinit var mPager: ViewPager2
@@ -172,9 +175,12 @@ class CalendarFragment: Fragment() {
 
 // CHANGE ?. to !!.
     fun storeFbRefPrefs(prefs: SharedPreferences?, prefDate:String, input:String ){
-        val editor = prefs?.edit()
-        editor?.putString(prefDate, input)
-        editor?.apply()
+        println("prefDate:: $prefDate")
+        println("Input:: $input")
+        println("prefs:: ${prefs.toString()}")
+        val editor = prefs!!.edit()
+        editor.putString(prefDate, input)
+        editor.apply()
     }
 
 

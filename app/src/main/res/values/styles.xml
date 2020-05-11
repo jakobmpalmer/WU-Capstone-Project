@@ -56,7 +56,7 @@
         <item name="android:textColor">@color/darkText</item>
         <item name="android:background">@color/darkBackground</item>
         <item name="colorPrimary">@color/darkIcon</item>
-        <item name="colorPrimaryDark">@color/darkTop</item>
+        <item name="colorPrimaryDark">#1E1E1E</item>
         <item name="colorAccent">@color/darkAccent</item>
     </style>
 

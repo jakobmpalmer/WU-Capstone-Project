@@ -20,13 +20,13 @@
             android:id="@+id/todayTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today" />
+            android:text="@string/today" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/calendarTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calendar" />
+            android:text="@string/calendar" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
