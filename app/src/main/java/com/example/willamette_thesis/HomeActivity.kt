@@ -54,26 +54,23 @@ class HomeActivity : AppCompatActivity() {
 
         val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)?: return
         val name = sharedPref.getString(PREF_THEME, "original")
-        if (name == "nature"){
-            setTheme(R.style.Green)
-        }else if(name == "original"){
-            setTheme(R.style.AppTheme)
-        }
+
+        val settingsFrag = SettingsFragment()
+        settingsFrag.changeTheme(sharedPref, this)
+//        if (name == "nature"){
+//            setTheme(R.style.Green)
+//        }else if(name == "original"){
+//            setTheme(R.style.AppTheme)
+//        }
 
         setContentView(R.layout.activity_home)
-        //setSupportActionBar(toolbar)
-        //supportActionBar?.setDisplayShowTitleEnabled(false)
-        //setUpNavigation()
-        //toolbar = supportActionBar!!
+
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.botNavigationView)
         val navController: NavController = Navigation.findNavController(this, R.id.home_fragment)
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
-
-
         //navController.navigate(ScreenSlidePagerActivity().id)
-
 
     //Sign-in
         if(FirebaseAuth.getInstance().currentUser != null){
@@ -84,14 +81,7 @@ class HomeActivity : AppCompatActivity() {
             createSignInIntent()
         }
 
-
-
     } // OnCreate
-
-
-
-
-
 
 
     private fun createSignInIntent() {

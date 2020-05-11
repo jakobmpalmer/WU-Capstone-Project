@@ -20,6 +20,9 @@
     <string name="themeNature">nature</string>
     <string name="themeDefault">original</string>
 
+<!--    Calendar-->
+    <string name="today">Today</string>
+    <string name="calendar">Calendar</string>
 
     <string-array name="WaterSizes">
         <item>8 oz</item>
