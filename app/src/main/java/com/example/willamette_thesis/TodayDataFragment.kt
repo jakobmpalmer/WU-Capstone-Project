@@ -75,7 +75,7 @@ class TodayDataFragment : Fragment() {
                 totalCarbonFp = totalCarbonFp.toString().toBigDecimal()
                 totalCarbonFp = totalCarbonFp.setScale(2, RoundingMode.HALF_EVEN).toDouble()
 
-                carbonFootrpintVar.text = ("$totalCarbonFp C02e")
+                carbonFootrpintVar.text = ("$totalCarbonFp lb of C02e")
 
             }.addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting travel total: ", exception)
