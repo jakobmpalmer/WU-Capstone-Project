@@ -61,7 +61,7 @@ class WaterFPFragment : Fragment() {
                 var recycleTotalValue = if (result.get("recycled_items") != null) result.get("recycled_items").toString().toFloat() else 0f
                 var waterFpValue = if (result.get("water_fp_plastic") != null) result.get("water_fp_plastic").toString().toFloat() else 0f
 
-                plasticsTotalVar.text = if(plasticTotalValue.toString() != null) plasticTotalValue.toString() else "0 lbs"
+                plasticsTotalVar.text = if(plasticTotalValue?.toString() != null) plasticTotalValue.toString() else "0 lbs"
                 recycleTotalVar.text = if(recycleTotalValue.toString() != null) recycleTotalValue.toString() else "0 lbs"
 
                 runningWaterFP += waterFpValue.toString().toDouble()

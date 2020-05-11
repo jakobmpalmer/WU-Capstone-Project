@@ -5,18 +5,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_car.*
-import java.math.BigDecimal
-import java.math.RoundingMode
-import java.util.*
 
-class CarActivity2 : AppCompatActivity() {
+class TravelActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
@@ -41,7 +37,7 @@ class CarActivity2 : AppCompatActivity() {
         submitButton.setOnClickListener{ it: View? ->
 
             storeData(ourDate)
-            Toast.makeText(this@CarActivity2, "Transportation info for the day has been recorded", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@TravelActivity, "Transportation info for the day has been recorded", Toast.LENGTH_SHORT).show()
         }
     }
 
