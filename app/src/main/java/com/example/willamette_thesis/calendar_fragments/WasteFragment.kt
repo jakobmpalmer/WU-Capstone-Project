@@ -50,7 +50,7 @@ class WasteFragment : Fragment() {
 
             var trashValue = if (result.get("trash_lbs") != null) result.get("trash_lbs").toString().toFloat() else 0f
 
-            trashTotalVar.text = trashValue.toString()
+            trashTotalVar.text = trashValue.toString() + " lbs"
 
         }.addOnFailureListener { exception ->
             println("Couldent access todayWasteDoc")

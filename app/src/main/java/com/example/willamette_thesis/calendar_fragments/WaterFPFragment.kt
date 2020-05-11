@@ -61,8 +61,8 @@ class WaterFPFragment : Fragment() {
                 var recycleTotalValue = if (result.get("recycled_items") != null) result.get("recycled_items").toString().toFloat() else 0f
                 var waterFpValue = if (result.get("water_fp_plastic") != null) result.get("water_fp_plastic").toString().toFloat() else 0f
 
-                plasticsTotalVar.text = if(plasticTotalValue.toString() != null) plasticTotalValue.toString() else "0 lbs"
-                recycleTotalVar.text = if(recycleTotalValue.toString() != null) recycleTotalValue.toString() else "0 lbs"
+                plasticsTotalVar.text = if(plasticTotalValue.toString() != null) plasticTotalValue.toString() + " units" else "0 lbs"
+                recycleTotalVar.text = if(recycleTotalValue.toString() != null) recycleTotalValue.toString() + " units" else "0 lbs"
 
                 runningWaterFP += waterFpValue.toString().toDouble()
                 waterFpVar.text = ("$runningWaterFP gallons")
@@ -81,9 +81,9 @@ class WaterFPFragment : Fragment() {
                 var pigVal = if (result.get("pig_oz") != null) result.get("pig_oz").toString().toFloat() else 0f
                 var waterFpVal = if (result.get("water_fp_consum") != null) result.get("water_fp_consum").toString().toFloat() else 0f
 
-                chickenTotalVar.text = if(chickenVal.toString() != null) chickenVal.toString() else "0 oz"
-                cowTotalVar.text = if(cowVal.toString() != null) cowVal.toString() else "0 oz"
-                pigTotalVar.text = if(pigVal.toString() != null) pigVal.toString() else "0 oz"
+                chickenTotalVar.text = if(chickenVal.toString() != null) chickenVal.toString() + " oz." else "0 oz"
+                cowTotalVar.text = if(cowVal.toString() != null) cowVal.toString() + " oz." else "0 oz"
+                pigTotalVar.text = if(pigVal.toString() != null) pigVal.toString() + " oz." else "0 oz"
 
                 runningWaterFP += waterFpVal.toString().toDouble()
                 waterFpVar.text = ("$runningWaterFP gallons")
