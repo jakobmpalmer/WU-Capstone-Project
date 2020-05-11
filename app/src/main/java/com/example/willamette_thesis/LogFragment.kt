@@ -37,13 +37,13 @@ class LogFragment : Fragment() {
 // Transportation
         logView.buttonTransportation.setOnClickListener{
             //val carImgIntent = Intent(this, CarActivity::class.java)
-            val carImgIntent = Intent(activity, CarActivity2::class.java)
+            val carImgIntent = Intent(activity, TravelActivity::class.java)
             startActivity(carImgIntent)
         }
 //        val imageTransportation = findViewById <ImageView> (R.id.transportationIV)
         logView.transportationIV.setOnClickListener {
 //            val carIntent = Intent(activity, LogNavigator::class.java)
-            val carIntent = Intent(activity, CarActivity2::class.java)
+            val carIntent = Intent(activity, TravelActivity::class.java)
             startActivity(carIntent)
         }
 
