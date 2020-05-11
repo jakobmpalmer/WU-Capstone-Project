@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_today.*
-import java.math.BigDecimal
 import java.math.RoundingMode
 
 
@@ -26,7 +25,7 @@ class TodayDataFragment : Fragment() {
             val timeNow = appHome.getOurTime()
 
             val consumpAct = ConsumableActivity()
-            val wasteAct = WasteActivity()
+            val wasteAct = WasteLogActivity()
 
 
             val db = FirebaseFirestore.getInstance()

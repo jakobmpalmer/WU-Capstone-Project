@@ -1,7 +1,5 @@
 package com.example.willamette_thesis
 
-//import com.google.firebase.database.DatabaseReference
-//import com.google.firebase.database.FirebaseDatabase
 
 import android.content.Context
 import android.content.SharedPreferences

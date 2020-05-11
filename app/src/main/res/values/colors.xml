@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<!--    Primary-->
+
+    <color name="white">#E8EAF6</color>
+
+
+<!--    Custom-->
     <color name="profileColor">#f2b400</color>
 
     <color name="colorPrimary">#2B547E</color>

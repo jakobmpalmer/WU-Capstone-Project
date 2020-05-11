@@ -1,6 +1,7 @@
 package com.example.willamette_thesis
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,6 +9,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.firebase.ui.auth.AuthUI
@@ -38,6 +42,22 @@ class SettingsFragment : Fragment() {
         //setContentView(R.layout.activity_settings)
 
         val prefs = this.activity?.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)
+
+
+
+        val spinner: Spinner = settingsView.spinner
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this.context,
+            R.array.style_options,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
 
 
         settingsView.nature_button.setOnClickListener {
@@ -128,6 +148,20 @@ class SettingsFragment : Fragment() {
             thisContext.setTheme(R.style.Dark)
         }else if (name == "original") {
             thisContext.setTheme(R.style.AppTheme)
+        }
+    }
+
+
+
+    inner class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+            // An item was selected. You can retrieve the selected item using
+            // parent.getItemAtPosition(pos)
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>) {
+            // Another interface callback
         }
     }
 

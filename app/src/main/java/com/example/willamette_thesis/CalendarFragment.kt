@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.willamette_thesis.calendar_fragments.TravelFragment
 import com.example.willamette_thesis.calendar_fragments.WasteFragment
+import com.example.willamette_thesis.calendar_fragments.WaterFPFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -42,12 +44,9 @@ class CalendarFragment: Fragment() {
     }
     //private var totalRef = todayDataRef.collection("total-data")
 
-    private val REF_PREF_FILE = "our-calref-prefs"
-
+    //private val REF_PREF_FILE = "our-calref-prefs"
+    private val REF_PREF_FILE = "com.calref.prefs"
     //val refPrefs = this.activity?.getSharedPreferences(this.REF_PREF_FILE, Context.MODE_PRIVATE)
-    val refPrefs = this.activity?.getSharedPreferences(this.REF_PREF_FILE, Context.MODE_PRIVATE)
-
-
 
     private lateinit var mPager: ViewPager2
 
@@ -61,7 +60,7 @@ class CalendarFragment: Fragment() {
             false
         )
 
-        if (DO_DEBUG) println("\n\n\n\tEntering Calendar Fragment")
+        val refPrefs = this.activity?.getSharedPreferences(this.REF_PREF_FILE, Context.MODE_PRIVATE)
 
         selectedDateRef = todayDataRef
 
@@ -95,12 +94,8 @@ class CalendarFragment: Fragment() {
 
 
 
-        var currentDayStr = dateToday
-//        var selectedDay = appHome.getOurDay()
-//        var selectedMonth = appHome.getOurMonth()
-//        var selectedYear = appHome.getOurYear()
-        //val currentDayText = calView.currentDateText
-        //currentDayText.text = "${appHome.getOurDay()}/${appHome.getOurMonth() + 1}/${appHome.getOurYear()}"
+        var currentDayStr: String
+
         cal.setOnDateChangeListener { view, year, month, dayOfMonth ->
             if (DO_DEBUG) println("changed dates!")
             var userMonth = month + 1

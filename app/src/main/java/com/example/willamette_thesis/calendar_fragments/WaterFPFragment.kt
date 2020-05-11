@@ -1,4 +1,4 @@
-package com.example.willamette_thesis
+package com.example.willamette_thesis.calendar_fragments
 
 /*
 WaterFPFragment.ks
@@ -11,12 +11,13 @@ water footprint.
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.SystemClock
-import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.willamette_thesis.CalendarFragment
+import com.example.willamette_thesis.HomeActivity
+import com.example.willamette_thesis.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.waterfootprint_fragment.*
 
@@ -28,9 +29,10 @@ class WaterFPFragment : Fragment() {
 
 //PREFRENCES
     var ourSelectedDay: String = ""
-    private val REF_PREF_FILE = "our-calref-prefs"
+    //private val REF_PREF_FILE = "our-calref-prefs"
+    private val REF_PREF_FILE = "com.calref.prefs"
 
-    private var mLastClickTime: Long = 0
+    //private var mLastClickTime: Long = 0
 
     val db = FirebaseFirestore.getInstance()
     val userCol = db.collection("users").document(appHome.getUserEmail())
@@ -56,8 +58,8 @@ class WaterFPFragment : Fragment() {
                 var recycleTotalValue = if (result.get("recycled_items") != null) result.get("recycled_items").toString().toFloat() else 0f
                 var waterFpValue = if (result.get("water_fp_plastic") != null) result.get("water_fp_plastic").toString().toFloat() else 0f
 
-                plasticsTotalVar.text = plasticTotalValue.toString()
-                recycleTotalVar.text = recycleTotalValue.toString()
+                plasticsTotalVar.text = if(plasticTotalValue.toString() != null) plasticTotalValue.toString() else "0 lbs"
+                recycleTotalVar.text = if(recycleTotalValue.toString() != null) recycleTotalValue.toString() else "0 lbs"
 
                 var tempWaterFP = waterFpVar.text.toString().toDouble()
                 tempWaterFP += waterFpValue
@@ -78,9 +80,9 @@ class WaterFPFragment : Fragment() {
                 var pigVal = if (result.get("pig_oz") != null) result.get("pig_oz").toString().toFloat() else 0f
                 var waterFpVal = if (result.get("water_fp_consum") != null) result.get("water_fp_consum").toString().toFloat() else 0f
 
-                chickenTotalVar.text = chickenVal.toString()
-                cowTotalVar.text = cowVal.toString()
-                pigTotalVar.text = pigVal.toString()
+                chickenTotalVar.text = if(chickenVal.toString() != null) chickenVal.toString() else "0 oz"
+                cowTotalVar.text = if(cowVal.toString() != null) cowVal.toString() else "0 oz"
+                pigTotalVar.text = if(pigVal.toString() != null) pigVal.toString() else "0 oz"
 
 
                 var tempWaterFP = waterFpVar.text.toString().toDouble()

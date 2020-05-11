@@ -69,7 +69,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="8dp"
         android:background="#0099FF"
-        android:text="Nature Setting"
+        android:text="Nature Theme"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
@@ -82,7 +82,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="8dp"
         android:background="#0099FF"
-        android:text="Original Setting"
+        android:text="Original Theme"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/nature_button"
         app:layout_constraintHorizontal_bias="0.498"
@@ -103,12 +103,25 @@
 
     <Button
         android:id="@+id/darkBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/dark"
         app:layout_constraintBottom_toTopOf="@+id/logout_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/original_button"
+        app:layout_constraintStart_toStartOf="@+id/original_button"
         app:layout_constraintTop_toBottomOf="@+id/original_button" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="@+id/nature_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/nature_button"
+        app:layout_constraintTop_toBottomOf="@+id/nature_button"
+        app:layout_constraintVertical_bias="0.444" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

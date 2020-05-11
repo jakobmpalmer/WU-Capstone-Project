@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)?: return
-        val name = sharedPref.getString(PREF_THEME, "original")
+        //val name = sharedPref.getString(PREF_THEME, "original")
 
         val settingsFrag = SettingsFragment()
         settingsFrag.changeTheme(sharedPref, this)

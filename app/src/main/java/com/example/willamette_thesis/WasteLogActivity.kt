@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_waste.*
 import java.util.*
 
 
-class WasteActivity : AppCompatActivity() {
+class WasteLogActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
 
@@ -27,17 +27,23 @@ class WasteActivity : AppCompatActivity() {
     val appHome = HomeActivity()
     val ourDate = appHome.getOurDate()
 
+//Shared Prefs
+    val ourSettings = SettingsFragment()
+    private val PREF_FILE = "com.theme.prefs"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        changeTheme()
+        //changeTheme()
+        val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)?: return
+        ourSettings.changeTheme(sharedPref, this)
         setContentView(R.layout.activity_waste)
 
         val submitWasteBtn = findViewById<Button>(R.id.submitWaste_Button)
         submitWasteBtn.setOnClickListener {
 
             storeData(ourDate)
-            Toast.makeText(this@WasteActivity, "Waste info for the day has been recorded", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@WasteLogActivity, "Waste info for the day has been recorded", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -84,13 +90,13 @@ class WasteActivity : AppCompatActivity() {
         return trashImpact
     }
 
-    fun changeTheme(){
-        val sharedPref = this.getSharedPreferences("com.theme.prefs", Context.MODE_PRIVATE) ?: return
-        val name = sharedPref.getString("theme-preference", "original")
-        if (name == "nature") {
-            setTheme(R.style.Pink)
-        } else if (name == "original") {
-            setTheme(R.style.AppTheme)
-        }
-    }
+//    fun changeTheme(){
+//        val sharedPref = this.getSharedPreferences("com.theme.prefs", Context.MODE_PRIVATE) ?: return
+//        val name = sharedPref.getString("theme-preference", "original")
+//        if (name == "nature") {
+//            setTheme(R.style.Pink)
+//        } else if (name == "original") {
+//            setTheme(R.style.AppTheme)
+//        }
+//    }
 }

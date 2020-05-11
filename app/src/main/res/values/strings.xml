@@ -24,6 +24,8 @@
     <string name="today">Today</string>
     <string name="calendar">Calendar</string>
 
+    <string name="dark">Dark</string>
+
     <string-array name="WaterSizes">
         <item>8 oz</item>
         <item>12 oz</item>
@@ -32,6 +34,15 @@
         <item>24 oz</item>
         <item>33.8 oz</item>
         <item>36 oz</item>
+    </string-array>
+
+    <string-array name="style_options">
+        <item>Original</item>
+        <item>Nature</item>
+        <item>Blue</item>
+        <item>Orange</item>
+        <item>Dark</item>
+
     </string-array>
 
     <string-array name="carTypes">

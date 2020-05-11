@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_logging.view.*
 
@@ -52,12 +50,12 @@ class LogFragment : Fragment() {
 
 //Waste
         logView.buttonWaste.setOnClickListener{
-            val wasteIntent = Intent(activity, WasteActivity::class.java)
+            val wasteIntent = Intent(activity, WasteLogActivity::class.java)
             startActivity(wasteIntent)
         }
         //val imageWaste = findViewById <ImageView>(R.id.imageTrash)
         logView.imageWaste.setOnClickListener {
-            val wasteIntent = Intent(activity, WasteActivity::class.java)
+            val wasteIntent = Intent(activity, WasteLogActivity::class.java)
             startActivity(wasteIntent)
         }
 

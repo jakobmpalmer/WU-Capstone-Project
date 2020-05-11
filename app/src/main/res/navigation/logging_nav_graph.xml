@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/travelFragment"
-        android:name="com.example.willamette_thesis.TravelFragment"
+        android:name="com.example.willamette_thesis.calendar_fragments.TravelFragment"
         android:label="TravelFragment"
         app:navGraph="@navigation/logging_nav_graph" >
         <action

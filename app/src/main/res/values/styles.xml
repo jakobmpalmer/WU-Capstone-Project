@@ -10,6 +10,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.DayNight">
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/darkBackground</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -52,14 +64,60 @@
     </style>
 
 
-    <style name="Dark" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Dark" parent="AppTheme.Dark">
+<!--    <style name="Dark" parent="Theme.AppCompat.Light.NoActionBar">-->
         <item name="android:textColor">@color/darkText</item>
         <item name="android:background">@color/darkBackground</item>
         <item name="colorPrimary">@color/darkIcon</item>
         <item name="colorPrimaryDark">#1E1E1E</item>
         <item name="colorAccent">@color/darkAccent</item>
+        <item name="android:calendarViewStyle">@style/Widget.MyLight.CalendarView</item>
+        <item name="android:tabWidgetStyle">@style/Widget.MyTabItem</item>
+        <item name="android:buttonStyle">@style/Widget.Dark.Btn</item>
+    </style>
+
+    <style name="CalendarView" parent="android:Widget.CalendarView">
+<!--        <item name="android:focusedMonthDateColor">@color/darkText</item>-->
+        <item name="android:showWeekNumber">false</item>
+<!--        <item name="background">@color/darkIcon</item>-->
+        <item name="android:selectedWeekBackgroundColor">@color/darkIcon</item>
+<!--        <item name="android:weekNumberColor">@color/darkIcon</item>-->
+<!--        <item name="android:weekDayTextAppearance">@style/darkAccent</item>-->
+<!--        <item name="android:dateTextAppearance">@style/TextAppearance.Medium</item>-->
+    </style>
+
+    <style name="Widget.MyLight.CalendarView" parent="android:Widget.Holo.CalendarView">
+        <item name="android:showWeekNumber">false</item>
+<!--        <item name="background">@color/darkIcon</item>-->
+        <item name="android:selectedWeekBackgroundColor">@color/darkIcon</item>
+        <item name="android:focusedMonthDateColor">@color/white</item>
+        <item name="android:unfocusedMonthDateColor">@color/darkIcon</item>
+<!--        <item name="android:weekNumberColor">@color/white</item>-->
+<!--        <item name="android:weekDayTextAppearance">@color/darkAccent</item>-->
+<!--        <item name="android:dateTextAppearance">@style/TextAppearance.Medium</item>-->
+        <item name="android:weekSeparatorLineColor">@color/white</item>
+    </style>
+
+    
+
+    <style name="Widget.Dark.Btn" parent="android:Widget.Button">
+        <item name="backgroundColor">@color/white</item>
+        <item name="android:textColor">@color/darkBackground</item>
+        <item name="textAllCaps">true</item>
     </style>
 
 
+    <style name="Widget.MyTabItem" parent="Widget.Design.TabLayout">
+        <item name="android:tabWidgetStyle">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="tabTextAppearance">@style/AppTabTextAppearance</item>
+    </style>
+
+    <!-- for text -->
+    <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
+<!--        <item name="android:textSize">12sp</item>-->
+        <item name="android:textColor">@color/white</item>
+        <item name="textAllCaps">false</item>
+    </style>
 
 </resources>

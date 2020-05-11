@@ -1,14 +1,19 @@
-package com.example.willamette_thesis
+package com.example.willamette_thesis.calendar_fragments
 
 //import com.google.firebase.database.DatabaseReference
 //import com.google.firebase.database.FirebaseDatabase
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.willamette_thesis.CalendarFragment
+import com.example.willamette_thesis.HomeActivity
+import com.example.willamette_thesis.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_today.view.*
 
@@ -16,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_today.view.*
 class TravelFragment : Fragment() {
 
     //private lateinit var database: DatabaseReference
-    private val db = FirebaseFirestore.getInstance()
+
     //add the tag
     val TAG: String = "ECO-FR3ndly"
 
@@ -30,7 +35,11 @@ class TravelFragment : Fragment() {
     val currentUser = appHome.getUserEmail()
     val calFrag = CalendarFragment()
 
+    private val db = FirebaseFirestore.getInstance()
+    private val userCol = db.collection("users").document(appHome.getUserEmail())
 
+    var ourSelectedDay: String = ""
+    private val REF_PREF_FILE = "com.calref.prefs"
 
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,13 +52,10 @@ class TravelFragment : Fragment() {
             )
             println("Creating travel fragment.. .")
 
-            //var selectedDate = calFrag.getSelectedDate()
-            val selectedDay = calFrag.getSelectedDateRef()
-            println("SelectedDay= $selectedDay")
-            val travelRef = selectedDay.document("transportation")
-            println("travelRef gotten!")
-
-
+            val sharedPref = this.activity!!.getSharedPreferences(REF_PREF_FILE, Context.MODE_PRIVATE)
+            ourSelectedDay = getPref(sharedPref, "ourCurrentDateStr", appHome.getOurDate())
+            val travelRef = userCol.collection(ourSelectedDay).document("transportation")
+            
         //Fetch Values
             travelRef.get().addOnSuccessListener { result ->
 
@@ -80,13 +86,9 @@ class TravelFragment : Fragment() {
                 return travelView
         }
 
-        override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-            super.setUserVisibleHint(isVisibleToUser)
-            if (isVisibleToUser) {
-                // Refresh your fragment here
-            }
+        fun getPref(sharedPref: SharedPreferences, pref_to_retrieve: String, default : String) : String {
+            val value_retrieved: String = sharedPref.getString(pref_to_retrieve, default)
+            return value_retrieved
         }
-
-
 
 }
