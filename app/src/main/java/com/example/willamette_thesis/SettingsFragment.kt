@@ -83,14 +83,6 @@ class SettingsFragment : Fragment() {
             startActivity(profileIntent)
         }
 
-        settingsView.darkBtn.setOnClickListener {
-
-            storePrefs(prefs, PREF_THEME, "dark")
-            Toast.makeText(activity, "Settings Preferences Applied to Original", Toast.LENGTH_SHORT).show();
-            val profileIntent = Intent(activity, HomeActivity::class.java)
-            startActivity(profileIntent)
-        }
-
         settingsView.logout_btn.setOnClickListener {
             signOut()
             createSignInIntent()

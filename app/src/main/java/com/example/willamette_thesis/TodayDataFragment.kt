@@ -101,7 +101,7 @@ class TodayDataFragment : Fragment() {
 
 
                 waterFpTotal += waterFpConsump.toString().toDouble()
-                waterFpVar.text = waterFpTotal.toString()
+                waterFpVar.text = waterFpTotal.toString() + "gallons"
 
             }.addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting Consumption Total: ", exception)
@@ -112,7 +112,7 @@ class TodayDataFragment : Fragment() {
                 //totalWasteVar.text = ("$totalWaste lbs")
 
                 var plasticTotalValue = if (result.get("plastic_items") != null) result.get("plastic_items").toString().toFloat() else 0f
-                var recycleTotalValue = if (result.get("recycle_items") != null) result.get("recycle_items").toString().toFloat() else 0f
+                var recycleTotalValue = if (result.get("recycled_items") != null) result.get("recycled_items").toString().toFloat() else 0f
                 var trashTotalValue = if (result.get("trash_lbs") != null) result.get("trash_lbs").toString().toFloat() else 0f
                 var waterFpPlastic = if (result.get("water_fp_plastic") != null) result.get("water_fp_plastic").toString().toFloat() else 0f
 
