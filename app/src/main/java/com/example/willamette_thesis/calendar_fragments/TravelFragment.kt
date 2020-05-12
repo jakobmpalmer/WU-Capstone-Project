@@ -75,7 +75,7 @@ class TravelFragment : Fragment() {
                 //totalKmVar.text = ("$totalKm Kilometers")
 
                 var totalCarbonFp = if(result.get("carb_footprint")!= null) result.get("carb_footprint") else 0f
-                travelView.carbonFootrpintVar.text = ("$totalCarbonFp C02e")
+                travelView.carbonFootrpintVar.text = ("$totalCarbonFp lbs of C02e")
 
             }.addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting travel total: ", exception)

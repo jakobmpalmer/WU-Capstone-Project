@@ -63,6 +63,27 @@
         <item name="colorAccent">@color/orangeAccent</item>
     </style>
 
+    <style name="TotalDisplay" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@color/displaySecondary</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TotalDisplay.LargeSize" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@color/displaySecondary</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="MetricsDisplay" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@color/displayPrimary</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 
     <style name="Dark" parent="AppTheme.Dark">
 <!--    <style name="Dark" parent="Theme.AppCompat.Light.NoActionBar">-->
