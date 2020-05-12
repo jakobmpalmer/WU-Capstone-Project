@@ -99,8 +99,8 @@ class CalendarFragment: Fragment() {
         cal.setOnDateChangeListener { view, year, month, dayOfMonth ->
             if (DO_DEBUG) println("changed dates!")
             var userMonth = month + 1
-            val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-            if (DO_DEBUG) Toast.makeText(this@CalendarFragment.context, msg, Toast.LENGTH_SHORT).show()
+            //val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
+            //if (DO_DEBUG) Toast.makeText(this@CalendarFragment.context, msg, Toast.LENGTH_SHORT).show()
             //currentDayText.text = "$dayOfMonth/$userMonth/$year"
             currentDayStr = "$dayOfMonth, $userMonth, $year"
             if (DO_DEBUG) println("currentDayRef: $currentDayStr")

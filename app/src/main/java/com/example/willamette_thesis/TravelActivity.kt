@@ -21,16 +21,21 @@ class TravelActivity : AppCompatActivity() {
     private val PREF_MPG = "profile-pref-mpg"
     private val PREF_FUEL = "profile-pref-fuel"
 
+    private val PREF_THEMES = "com.theme.prefs"
+
     //add the tag
     val TAG: String = "ECO-FR3ndly"
 
     private val appHome = HomeActivity()
     private val ourDate = appHome.getOurDate()
+    private val ourSettings = SettingsFragment()
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        changeTheme()
+        //changeTheme()
+        val themePrefs = this.getSharedPreferences(PREF_THEMES, Context.MODE_PRIVATE) ?: return
+        ourSettings.changeTheme( themePrefs, this)
         setContentView(R.layout.activity_car)
 
         val submitButton = findViewById<Button>(R.id.button1)
