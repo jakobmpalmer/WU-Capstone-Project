@@ -141,4 +141,29 @@
         <item name="textAllCaps">false</item>
     </style>
 
+
+    <style name="Custom.Firebase.WrapperStyle" parent="FirebaseUI">
+<!--        <item name="android:background">@drawable/ecofr3ndly_background</item>-->
+        <item name="android:background">@color/lightGreen</item>
+<!--        <item name="android:windowBackground">@color/red</item>-->
+        <item name="android:textColor">@color/forestGreen</item>
+        <item name="android:colorPrimary">@color/pink</item>
+        <item name="android:colorPrimaryDark">@color/forestGreen</item>
+        <item name="android:colorAccent">@color/blue</item>
+
+        <item name="colorControlActivated">@color/forestGreen</item>
+        <item name="colorControlNormal">@color/red</item>
+        <item name="colorControlHighlight">@color/white</item>
+<!--        <item name="colorButtonNormal">@color/green</item>-->
+
+<!--        <item name="android:layout_height">match_parent</item>-->
+<!--        <item name="android:layout_width">match_parent</item>-->
+<!--        <item name="android:paddingTop">16dp</item>-->
+<!--        <item name="android:paddingLeft">-->
+<!--            @dimen/fui_wrapper_padding_horiz-->
+<!--        </item>-->
+<!--        <item name="android:paddingRight">@dimen/fui_wrapper_padding_horiz-->
+<!--        </item>-->
+    </style>
+
 </resources>

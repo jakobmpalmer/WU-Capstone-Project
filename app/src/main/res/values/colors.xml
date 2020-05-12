@@ -4,6 +4,14 @@
 <!--    Primary-->
 
     <color name="white">#E8EAF6</color>
+    <color name="pink">#C800FF</color>
+    <color name="blue">#001FDA</color>
+    <color name="red">#CC0000</color>
+    <color name="green">#40FF00</color>
+    <color name="forestGreen">#1E7700</color>
+    <color name="lightGreen">#A5D6A7</color>
+    <color name="yellow">#FFE600</color>
+    <color name="black">#101010</color>
 
 
 <!--    Custom-->

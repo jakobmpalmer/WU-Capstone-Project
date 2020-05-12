@@ -97,6 +97,7 @@ class HomeActivity : AppCompatActivity() {
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
+                .setTheme(R.style.Custom_Firebase_WrapperStyle)
                 .setAvailableProviders(providers)
                 .build(),
             //RC_SIGN_IN)
