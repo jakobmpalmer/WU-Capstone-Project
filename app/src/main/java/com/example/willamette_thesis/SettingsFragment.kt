@@ -43,23 +43,6 @@ class SettingsFragment : Fragment() {
 
         val prefs = this.activity?.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)
 
-
-
-        val spinner: Spinner = settingsView.spinner
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this.context,
-            R.array.style_options,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
-        }
-
-
-
         settingsView.nature_button.setOnClickListener {
 
             storePrefs(prefs, PREF_THEME, "nature")
@@ -78,6 +61,22 @@ class SettingsFragment : Fragment() {
         settingsView.original_button.setOnClickListener {
 
             storePrefs(prefs, PREF_THEME, "original")
+            Toast.makeText(activity, "Settings Preferences Applied to Original", Toast.LENGTH_SHORT).show();
+            val profileIntent = Intent(activity, HomeActivity::class.java)
+            startActivity(profileIntent)
+        }
+
+        settingsView.blueThemeBtn.setOnClickListener {
+
+            storePrefs(prefs, PREF_THEME, "blue")
+            Toast.makeText(activity, "Settings Preferences Applied to Original", Toast.LENGTH_SHORT).show();
+            val profileIntent = Intent(activity, HomeActivity::class.java)
+            startActivity(profileIntent)
+        }
+
+        settingsView.orangeThemeBtn.setOnClickListener {
+
+            storePrefs(prefs, PREF_THEME, "orange")
             Toast.makeText(activity, "Settings Preferences Applied to Original", Toast.LENGTH_SHORT).show();
             val profileIntent = Intent(activity, HomeActivity::class.java)
             startActivity(profileIntent)
@@ -135,9 +134,11 @@ class SettingsFragment : Fragment() {
         //val sharedPref = this.getSharedPreferences("com.theme.prefs", Context.MODE_PRIVATE) ?: return
         val name = sharedPref.getString("theme-preference", "original")
         if (name == "nature") {
+            thisContext.setTheme(R.style.Green)
+        } else if(name == "blue"){
+            thisContext.setTheme(R.style.Blue)
+        } else if(name == "orange"){
             thisContext.setTheme(R.style.Orange)
-        } else if(name == "dark"){
-            thisContext.setTheme(R.style.Dark)
         }else if (name == "original") {
             thisContext.setTheme(R.style.AppTheme)
         }

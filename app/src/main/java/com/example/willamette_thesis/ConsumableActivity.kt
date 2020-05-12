@@ -14,21 +14,24 @@ import java.util.*
 
 //import kotlinx.android.synthetic.main.content_main.*
 
+private val PREF_THEMES = "com.theme.prefs"
 
 class ConsumableActivity : AppCompatActivity() {
-    val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
 
     private val db = FirebaseFirestore.getInstance()
+    private val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
+    //private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
+    //private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
 
-    private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
-    private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
-
-    val appHome = HomeActivity()
-    var ourDate = appHome.getOurDate()
+    private val appHome = HomeActivity()
+    private var ourDate = appHome.getOurDate()
+    private val ourSettings = SettingsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        changeTheme()
+        //changeTheme()
+        val themePrefs = this.getSharedPreferences(PREF_THEMES, Context.MODE_PRIVATE) ?: return
+        ourSettings.changeTheme( themePrefs, this)
         setContentView(R.layout.activity_consumable)
 
         submitConsum_Button.setOnClickListener{ it: View? ->

@@ -29,29 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="Nature Setting:\nUses a nature-inspired color palette"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.414"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Original Setting:\nUses a more neutral color palette"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nature_button" />
-
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="90dp"
@@ -67,51 +44,91 @@
         android:id="@+id/nature_button"
         android:layout_width="140dp"
         android:layout_height="35dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="#0099FF"
         android:text="Nature Theme"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/original_button"
         android:layout_width="0dp"
         android:layout_height="35dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="44dp"
         android:background="#0099FF"
         android:text="Original Theme"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/nature_button"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/nature_button"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/nature_button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/logout_btn"
         android:layout_width="0dp"
         android:layout_height="35dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="119dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="32dp"
         android:background="#0099FF"
         android:text="@string/logout_str"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/original_button"
-        app:layout_constraintStart_toStartOf="@+id/original_button"
-        app:layout_constraintTop_toBottomOf="@+id/original_button" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
-        app:layout_constraintEnd_toEndOf="@+id/nature_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/original_button"
+        app:layout_constraintVertical_bias="0.07999998" />
+
+    <Button
+        android:id="@+id/orangeThemeBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginEnd="46dp"
+        android:background="#0099FF"
+        android:text="Orange Theme"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/nature_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/nature_button"
-        app:layout_constraintTop_toBottomOf="@+id/nature_button"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintTop_toTopOf="@+id/nature_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/blueThemeBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Blue Theme"
+        android:background="#0099FF"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/original_button"
+        app:layout_constraintEnd_toEndOf="@+id/orangeThemeBtn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/orangeThemeBtn"
+        app:layout_constraintTop_toTopOf="@+id/original_button" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Themes"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintVertical_bias="0.060000002" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
