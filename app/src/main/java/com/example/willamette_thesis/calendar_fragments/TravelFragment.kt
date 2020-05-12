@@ -16,6 +16,7 @@ import com.example.willamette_thesis.HomeActivity
 import com.example.willamette_thesis.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_today.view.*
+import java.math.RoundingMode
 
 
 class TravelFragment : Fragment() {
@@ -75,6 +76,9 @@ class TravelFragment : Fragment() {
                 //totalKmVar.text = ("$totalKm Kilometers")
 
                 var totalCarbonFp = if(result.get("carb_footprint")!= null) result.get("carb_footprint") else 0f
+                totalCarbonFp = totalCarbonFp.toString().toBigDecimal().setScale(2,RoundingMode.HALF_EVEN)
+
+
                 travelView.carbonFootrpintVar.text = ("$totalCarbonFp lbs of C02e")
 
             }.addOnFailureListener { exception ->
