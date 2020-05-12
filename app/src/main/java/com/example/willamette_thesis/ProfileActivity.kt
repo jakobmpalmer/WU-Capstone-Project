@@ -26,6 +26,7 @@ class ProfileActivity  : AppCompatActivity(){
     private val PREF_FUEL = "profile-pref-fuel"
     private val PREF_CAR = "profile-pref-car"
 
+    private val PREF_THEMES = "com.theme.prefs"
 
     //add the tag
     val TAG: String = "ECO-FR3ndly"
@@ -35,6 +36,7 @@ class ProfileActivity  : AppCompatActivity(){
     private var calendar: Calendar = GregorianCalendar(this.pdt)
 
     val appHome = HomeActivity()
+    private val ourSettings = SettingsFragment()
 
     lateinit var choose_car : Spinner
     lateinit var chosen_mpg : TextView
@@ -52,9 +54,9 @@ class ProfileActivity  : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setTheme(R.style.Green)
+        val themePrefs = this.getSharedPreferences(PREF_THEMES, Context.MODE_PRIVATE) ?: return
+        ourSettings.changeTheme( themePrefs, this)
         setContentView(R.layout.profile_activity)
-
-        //database = FirebaseDatabase.getInstance().reference
 
         choose_car = findViewById(R.id.spinnerCar) as Spinner
         chosen_mpg = findViewById(R.id.milesPerGallon) as TextView
