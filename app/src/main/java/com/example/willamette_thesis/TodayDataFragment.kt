@@ -101,7 +101,7 @@ class TodayDataFragment : Fragment() {
 
 
                 waterFpTotal += waterFpConsump.toString().toDouble()
-                waterFpVar.text = waterFpTotal.toString() + "gallons"
+                waterFpVar.text = waterFpTotal.toString() + " gallons"
 
             }.addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting Consumption Total: ", exception)

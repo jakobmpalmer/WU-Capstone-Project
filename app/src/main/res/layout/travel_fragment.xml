@@ -22,7 +22,7 @@
         <LinearLayout
             android:id="@+id/travelTotalVals"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -37,22 +37,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/displayPrimary"
                     android:text="@string/car_miles"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    style="@style/MetricsDisplay" />
 
                 <TextView
                     android:id="@+id/carTotalVar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    style="@style/MetricsDisplay" />
 
             </LinearLayout>
 
@@ -67,22 +61,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/displayPrimary"
                     android:text="@string/bus_miles"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    style="@style/MetricsDisplay" />
 
                 <TextView
                     android:id="@+id/busTotalVar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    style="@style/MetricsDisplay" />
 
             </LinearLayout>
 
@@ -97,22 +85,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/displayPrimary"
                     android:text="@string/plane_miles"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    style="@style/MetricsDisplay" />
 
                 <TextView
                     android:id="@+id/planeTotalVar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    style="@style/MetricsDisplay"/>
 
             </LinearLayout>
 
@@ -127,22 +109,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/displayPrimary"
                     android:text="@string/walk_miles"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    style="@style/MetricsDisplay"/>
 
                 <TextView
                     android:id="@+id/walkTotalVar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/displayPrimary"
                     android:text="@string/null_int"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    style="@style/MetricsDisplay"/>
 
             </LinearLayout>
 
@@ -159,22 +135,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displaySecondary"
                 android:text="Total Miles: "
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                style="@style/TotalDisplay"/>
 
             <TextView
                 android:id="@+id/totalMilesVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displaySecondary"
                 android:text="@string/null_int"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                style="@style/TotalDisplay" />
         </LinearLayout>
 
         <LinearLayout
@@ -189,22 +159,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displaySecondary"
                 android:text="Carbon Footprint:"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                style="@style/TotalDisplay" />
 
             <TextView
                 android:id="@+id/carbonFootrpintVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displaySecondary"
                 android:text="@string/null_int"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="26sp" />
+                style="@style/TotalDisplay"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -32,22 +32,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="Plastic Total:"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay"  />
 
             <TextView
                 android:id="@+id/plasticsTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="@string/null_int"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay"  />
         </LinearLayout>
 
         <LinearLayout
@@ -61,22 +55,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="Recycling Total:"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay" />
 
             <TextView
                 android:id="@+id/recycleTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="@string/null_int"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay"  />
         </LinearLayout>
 
         <LinearLayout
@@ -90,22 +78,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="Bovine Total"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay"  />
 
             <TextView
                 android:id="@+id/cowTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="@string/null_int"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay"  />
         </LinearLayout>
 
         <LinearLayout
@@ -119,22 +101,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="Chicken Total"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay"  />
 
             <TextView
                 android:id="@+id/chickenTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="@string/null_int"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay" />
         </LinearLayout>
 
         <LinearLayout
@@ -148,22 +124,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="Pig\nTotal:"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay" />
 
             <TextView
                 android:id="@+id/pigTotalVar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/displayPrimary"
                 android:text="@string/null_int"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                style="@style/MetricsDisplay" />
         </LinearLayout>
 
     </LinearLayout>
@@ -185,22 +155,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/displaySecondary"
             android:text="Water Footprint:"
             android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp" />
+            style="@style/TotalDisplay.LargeSize"  />
 
         <TextView
             android:id="@+id/waterFpVar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/displaySecondary"
             android:text="@string/null_int"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp" />
+            style="@style/TotalDisplay.LargeSize"  />
 
     </LinearLayout>
 

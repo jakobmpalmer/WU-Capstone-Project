@@ -24,9 +24,7 @@
             android:layout_weight="1"
             android:background="@color/displayPrimary"
             android:text="Total Trash:"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp" />
+            style="@style/TotalDisplay.LargeSize" />
 
         <TextView
             android:id="@+id/trashTotalVar"
@@ -35,9 +33,7 @@
             android:layout_weight="1"
             android:background="@color/displayPrimary"
             android:text="@string/null_int"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="26sp" />
+            style="@style/TotalDisplay.LargeSize" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
