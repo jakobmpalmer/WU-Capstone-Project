@@ -3,7 +3,7 @@ Created by Jakob M Paulson-Palmer & Daniela Camacho
 
 🌲🐻
 
-Background and Introduction
+### Background and Introduction
  
 The Intergovernmental Panel for Climate Change (IPCC) believes that by the end of the century our planet will warm by 2°C as 
 a result of global warming (Archer et al., 2019, p.1). Global warming is caused by a greenhouse effect when gasses such as 
