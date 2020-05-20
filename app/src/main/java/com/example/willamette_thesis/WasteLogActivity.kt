@@ -34,7 +34,6 @@ class WasteLogActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //changeTheme()
         val sharedPref = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)?: return
         ourSettings.changeTheme(sharedPref, this)
         setContentView(R.layout.activity_waste)
@@ -90,13 +89,4 @@ class WasteLogActivity : AppCompatActivity() {
         return trashImpact
     }
 
-//    fun changeTheme(){
-//        val sharedPref = this.getSharedPreferences("com.theme.prefs", Context.MODE_PRIVATE) ?: return
-//        val name = sharedPref.getString("theme-preference", "original")
-//        if (name == "nature") {
-//            setTheme(R.style.Pink)
-//        } else if (name == "original") {
-//            setTheme(R.style.AppTheme)
-//        }
-//    }
 }
