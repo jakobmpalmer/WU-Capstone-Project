@@ -33,7 +33,6 @@ class TravelActivity : AppCompatActivity() {
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //changeTheme()
         val themePrefs = this.getSharedPreferences(PREF_THEMES, Context.MODE_PRIVATE) ?: return
         ourSettings.changeTheme( themePrefs, this)
         setContentView(R.layout.activity_car)
@@ -74,7 +73,6 @@ class TravelActivity : AppCompatActivity() {
                 "walk_miles" to walkData,
                 "carb_footprint" to carb_footprint
             )
-            //db.collection(userPath).document(ourDate).collection("transportation").document(ourDate).set(data)
             db.collection("users").document(userPath).collection(ourDate).document("transportation").set(data)
 
         }
