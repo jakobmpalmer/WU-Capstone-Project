@@ -7,12 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
-//import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_consumable.*
 import java.util.*
-
-//import kotlinx.android.synthetic.main.content_main.*
 
 private val PREF_THEMES = "com.theme.prefs"
 
@@ -20,8 +16,6 @@ class ConsumableActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
-    //private var ids: Array<String?>? = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000)
-    //private var pdt: SimpleTimeZone = SimpleTimeZone(-8 * 60 * 60 * 1000, ids?.get(0))
 
     private val appHome = HomeActivity()
     private var ourDate = appHome.getOurDate()
@@ -29,7 +23,6 @@ class ConsumableActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //changeTheme()
         val themePrefs = this.getSharedPreferences(PREF_THEMES, Context.MODE_PRIVATE) ?: return
         ourSettings.changeTheme( themePrefs, this)
         setContentView(R.layout.activity_consumable)
@@ -68,11 +61,8 @@ class ConsumableActivity : AppCompatActivity() {
                 "cow_oz" to cowData,
                 "chicken_oz" to chickenData,
                 "pig_oz" to pigData,
-//<<<<<<< HEAD
-                //"water_fp_consum" to water_ft_consum
-//=======
                 "water_fp_consum" to water_fp_consum
-//>>>>>>> fa28fc229a98c77ced0dd2c5d7e54343ab9ab7c8
+
             )
 
             db.collection("users").document(userPath).collection(ourDate).document("consumables").set(data)
