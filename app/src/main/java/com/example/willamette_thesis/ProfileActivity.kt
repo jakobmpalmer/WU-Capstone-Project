@@ -53,7 +53,6 @@ class ProfileActivity  : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setTheme(R.style.Green)
         val themePrefs = this.getSharedPreferences(PREF_THEMES, Context.MODE_PRIVATE) ?: return
         ourSettings.changeTheme( themePrefs, this)
         setContentView(R.layout.profile_activity)
@@ -73,10 +72,6 @@ class ProfileActivity  : AppCompatActivity(){
         val submitButton = findViewById<Button>(R.id.submit_profile)
         submitButton.setOnClickListener{
 
-            //saveMileageSelected(indexCar)
-            //saveFuelSelected(indexFuel)
-            //updateTextViews()
-
             val prefs = this.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)
             val res : Resources = resources
             val mpg_selected = res.getStringArray(R.array.carMileage).get(indexCar).toFloat()
@@ -89,8 +84,6 @@ class ProfileActivity  : AppCompatActivity(){
             updateText()
 
         }
-
-        //updateTextViews()
         updateText()
 
 }
@@ -141,13 +134,8 @@ class ProfileActivity  : AppCompatActivity(){
     }
 
     fun saveMileageSelected(p2:Int) {
-        //val mpg = findViewById(R.id.milesPerGallon) as TextView
-        //val mpg_double = mpg.text.toString().toDouble()
-
         val res : Resources = resources
         val data_mpg = res.getStringArray(R.array.carMileage).get(p2).toDouble()
-
-        //val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
 
         val data = hashMapOf("mpg" to data_mpg)
         db.collection(userPath).document("mileage_selected").set(data)
@@ -167,13 +155,8 @@ class ProfileActivity  : AppCompatActivity(){
     }
 
     fun saveFuelSelected(p2:Int) {
-        //val mpg = findViewById(R.id.milesPerGallon) as TextView
-        //val mpg_double = mpg.text.toString().toDouble()
-
         val res : Resources = resources
         val fuel = res.getStringArray(R.array.fuelRate).get(p2).toDouble()
-
-        //val userPath = "/" + (FirebaseAuth.getInstance().currentUser?.email ?: "NOT AVAILABLE")
 
         val data = hashMapOf("fuel_rate" to fuel)
         db.collection(userPath).document("fuel_selected").set(data)
