@@ -90,7 +90,6 @@ class TodayDataFragment : Fragment() {
 
 
                 waterFpTotal += waterFpPlastic.toString().toDouble()
-                //waterFpVar.text = waterFpTotal.toString()
                 waterFpVar.text = ("$waterFpTotal gallons")
 
             }.addOnFailureListener { exception ->
