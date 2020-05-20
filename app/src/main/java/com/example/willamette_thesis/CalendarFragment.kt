@@ -37,22 +37,17 @@ class CalendarFragment: Fragment() {
 
     val db = FirebaseFirestore.getInstance()
     private var todayDataRef = db.collection("users").document(currentUser).collection(dateToday)
-//    private var selectedDateRef = todayDataRef
 
     companion object {
         var selectedDateRef = FirebaseFirestore.getInstance().collection("users")
     }
-    //private var totalRef = todayDataRef.collection("total-data")
-
-    //private val REF_PREF_FILE = "our-calref-prefs"
+    
     private val REF_PREF_FILE = "com.calref.prefs"
-    //val refPrefs = this.activity?.getSharedPreferences(this.REF_PREF_FILE, Context.MODE_PRIVATE)
 
     private lateinit var mPager: ViewPager2
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.data_display_layout)
 
         val calView: View = inflater.inflate(
             R.layout.fragment_calendar,
@@ -65,7 +60,6 @@ class CalendarFragment: Fragment() {
         selectedDateRef = todayDataRef
 
         val tLayout = calView.metricTabLayout
-        // Instantiate a ViewPager and a PagerAdapter.
         mPager = calView.metricView
         println(tLayout.toString())
 
@@ -85,8 +79,6 @@ class CalendarFragment: Fragment() {
 
         val cal = calView.calendarView
         cal.setDate(System.currentTimeMillis(), true, false)
-
-//        var currentDateFormatted = System.currentTimeMillis().to
         var currentDateFormatted = cal.dateTextAppearance
         if (DO_DEBUG) println("$currentDateFormatted <---- currentDateFormatted")
 
@@ -99,9 +91,6 @@ class CalendarFragment: Fragment() {
         cal.setOnDateChangeListener { view, year, month, dayOfMonth ->
             if (DO_DEBUG) println("changed dates!")
             var userMonth = month + 1
-            //val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-            //if (DO_DEBUG) Toast.makeText(this@CalendarFragment.context, msg, Toast.LENGTH_SHORT).show()
-            //currentDayText.text = "$dayOfMonth/$userMonth/$year"
             currentDayStr = "$dayOfMonth, $userMonth, $year"
             if (DO_DEBUG) println("currentDayRef: $currentDayStr")
 
@@ -152,9 +141,7 @@ class CalendarFragment: Fragment() {
     }
 
     private fun updateMyRefs(currentDay: String) : CollectionReference{
-        //todayDataRef = db.collection("users").document(currentUser).collection(currentDay)
         var selectedDateFbRef = db.collection("users").document(currentUser).collection(currentDay)
-        //totalRef = todayDataRef.collection("total-data")
         if (DO_DEBUG) println("updating ref, ${todayDataRef}")
         selectedDateRef = selectedDateFbRef
         return selectedDateFbRef
@@ -162,13 +149,10 @@ class CalendarFragment: Fragment() {
     }
 
     fun getSelectedDateRef(): CollectionReference {
-        //return todayDataRef
         return selectedDateRef
     }
 
 
-
-// CHANGE ?. to !!.
     fun storeFbRefPrefs(prefs: SharedPreferences?, prefDate:String, input:String ){
         println("prefDate:: $prefDate")
         println("Input:: $input")
