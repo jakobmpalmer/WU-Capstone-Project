@@ -98,10 +98,12 @@ class HomeActivity : AppCompatActivity() {
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setTheme(R.style.Custom_Firebase_WrapperStyle)
+                .setLogo(R.drawable.icon_logo_b)
+                .setAlwaysShowSignInMethodScreen(true)
                 .setAvailableProviders(providers)
                 .build(),
-            //RC_SIGN_IN)
-            1)
+            RC_SIGN_IN);
+            //1)
         // [END auth_fui_create_intent]
     }
 
